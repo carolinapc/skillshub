@@ -1,0 +1,33 @@
+.card{
+  margin: 20px 0;
+}
+
+.card img {
+  float: left;
+  margin-right: 20px;
+  object-fit: cover;
+  width: 150px;
+  border-radius: 5px;
+  border: 1px solid #cccc;
+}
+.card p{
+  margin-top: 30px;
+  text-align: justify;
+}
+
+.wrap-button{
+  float: right;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+.card .btn {
+  margin-left:5px;
+}
+
+@media screen and (max-width: 940px){
+  .card-title{
+    margin-top: 40px !important;
+  }
+}

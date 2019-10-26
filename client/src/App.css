@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Fontdiner+Swanky&display=swap');
+
+h1, h3 {
+  font-family: 'Fontdiner Swanky', cursive;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media screen and (max-width: 640px){
+  h1 {
+    font-size: 20px !important;
+  }
+  h3{
+    font-size: 18px !important;
+  }
+}
+
+@media screen and (max-width: 940px){
+  h1 {
+    font-size: 24px !important;
+  }
+  h3{
+    font-size: 22px !important;
+  }
+}
