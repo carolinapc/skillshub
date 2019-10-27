@@ -40,7 +40,7 @@ module.exports = function (sequelize, DataTypes) {
       validate: {
         len: {
           args: [8, 60],
-          msg: "Password must have at least 8 characters"
+          msg: "Password must have at least 6 characters"
         }
       }
     },
@@ -62,19 +62,20 @@ module.exports = function (sequelize, DataTypes) {
     freezeTableName: true
   });
 
-  User.associate = function (models) {
-    User.hasMany(models.Review, {
+  // User.associate = function (models) {
+  //   User.hasMany(models.Review, {
       
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  User.hasMany(models.Service, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };  
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+
+  //   User.hasMany(models.Service, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };  
 
   return User;
 };

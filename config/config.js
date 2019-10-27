@@ -11,8 +11,6 @@ module.exports = {
     "dialectOptions": {
       "multipleStatements": true
     }
-
-  
   },
   "test": {
     "username": process.env.DB_USER,
@@ -24,7 +22,6 @@ module.exports = {
     "dialectOptions": {
       "multipleStatements": true
     }
-    
   },
   "production": {
     "use_env_variable": "JAWSDB_URL",
@@ -32,6 +29,6 @@ module.exports = {
     "dialectOptions": {
       "multipleStatements": true
     }
-
-  }
+  },
+  "uploadFolder": "./client/public/images/uploads"
 };

@@ -6,6 +6,8 @@ const fileUpload = require("express-fileupload");
 const session = require("express-session");
 const express = require("express");
 const app = express();
+const db = require("./models");
+const uploadFolder = require("./config/config").uploadFolder;
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -14,7 +16,7 @@ app.use(express.json());
 app.use(fileUpload({
   limits: { fileSize: 50 * 1024 * 1024 },
   useTempFiles : true,
-  tempFileDir : "./client/public/images/uploads/tmp/"
+  tempFileDir : `${uploadFolder}/tmp/`
 }));
 
 app.use(session({
@@ -62,8 +64,8 @@ db.sequelize.sync(syncOptions).then(function () {
   if (syncOptions.force) {
     
     //execute the schema changes and the seeds
-    let schema = fs.readFileSync("./models/schema.sql", { encoding: "utf8" });
-    let seeds = fs.readFileSync("./models/seeds.sql", { encoding: "utf8" });
+    let schema = fs.readFileSync("./database/schema.sql", { encoding: "utf8" });
+    let seeds = fs.readFileSync("./database/seeds.sql", { encoding: "utf8" });
   
     db.sequelize.query(schema + seeds, { raw: true }).then(() => {
       runServer();
