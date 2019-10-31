@@ -6,6 +6,7 @@ import API from './utils/API';
 import MenuTop from "./components/MenuTop";
 import Jumbotron from "./components/Jumbotron";
 import AuthModal from "./components/AuthModal";
+import WithAuth from './components/WithAuth';
 
 //Pages
 import Search from "./pages/Search";
@@ -75,7 +76,7 @@ class App extends Component {
           <Route exact path="/" component={Search} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/profile" component={() => <Profile authenticated={this.state.authenticated} />}  />
+          <Route exact path="/profile" component={WithAuth(Profile)}  />
           <Route path="*">
             <Redirect to="/" />
           </Route>
