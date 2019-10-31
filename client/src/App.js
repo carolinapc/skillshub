@@ -10,7 +10,6 @@ import WithAuth from './components/WithAuth';
 
 //Pages
 import Search from "./pages/Search";
-import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 
 //CSS
@@ -79,7 +78,6 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Search} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/signup" component={Signup} />
           <Route exact path="/profile" component={WithAuth(Profile)}  />
           <Route path="*">
             <Redirect to="/" />
