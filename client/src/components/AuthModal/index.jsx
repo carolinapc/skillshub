@@ -9,15 +9,18 @@ class AuthModal extends React.Component {
   state = {
     email: "",
     password: "",
+    confirmPassword: "",
     firstName: "",
     lastName: "",
     message: "",
     error: false,
+    isLoading: false,
     modalSetup: {
       title: "Sign In",
       showFirstName: false,
       showLastName: false,
       showPassword: true,
+      showConfirmPassword: false,
       showEmail: true,
       showLinkSignUp: true,
       showLinkReset: true,
@@ -31,6 +34,9 @@ class AuthModal extends React.Component {
   //authenticate user
   authenticate = event => {
     event.preventDefault();
+
+    this.setState({ isLoading: true });
+
     const { email, password } = this.state;
     let data = { email, password };
 
@@ -38,51 +44,70 @@ class AuthModal extends React.Component {
       .then(res => {
         this.setState({ message: "" });
         this.props.handleAuthentication(res);
+        this.setState({ isLoading: false });
       })
-      .catch(err => this.setState({ message: err.response.data, error:true }));
+      .catch(err => {
+        this.setState({ message: err.response.data, error: true });
+        this.setState({ isLoading: false });
+      });
+
   }
 
   //create an account
   signUp = event => {
     event.preventDefault();
-    const { firstName, lastName, email, password } = this.state;
-    let data = {
-      firstname: firstName,
-      lastname: lastName,
-      email: email,
-      password: password
-    };
+    this.setState({ isLoading: true });
+    const { firstName, lastName, email, password, confirmPassword } = this.state;
 
-    API.signUp(data)
-      .then(res => {
-        this.setupModal("signin");
-        this.setState({ message: "Account was created successfully", error: false });
-      })
-      .catch(err => {
-        let message;
-        if (err.response.data.errors) {
-          message = err.response.data.errors[0].message;
-        }
-        else {
-          message = err.response.data;  
-        }
-        this.setState({ message, error: true });
-        
-      });
+    if (firstName.trim() === "" || 
+      lastName.trim() === "" ||
+      email.trim() === "" ||
+      password.trim() === "" ||
+      confirmPassword.trim() === "") {
+        this.setState({ message: "All fields are required", error: true, isLoading:false });
+    }
+    else if (password != confirmPassword) {
+      this.setState({ message: "Passwords must match", error: true, isLoading:false });
+    }
+    else {
+      let data = {
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        password: password
+      };
+  
+      API.signUp(data)
+        .then(res => {
+          this.setupModal("signin");
+          this.setState({ message: "Account was created successfully", error: false, isLoading:false });
+        })
+        .catch(err => {
+          let message;
+          if (err.response.data.errors) {
+            message = err.response.data.errors[0].message;
+          }
+          else {
+            message = err.response.data;  
+          }
+          this.setState({ message, error: true, isLoading:false });
+          
+        });
+    }
+
   }
 
   //send new password to user email
   resetPassword = event => {
     event.preventDefault();
-    const { email, password } = this.state;
-    let data = { email, password };
+    this.setState({ isLoading: true });
+    let data = { email: this.state.email };
 
-    API.authenticate(data)
+    API.resetPassword(data)
       .then(res => {
-        this.setState({ message: "", error:false });
-        this.props.handleAuthentication(res);
+        this.setState({ message: "Password sent to your e-mail", error:false, isLoading:false });
       })
-      .catch(err => this.setState({ message: err.response.data, error: true }));
+      .catch(err => this.setState({ message: err.response.data, error: true, isLoading:false }));
   }
 
   handleInputChange = event => {
@@ -101,6 +126,7 @@ class AuthModal extends React.Component {
         showFirstName: true,
         showLastName: true,
         showPassword: true,
+        showConfirmPassword: true,
         showEmail: true,
         showLinkSignUp: false,
         showLinkReset: false,
@@ -116,6 +142,7 @@ class AuthModal extends React.Component {
         showFirstName: false,
         showLastName: false,
         showPassword: false,
+        showConfirmPassword: false,
         showEmail: true,
         showLinkSignUp: true,
         showLinkReset: false,
@@ -131,6 +158,7 @@ class AuthModal extends React.Component {
         showFirstName: false,
         showLastName: false,
         showPassword: true,
+        showConfirmPassword: false,
         showEmail: true,
         showLinkSignUp: true,
         showLinkReset: true,
@@ -144,6 +172,7 @@ class AuthModal extends React.Component {
     this.setState({
       email: "",
       password: "",
+      confirmPassword: "",
       firstName: "",
       lastName: "",
       message: "",
@@ -178,6 +207,7 @@ class AuthModal extends React.Component {
       showFirstName,
       showLastName,
       showPassword,
+      showConfirmPassword,
       showLinkReset,
       showLinkSignIn,
       showLinkSignUp,
@@ -212,16 +242,39 @@ class AuthModal extends React.Component {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" name="password" value={this.state.password} placeholder="Password" onChange={this.handleInputChange} />
           </Form.Group>
+
+          <Form.Group controlId="formBasicConfirmPassword" className={showConfirmPassword ? "" : "hide-self"}>
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control type="password" name="confirmPassword" value={this.state.confirmPassword} placeholder="Password" onChange={this.handleInputChange} />
+          </Form.Group>
         </Form>
           <span className={this.state.error?"text-danger":"text-success"}>{this.state.message}</span>  
           <ButtonToolbar className="justify-content-center">
-            <Button variant="secondary" className={showBtnSignIn?"":"hide-self"} block onClick={this.authenticate}>
+            <Button
+              variant="secondary"
+              disabled={this.state.isLoading}
+              className={showBtnSignIn ? "" : "hide-self"}
+              block
+              onClick={!this.state.isLoading ? this.authenticate : null}
+            >
               Sign In
             </Button>
-            <Button variant="secondary" className={showBtnSignUp?"":"hide-self"} block onClick={this.signUp}>
+            <Button
+              variant="secondary"
+              disabled={this.state.isLoading}
+              className={showBtnSignUp ? "" : "hide-self"}
+              block
+              onClick={!this.state.isLoading ? this.signUp : null}
+            >
               Sign Up
             </Button>
-            <Button variant="secondary" className={showBtnReset?"":"hide-self"} block onClick={this.resetPassword}>
+            <Button
+              variant="secondary"
+              disabled={this.state.isLoading}
+              className={showBtnReset ? "" : "hide-self"}
+              block
+              onClick={!this.state.isLoading ? this.resetPassword : null}
+            >
               Reset Password
             </Button>
           </ButtonToolbar>

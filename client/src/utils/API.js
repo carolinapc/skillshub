@@ -13,5 +13,8 @@ export default {
   },
   signUp: function (data) {
     return axios.post("/api/user", data);
+  },
+  resetPassword: function (data) {
+    return axios.post("/api/user/resetpwd", data);
   }
 };
