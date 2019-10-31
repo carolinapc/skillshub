@@ -76,7 +76,7 @@ class App extends Component {
           <Route exact path="/" component={Search} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/profile" component={WithAuth(Profile, this.state.authenticated)}  />
+          <Route exact path="/profile" component={WithAuth(Profile)}  />
           <Route path="*">
             <Redirect to="/" />
           </Route>
