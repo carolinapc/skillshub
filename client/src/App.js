@@ -23,7 +23,8 @@ class App extends Component {
   state = {
     userData: {},
     authenticated: false,
-    authModalShow: false
+    authModalShow: false,
+    viewType: "signin"
   }
 
   componentDidMount = ()=>{
@@ -39,8 +40,11 @@ class App extends Component {
   }
 
   //show/hide authentication modal
-  toggleAuthModalShow = () => {
-    this.setState({ authModalShow: !this.state.authModalShow });
+  toggleAuthModalShow = viewType => {
+    this.setState({
+      authModalShow: !this.state.authModalShow,
+      viewType: viewType
+    });
   }  
 
   //handle authentication status
@@ -84,6 +88,7 @@ class App extends Component {
         <AuthModal
           handleCloseModal={this.toggleAuthModalShow}
           show={this.state.authModalShow}
+          viewType={this.state.viewType}
           handleAuthentication={this.handleAuthentication}
         />
       </Router>

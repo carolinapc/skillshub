@@ -10,5 +10,8 @@ export default {
   },
   getUserSession: function () {
     return axios.get("/api/user/auth");
+  },
+  signUp: function (data) {
+    return axios.post("/api/user", data);
   }
 };

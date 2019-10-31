@@ -41,19 +41,12 @@ function MenuTop(props) {
                 <NavDropdown.Item onClick={() => props.signOut()}>Sign-Out</NavDropdown.Item>
               </NavDropdown>
             </>
-          :
-          <Nav.Link className="nav-link" onClick={() => props.toggleAuthModalShow()}>Sign-In</Nav.Link>
+            :
+            <>
+              <Nav.Link className="nav-link" onClick={() => props.toggleAuthModalShow("signin")}>Sign-In</Nav.Link>
+              <Nav.Link className="nav-link" onClick={() => props.toggleAuthModalShow("signup")}>Sign-Up</Nav.Link>
+            </>
         }
-          
-        <NavLink  
-          exact
-          to="/signup"
-          activeClassName="active"
-          className="nav-link"
-          >
-          Sign-Up
-        </NavLink>
-        
       </Nav>
     </Navbar.Collapse>
   </Navbar>   
