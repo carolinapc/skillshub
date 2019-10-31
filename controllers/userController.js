@@ -25,39 +25,12 @@ module.exports = {
   //create new one
   create: function (req, res) {
     let pwd;
-
-    try {
-      if (req.body.firstname.trim() === "") {
-        res.status(422).end("First name must be informed!");        
-      }
-    }
-    catch (e) {
-      res.status(500).end("The firstname field is expected!");        
-    }
-
-    try {
-      if (req.body.lastname.trim() === "") {
-        res.status(422).end("Last name must be informed!");        
-      }
-    }
-    catch (e) {
-      res.status(500).end("The lastname field is expected!");        
-    }
-
-    try {
-      if (req.body.firstname.trim() === "") {
-        res.status(422).end("E-mail must be informed!");        
-      }
-    }
-    catch (e) {
-      res.status(500).end("The email field is expected!");        
-    }
-
     //checks if the password field was passed
-    try {
+    try{
       pwd = req.body.password.trim();
     }
     catch (e) {
+      console.log("The password field is expected!");
       res.status(500).end("The password field is expected!");        
     }
 

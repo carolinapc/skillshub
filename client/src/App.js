@@ -10,6 +10,7 @@ import WithAuth from './components/WithAuth';
 
 //Pages
 import Search from "./pages/Search";
+import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 
 //CSS
@@ -22,8 +23,7 @@ class App extends Component {
   state = {
     userData: {},
     authenticated: false,
-    authModalShow: false,
-    viewType: "signin"
+    authModalShow: false
   }
 
   componentDidMount = ()=>{
@@ -39,11 +39,8 @@ class App extends Component {
   }
 
   //show/hide authentication modal
-  toggleAuthModalShow = viewType => {
-    this.setState({
-      authModalShow: !this.state.authModalShow,
-      viewType: viewType
-    });
+  toggleAuthModalShow = () => {
+    this.setState({ authModalShow: !this.state.authModalShow });
   }  
 
   //handle authentication status
@@ -78,6 +75,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Search} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/signup" component={Signup} />
           <Route exact path="/profile" component={WithAuth(Profile)}  />
           <Route path="*">
             <Redirect to="/" />
@@ -86,7 +84,6 @@ class App extends Component {
         <AuthModal
           handleCloseModal={this.toggleAuthModalShow}
           show={this.state.authModalShow}
-          viewType={this.state.viewType}
           handleAuthentication={this.handleAuthentication}
         />
       </Router>
