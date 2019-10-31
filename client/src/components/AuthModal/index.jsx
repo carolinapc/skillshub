@@ -66,7 +66,7 @@ class AuthModal extends React.Component {
       confirmPassword.trim() === "") {
         this.setState({ message: "All fields are required", error: true, isLoading:false });
     }
-    else if (password != confirmPassword) {
+    else if (password !== confirmPassword) {
       this.setState({ message: "Passwords must match", error: true, isLoading:false });
     }
     else {
