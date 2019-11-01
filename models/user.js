@@ -44,6 +44,10 @@ module.exports = function (sequelize, DataTypes) {
         }
       }
     },
+    zipcode: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     image: {
       type: DataTypes.STRING,
       allowNull: true
@@ -62,20 +66,20 @@ module.exports = function (sequelize, DataTypes) {
     freezeTableName: true
   });
 
-  // User.associate = function (models) {
-  //   User.hasMany(models.Review, {
+  User.associate = function (models) {
+    User.hasMany(models.Skill, {
       
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
+      foreignKey: {
+        allowNull: false
+      }
+    });
 
-  //   User.hasMany(models.Service, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };  
+    User.hasMany(models.Contact, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };  
 
   return User;
 };
