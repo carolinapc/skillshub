@@ -11,6 +11,10 @@ router.route("/")
 router.route("/find/:id")
   .get(userController.findById)
 
+// Matches with "/api/user/account"
+router.route("/account")
+  .get(userController.getUserAccount)
+
 // Matches with "/api/user/resetpwd"
 router.route("/resetpwd")
   .post(userController.resetPassword);

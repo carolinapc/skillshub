@@ -1,5 +1,6 @@
 import React from 'react';
 //import API from '../../utils/API';
+import Jumbotron from "../../components/Jumbotron";
 import PageContainer from '../../components/PageContainer';
 
 
@@ -30,6 +31,8 @@ class Search extends React.Component {
 
   render() { 
     return (
+    <>
+      <Jumbotron />
       <PageContainer title="Search Professionals">
 
         <form onSubmit={this.onSubmit}>
@@ -61,6 +64,7 @@ class Search extends React.Component {
           : this.state.notFoundMsg
         } */}
       </PageContainer>
+    </>
     );
   }
 }
