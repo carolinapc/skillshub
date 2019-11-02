@@ -3,6 +3,8 @@ import { Form, Button } from 'react-bootstrap';
 import API from '../../utils/API';
 
 class PersonalInfo extends React.Component {
+  mounted = false;
+
   state = {
     firstName: "",
     lastName: "",
@@ -14,21 +16,27 @@ class PersonalInfo extends React.Component {
   }
 
   componentDidMount = () => {
+    this.mounted = true;
     //fill all the fields from database
     API.getUserAccount().then(res => {
       if (res.data) {
-        this.setState({
-          firstName: res.data.firstname,
-          lastName: res.data.lastname,
-          email: res.data.email,
-          zipCode: res.data.zipcode
-        });
-          
+        if (this.mounted) {
+          this.setState({
+            firstName: res.data.firstname,
+            lastName: res.data.lastname,
+            email: res.data.email,
+            zipCode: res.data.zipcode
+          });
+        }
       }
       else {
         console.log("User didn't sign in or not found!");
       }
     }).catch(err => console.log(err));
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   handleInputChange = event => {
