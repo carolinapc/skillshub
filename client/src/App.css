@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Averia+Sans+Libre&display=swap');
 
-h1, h3 {
+h1, h3, h4, h5 {
   font-family: 'Averia Sans Libre', cursive;
 }
 
@@ -24,25 +24,7 @@ h1, h3 {
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.container{
+  margin-top: 85px;
 }
 
-@media screen and (max-width: 640px){
-  h1 {
-    font-size: 20px !important;
-  }
-  h3{
-    font-size: 18px !important;
-  }
-}
-
-@media screen and (max-width: 940px){
-  h1 {
-    font-size: 24px !important;
-  }
-  h3{
-    font-size: 22px !important;
-  }
-}

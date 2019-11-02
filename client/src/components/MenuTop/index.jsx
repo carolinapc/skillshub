@@ -7,7 +7,7 @@ import "./style.css";
 function MenuTop(props) {
   return (
       
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark">
     <Navbar.Brand>
       <NavLink
           exact

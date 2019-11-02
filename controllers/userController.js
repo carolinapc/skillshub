@@ -96,8 +96,8 @@ module.exports = {
         if (pwd === "") {
           res.status(500).end("Password must be informed!");
         }
-        if (pwd.length < 8) {
-          res.status(500).end("Password must have at least 8 characters!");
+        if (pwd.length < 6) {
+          res.status(500).end("Password must have at least 6 characters!");
         }
 
         //crypt the password
@@ -256,6 +256,23 @@ module.exports = {
     }
     else {
       res.status(200).json({ loggedin: false });
+    }
+  },
+
+  //get all user account data
+  getUserAccount: function (req, res) {
+    //checks if the user is logged in
+    if (!req.session.loggedin) {
+      res.status(400).end("You need to sign in to update a user.");
+    }
+    else {
+      db.User.findOne({
+        where: {
+          id: req.session.UserId
+        }
+        })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
     }
   }
 };

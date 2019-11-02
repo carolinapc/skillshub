@@ -4,7 +4,6 @@ import API from './utils/API';
 
 //Stateless Components
 import MenuTop from "./components/MenuTop";
-import Jumbotron from "./components/Jumbotron";
 import AuthModal from "./components/AuthModal";
 import WithAuth from './components/WithAuth';
 
@@ -74,7 +73,6 @@ class App extends Component {
           userInfo={this.state.userData}
           signOut={this.handleSignOut}
         />
-        <Jumbotron />
         <Switch>
           <Route exact path="/" component={Search} />
           <Route exact path="/search" component={Search} />

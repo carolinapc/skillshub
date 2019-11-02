@@ -9,6 +9,7 @@ export default function WithAuth(ComponentToProtect) {
       this.state = {
         loading: true,
         redirect: false,
+        userData: {}
       };
     }
 
@@ -16,12 +17,12 @@ export default function WithAuth(ComponentToProtect) {
       //check authentication status
       API.getUserSession().then(res => {
         if (res.data.loggedin) {
-          this.setState({ loading: false });
+          this.setState({ loading: false, userData: res.data });
         }
         else {
           this.setState({ loading: false, redirect: true });
         }
-      }).catch(err => console.log(err.response.data));
+      }).catch(err => console.log(err));
     }
 
     render() {
@@ -34,7 +35,7 @@ export default function WithAuth(ComponentToProtect) {
       }
       return (
         <React.Fragment>
-          <ComponentToProtect {...this.props} />
+          <ComponentToProtect userData={this.state.userData} {...this.props} />
         </React.Fragment>
       );
     }
