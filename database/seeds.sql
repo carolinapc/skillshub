@@ -13,4 +13,24 @@ INSERT INTO Category VALUES
 (5, 'Consulting','2019-11-01 12:00:00','2019-11-01 12:00:00'),
 (6, 'Translating/Interpreter','2019-11-01 12:00:00','2019-11-01 12:00:00'),
 (7, 'Teaching','2019-11-01 12:00:00','2019-11-01 12:00:00'),
-(8, 'Other','2019-11-01 12:00:00','2019-11-01 12:00:00')
+(8, 'Other','2019-11-01 12:00:00','2019-11-01 12:00:00');
+
+INSERT INTO Skill
+(
+name,
+description,
+price,
+pricetype,
+zipcode,
+CategoryId,
+UserId
+)
+VALUES
+(
+'Skill 1',
+'Description of Skill 1',
+100,
+'J',
+'M4Y1H5',
+1,
+1);

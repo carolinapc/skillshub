@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-  // Authenticate user
+  //USER
   authenticate: function(loginData) {
     return axios.post("/api/user/auth", loginData);
   },
@@ -22,5 +22,44 @@ export default {
   },
   updateUser: function (data) {
     return axios.put("api/user", data);
+  },
+  getUserSkills: function () {
+    return axios.get("api/user/skills");
+  },
+  createUserSkill: function (data) {
+    return axios.post("api/user/skills", data);
+  },
+  updateUserSkill: function (data) {
+    return axios.put("api/user/skills", data);
+  },
+
+  //CATEGORY
+  getCategories: function () {
+    return axios.get("api/category");
+  },
+
+  //CONSTANTS
+  getPriceTypes: () => {
+    const priceTypes = [
+      {
+        type: "H",
+        name: "Per Hour"
+      },
+      {
+        type: "D",
+        name: "Per Day"
+      },
+      {
+        type: "J",
+        name: "Per Job"
+      }
+    ];
+
+    return priceTypes;
+  },
+
+  uploadFile: function (data) {
+    return axios.post("api/utils/uploadFile", data);
   }
+
 };

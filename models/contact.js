@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    pricetype: {
+    priceType: {
       type: DataTypes.CHAR,
       allowNull: false
     },

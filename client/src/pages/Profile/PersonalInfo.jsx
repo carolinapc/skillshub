@@ -22,10 +22,10 @@ class PersonalInfo extends React.Component {
       if (res.data) {
         if (this.mounted) {
           this.setState({
-            firstName: res.data.firstname,
-            lastName: res.data.lastname,
+            firstName: res.data.firstName,
+            lastName: res.data.lastName,
             email: res.data.email,
-            zipCode: res.data.zipcode
+            zipCode: res.data.zipCode
           });
         }
       }
@@ -51,7 +51,7 @@ class PersonalInfo extends React.Component {
       firstname: firstName,
       lastName: lastName,
       email: email,
-      zipcode: zipCode
+      zipCode: zipCode
     })
     .then(() => {
       this.setState({ message: "Profile info updated successfully", error: false, isLoading: false });

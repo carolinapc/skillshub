@@ -9,11 +9,17 @@ router.route("/")
 
 // Matches with "/api/user/find/:id"
 router.route("/find/:id")
-  .get(userController.findById)
+  .get(userController.findById);
 
 // Matches with "/api/user/account"
 router.route("/account")
-  .get(userController.getUserAccount)
+  .get(userController.getUserAccount);
+
+// Matches with "/api/user/skills"
+router.route("/skills")
+  .get(userController.getUserSkills)
+  .post(userController.createUserSkill)
+  .put(userController.updateUserSkill);
 
 // Matches with "/api/user/resetpwd"
 router.route("/resetpwd")

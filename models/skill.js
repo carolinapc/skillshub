@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes) {
         validate: {
           len: {
             args: [3, 50],
-            msg: "User first name must have at least 3 and max 50 characters"
+            msg: "Business name must have at least 3 and max 50 characters"
           }
         }
       },
@@ -16,15 +16,26 @@ module.exports = function (sequelize, DataTypes) {
       },
       price: {
         type: DataTypes.DECIMAL(10,2),
-        allowNull: false
+        allowNull: false,
+        validate: {
+          customValidator(value) {
+            if (value === "") {
+              throw new Error("Price must be informed");
+            }
+            if (isNaN(value)) {
+              throw new Error("Price must be decimal");
+            }
+          }
+        }
+
       },
-      pricetype: {
+      priceType: {
         type: DataTypes.CHAR,
         allowNull: false,
         validate: {
           customValidator(value) {
             if (value === "") {
-              throw new Error("Price type must be choose: per hour, per day or per job");
+              throw new Error("Price type must be chosen: per hour, day or job");
             }
             if (value !== "H" && value !== "D" && value !== "J") {
               throw new Error("Price type must be [H]our, [D]ay or [J]ob");
@@ -32,9 +43,19 @@ module.exports = function (sequelize, DataTypes) {
           }
         }
       },
-      zipcode: {
+      zipCode: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "You must provide the zip code"
+          },
+          customValidator(value) {
+            if (value === "") {
+              throw new Error("Zip code must be informed");
+            }
+          }
+        }
       },
       active: {
         type: DataTypes.BOOLEAN,
@@ -48,7 +69,18 @@ module.exports = function (sequelize, DataTypes) {
     Skill.associate = function (models) {
       Skill.belongsTo(models.Category, {
         foreignKey: {
-          allowNull: false
+          allowNull: false,
+          validate: {
+            notNull: {
+              args: true,
+              msg: "You must select a category"
+            },
+            customValidator(value) {
+              if (value === "") {
+                throw new Error("Category must be informed");
+              }
+            }
+          }
         }
       });
   

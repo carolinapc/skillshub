@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
   let User = sequelize.define("User", {
-    firstname: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
         }
       }
     },
-    lastname: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -44,7 +44,7 @@ module.exports = function (sequelize, DataTypes) {
         }
       }
     },
-    zipcode: {
+    zipCode: {
       type: DataTypes.STRING,
       allowNull: true
     },
