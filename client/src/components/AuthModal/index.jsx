@@ -71,8 +71,8 @@ class AuthModal extends React.Component {
     }
     else {
       let data = {
-        firstname: firstName,
-        lastname: lastName,
+        firstName: firstName,
+        lastName: lastName,
         email: email,
         password: password
       };

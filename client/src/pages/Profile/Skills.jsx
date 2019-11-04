@@ -1,101 +1,198 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
 import API from '../../utils/API';
+import SkillsList from './SkillsList';
+import SkillForm from './SkillForm';
 
 class Skills extends React.Component {
+  mounted = false;
+
   state = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    zipCode: "",
-    message: "",
-    error: false,
-    isLoading: false
+    userSkills: [],
+    categories: [],
+    editionView: false,
+    fields: {
+      id: "",
+      name: "",
+      description: "",
+      price: "",
+      priceType: "",
+      zipCode: "",
+      active: false,
+      CategoryId: ""
+    },
+    controllers: {
+      message: "",
+      error: false,
+      isLoading: false
+    }
+  }
+
+  refreshUserSkills = () => {
+    //fill all the fields from database
+    API.getUserSkills().then(res => {
+      if (res.data) {
+          this.setState({
+            userSkills: res.data
+          });
+      }
+      else {
+        console.log("User doesn't have skills registered!");
+      }
+    }).catch(err => console.log(err.response));
   }
 
   componentDidMount = () => {
-    //fill all the fields from database
-    API.getUserAccount().then(res => {
+    this.mounted = true;
+
+    this.refreshUserSkills();
+
+    //get all categories
+    API.getCategories().then(res => {
       if (res.data) {
-        this.setState({
-          firstName: res.data.firstname,
-          lastName: res.data.lastname,
-          email: res.data.email,
-          zipCode: res.data.zipcode
-        });
-          
+        if (this.mounted) {
+          this.setState({
+            categories: res.data
+          });
+        }
       }
       else {
-        console.log("User didn't sign in or not found!");
+        console.log("There are no categories stored!");
       }
-    }).catch(err => console.log(err));
+    }).catch(err => console.log(err.response));
+
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+    let fields = {...this.state.fields};
+    let { name, value } = event.target;
+
+    //if it's a checkbox gets the checked value
+    if (event.target.type === "checkbox") {
+      value = event.target.checked;
+    }
+    else {
+      value = value.trim();
+    }
+      
+
+    fields[name] = value;
+    
+    this.setState({ fields: fields });
+    
   }
 
-  updateInfo = () => {
-    const { firstName, lastName, email, zipCode } = this.state;
-
-    API.updateProfileInfo({
-      firstname: firstName,
-      lastName: lastName,
-      email: email,
-      zipcode: zipCode
-    })
-    .then(() => {
-      this.setState({ message: "Profile info updated successfully", error: false, isLoading: false });
-    })
-    .catch(err => {
-      let message;
-      if (err.response.data.errors) {
-        message = err.response.data.errors[0].message;
+  editSkill = skill => {
+    this.setState({
+      editionView: true,
+      fields: skill,
+      controllers: {
+        error: false,
+        message: "",
+        isLoading: false
       }
-      else {
-        message = err.response.data;  
-      }
-      this.setState({ message, error: true, isLoading:false });
-      
     });
+  }
+  
+  viewSkillsList = () => {
+    this.setState({
+      editionView: false
+    });
+  }
 
+  addSkill = () => {
+    let skill = {
+      id: "",
+      name: "",
+      description: "",
+      price: "",
+      priceType: "",
+      zipCode: "",
+      active: false,
+      CategoryId: ""
+    };
+
+    this.editSkill(skill);    
+  }
+  
+  saveSkill = () => {
+    let controllers = { ...this.state.controlers };
+    controllers.error = false;
+    controllers.isLoading = true;
+
+    if (this.state.fields.id !== "") {
+
+      API.updateUserSkill(this.state.fields)
+        .then(res => {
+          controllers.message = "Skill updated successfully";
+          controllers.isLoading = false;
+          this.setState({ controllers });
+          this.refreshUserSkills();
+          this.viewSkillsList();
+        })
+        .catch(err => {
+          if (err.response.data.errors) {
+            controllers.message = err.response.data.errors[0].message;
+          }
+          else {
+            controllers.message = err.response.data;
+          }
+        
+          controllers.isLoading = false;
+          controllers.error = true;
+          this.setState({ controllers: controllers });
+        });
+    }
+    else {
+      API.createUserSkill(this.state.fields)
+      .then(res => {
+        controllers.message = "Skill created successfully";
+        controllers.isLoading = false;
+        this.setState({ controllers });
+        this.refreshUserSkills();
+        this.viewSkillsList();
+      })
+      .catch(err => {
+        if (err.response.data.errors) {
+          controllers.message = err.response.data.errors[0].message;
+        }
+        else {
+          controllers.message = err.response.data;
+        }
+      
+        controllers.isLoading = false;
+        controllers.error = true;
+        this.setState({ controllers: controllers });
+      });
+
+    }
+    
   }
 
   render() {
   
     return (
-      <Form>
-        <Form.Group controlId="formBasicFirstName">
-          <Form.Label>First Name</Form.Label>
-          <Form.Control type="text" name="firstName" value={this.state.firstName} placeholder="Enter first name" onChange={this.handleInputChange} />
-        </Form.Group>
-
-        <Form.Group controlId="formBasicLastName">
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control type="text" name="lastName" value={this.state.lastName} placeholder="Enter last name" onChange={this.handleInputChange} />
-        </Form.Group>
-
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" name="email" value={this.state.email} placeholder="Enter email" onChange={this.handleInputChange} />
-        </Form.Group>
-
-        <Form.Group controlId="formBasicZipCode">
-          <Form.Label>Zip Code</Form.Label>
-          <Form.Control type="text" name="zipCode" value={this.state.zipCode} placeholder="Zip Code" onChange={this.handleInputChange} />
-        </Form.Group>
-
-        <div className={this.state.error?"text-danger":"text-success"}>{this.state.message}</div>  
-        
-        <Button
-          variant="secondary"
-          disabled={this.state.isLoading}
-          onClick={!this.state.isLoading ? this.updateInfo : null}
-        >
-          Save
-        </Button>
-      </Form>
+      <>
+        {this.state.editionView ?
+          <SkillForm
+            skill={this.state.fields}
+            handleInputChange={this.handleInputChange}
+            controllers={this.state.controllers}
+            categories={this.state.categories}
+            saveSkill={this.saveSkill}
+            viewSkillsList={this.viewSkillsList}
+          />
+          :
+          <SkillsList
+            addSkill={this.addSkill}
+            editSkill={this.editSkill}
+            userSkills={this.state.userSkills}
+          />
+        }
+      </>
     );
   }
 }
