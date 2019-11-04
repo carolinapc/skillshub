@@ -56,6 +56,10 @@ export default {
     ];
 
     return priceTypes;
+  },
+
+  uploadFile: function (data) {
+    return axios.post("api/utils/uploadFile", data);
   }
 
 };

@@ -8,6 +8,15 @@ const express = require("express");
 const app = express();
 const db = require("./models");
 const uploadFolder = require("./config/config").uploadFolder;
+const cors = require('cors');
+
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+};
+
+//allow cors
+app.use(cors(corsOptions));
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));

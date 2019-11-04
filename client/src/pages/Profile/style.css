@@ -10,3 +10,27 @@
 .btn{
   margin-right: 5px;
 }
+
+.input-file {
+  position: relative;
+  padding: 10px;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  border-radius: 2px;
+  font: inherit;
+  cursor: pointer;
+}
+.input-file input {
+  display: none;
+}
+.input-file span{
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  margin: 10px;
+  width: Calc(100% - 20px);
+  background-color: rgb(65, 62, 62);
+  padding: 5px;
+  color: white;
+  text-align: center;
+}
