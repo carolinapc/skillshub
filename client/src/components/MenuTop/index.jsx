@@ -34,13 +34,11 @@ function MenuTop(props) {
         
         {/* show buttons according to authentication status */}
         {props.authenticated ?
-            <>
-              <NavDropdown title={<><i className="fas fa-user"></i> {props.userInfo.UserName}</>} id="basic-nav-dropdown">
-                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => props.signOut()}>Sign-Out</NavDropdown.Item>
-              </NavDropdown>
-            </>
+            <NavDropdown title={<><i className="fas fa-user"></i> {props.userInfo.UserName}</>} id="basic-nav-dropdown" className="menu-auth">
+              <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={() => props.signOut()}>Sign-Out</NavDropdown.Item>
+            </NavDropdown>
             :
             <>
               <Nav.Link className="nav-link" onClick={() => props.toggleAuthModalShow("signin")}>Sign-In</Nav.Link>

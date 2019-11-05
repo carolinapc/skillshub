@@ -2,6 +2,7 @@
   border-radius: 10px;
   width: 100%;
   margin-bottom: 10px;
+  border: 1px solid rgb(65, 62, 62);
 }
 
 .btn-toolbar{

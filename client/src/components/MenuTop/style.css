@@ -7,3 +7,7 @@
 nav.navbar.navbar-default {
   margin-bottom: 0;
 }
+.menu-auth{
+  min-width: 150px;
+  text-align: right;
+}
