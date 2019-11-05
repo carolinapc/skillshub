@@ -3,5 +3,3 @@ package-lock.json
 node_modules
 npm-debug.log
 .env
-!client/public/images/uploads/
-client/public/images/uploads/*
