@@ -60,6 +60,11 @@ module.exports = function (sequelize, DataTypes) {
       active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
+      },
+      score: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
       }
     },
     {
@@ -78,6 +83,23 @@ module.exports = function (sequelize, DataTypes) {
             customValidator(value) {
               if (value === "") {
                 throw new Error("Category must be informed");
+              }
+            }
+          }
+        }
+      });
+
+      Skill.belongsTo(models.User, {
+        foreignKey: {
+          allowNull: false,
+          validate: {
+            notNull: {
+              args: true,
+              msg: "You must inform an user"
+            },
+            customValidator(value) {
+              if (value === "") {
+                throw new Error("User must be informed");
               }
             }
           }

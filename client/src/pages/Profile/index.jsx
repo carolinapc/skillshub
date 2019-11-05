@@ -17,8 +17,6 @@ class Profile extends React.Component {
       page: "info"
     }
   };
-
-
   
   selectMenu = event => {
     event.preventDefault();
@@ -30,6 +28,7 @@ class Profile extends React.Component {
       }
     });
   }
+
   onChangeHandler=event=>{
     const data = new FormData();
     data.append('file', event.target.files[0]);
@@ -45,17 +44,6 @@ class Profile extends React.Component {
       API.updateUser(data)
         .then(res => console.log(res))
         .catch(err => console.log(err.response));
-      
-      // API.uploadFile(data)
-      //   .then(res => {
-      //     //console.log(res.data.fullFileName);
-          
-      //     API.updateUser({ image: res.data.fileName })
-      //       .then(res => console.log(res))
-      //       .catch(err => console.log(err));
-      //   })
-      //   .catch(err => console.log(err.response));
-
     }  
     reader.readAsDataURL(event.target.files[0]);
     //------

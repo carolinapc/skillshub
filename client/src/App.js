@@ -13,6 +13,7 @@ import AuthModal from "./components/AuthModal";
 import WithAuth from './components/WithAuth';
 
 //Pages
+import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
 
@@ -78,8 +79,10 @@ class App extends Component {
           signOut={this.handleSignOut}
         />
         <Switch>
-          <Route exact path="/" component={Search} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/search/:category" component={Search} />
+          <Route exact path="/search/skill/:search" component={Search} />
           <Route exact path="/profile" component={WithAuth(Profile)}  />
           <Route path="*">
             <Redirect to="/" />

@@ -1,0 +1,19 @@
+/*overriding bootstrap card class*/
+.card{
+  margin: 20px;
+  cursor: pointer;
+}
+.card:hover{
+  background-color: #ccc;
+}
+
+/*overriding bootstrap card class*/
+.btn-link{
+  text-decoration: none;
+  color: inherit;
+}
+/*overriding bootstrap card class*/
+.btn-link:hover{
+  text-decoration: none;
+  color: inherit;
+}
