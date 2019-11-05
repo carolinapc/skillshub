@@ -30,7 +30,7 @@ app.use(fileUpload({
 
 
 app.use(session({
-  secret: "SkillshubKey",
+  secret: process.env.SESSION_KEY,
   resave: true,
   saveUninitialized: true
 }));
@@ -40,6 +40,8 @@ app.use(session({
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+app.use(express.static("client/build/images/uploads"));
+app.use(express.static("client/public/images/uploads"));
 
 // API routes
 app.use(routes);
