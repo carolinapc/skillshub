@@ -1,6 +1,8 @@
 
 // Defining methods for the utils controlllers
 module.exports = {
+
+  //upload a file to the tmp folder and return its fileName
   uploadFile: function (req, res) {
     // check if the user is logged in
     if (!req.session.loggedin) {
@@ -17,7 +19,7 @@ module.exports = {
 
         //add extension to filename
         let fullFileName = `${req.files.file.tempFilePath}.${fileExt}`.toLowerCase();
-
+        
         fileName = fullFileName.split("/");
         fileName = fileName[fileName.length - 1];
         
