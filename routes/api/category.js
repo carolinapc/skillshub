@@ -5,4 +5,8 @@ const categoryController = require("../../controllers/categoryController");
 router.route("/")
   .get(categoryController.findAll);
 
+// Matches with "/api/category/grouped"
+router.route("/grouped")
+  .get(categoryController.findAllGrouped);
+
 module.exports = router;

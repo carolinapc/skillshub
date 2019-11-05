@@ -21,21 +21,30 @@ export default {
     return axios.post("/api/user/resetpwd", data);
   },
   updateUser: function (data) {
-    return axios.put("api/user", data);
+    return axios.put("/api/user", data);
   },
   getUserSkills: function () {
-    return axios.get("api/user/skills");
+    return axios.get("/api/user/skills");
   },
   createUserSkill: function (data) {
-    return axios.post("api/user/skills", data);
+    return axios.post("/api/user/skills", data);
   },
   updateUserSkill: function (data) {
-    return axios.put("api/user/skills", data);
+    return axios.put("/api/user/skills", data);
   },
 
   //CATEGORY
   getCategories: function () {
-    return axios.get("api/category");
+    return axios.get("/api/category");
+  },
+
+  getCategoriesMostAvailable: function () {
+    return axios.get("/api/category/grouped");
+  },
+
+  //SKILLS
+  getSkills: function (data) {
+    return axios.get(`/api/skill?search=${data.search}&categoryId=${data.categoryId}`);  
   },
 
   //CONSTANTS
@@ -54,8 +63,20 @@ export default {
         name: "Per Job"
       }
     ];
-
     return priceTypes;
+  },
+  getPriceTypeName: type => {
+    switch (type.toUpperCase()) {
+      case "H":
+        return "hour";
+      case "D":
+        return "day";
+      case "J":
+        return "job";
+      default:
+        return "undefined";
+    }
   }
+
 
 };
