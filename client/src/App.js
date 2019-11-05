@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import API from './utils/API';
 
+//CSS
+import "normalize.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+
 //Stateless Components
 import MenuTop from "./components/MenuTop";
 import AuthModal from "./components/AuthModal";
@@ -11,10 +16,7 @@ import WithAuth from './components/WithAuth';
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
 
-//CSS
-import "normalize.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "./App.css";
+
 
 class App extends Component {
 

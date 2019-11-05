@@ -29,6 +29,7 @@
     "generate-password": "^1.4.2",
     "if-env": "^1.0.4",
     "mysql2": "^1.7.0",
+    "rebass": "^4.0.7",
     "sequelize": "^5.21.1"
   }
 }
