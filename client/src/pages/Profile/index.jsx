@@ -71,7 +71,7 @@ class Profile extends React.Component {
           <div className="col-md-4">
             
             <label htmlFor="file" className="input-file">
-              <img src={image} alt="profile" className="profile-img" />
+              <img src={image} alt="profile" className="profile-img shadow" />
               <span>Click to change the image</span>
               <input type="file" id="file" name="file" onChange={this.onChangeHandler}/>
             </label>
