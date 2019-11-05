@@ -19,6 +19,7 @@
   border-radius: 2px;
   font: inherit;
   cursor: pointer;
+  width:100%;
 }
 .input-file input {
   display: none;
