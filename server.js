@@ -39,9 +39,13 @@ app.use(session({
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
+  app.use(express.static("client/build/images/uploads"));
 }
-app.use(express.static("client/build/images/uploads"));
-app.use(express.static("client/public/images/uploads"));
+else {
+  app.use(express.static("client/public/images/uploads"));  
+}
+
+
 
 // API routes
 app.use(routes);

@@ -11,7 +11,7 @@ import "./style.css";
 class Profile extends React.Component {
   
   state = {
-    image: this.props.userData.UserImage? `./images/uploads/${this.props.userData.UserImage}` : "profile.jpg",
+    image: this.props.userData.UserImage || "profile.jpg",
     pageView: {
       title: "Personal Info",
       page: "info"
