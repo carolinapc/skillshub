@@ -1,12 +1,13 @@
 import React from 'react';
 import './style.css';
 
+
 const Jumbotron = () => {
   return ( 
     <div className="jumbotron jumbotron-fluid">
-      <div className="container">
-        <h1 className="display-4"><i className="far fa-handshake"></i> Skills Hub</h1>
-        <p className="lead">A virtual skill sharing platform.</p>
+      <div className="containerHeader">
+        <span className="display-4"> Skills HUB</span>
+        <span className="lead"> a virtual skill sharing platform</span>
       </div>
     </div>
   );

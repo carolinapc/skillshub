@@ -1,10 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Londrina+Outline|Roboto:500&display=swap');
+
+
 .jumbotron{
   margin-top: 56px;
-  background-image: url('./bgjumbotron.png');
+  background-image: url('./cleaningBanner.jpg');
+  position: relative;
+  padding: 0;
+
+}
+
+.display-4 {
+
+  font-family: 'Londrina Outline', cursive;
+  letter-spacing: 0.07em;
+  font-size: 90px !important;
+
+}
+
+.lead{
+  margin: auto;
+  padding: 10px;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px !important;
+}
+
+.containerHeader{
+  width: 100%;
+  height: 100%;
+  background-color:#3a466070;
+  color: aliceblue;
+  max-width: 100%;
+  text-align: center;
+  padding: 100px 0;
+}
+
+@media screen and (max-width: 1000px){
+  .containerHeader {
+    max-width: 100%;
+  }
+
+  .lead {
+    display: block;
+  }
 }
 
 @media screen and (max-width: 575px){
   .jumbotron{
-    margin-top: 100px;
+
   }
 }
