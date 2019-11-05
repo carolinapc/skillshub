@@ -107,24 +107,57 @@ module.exports = {
         //nothing to do, and the password won't be updated
       }
 
-      //if there is file sent
-      if (req.body.image !== "") {
-                  
-        //check if the exists in the temp folder
-        if (fs.existsSync(`${uploadFolder}/tmp/${req.body.image}`)) {
-          let fileExt = req.body.image.split(".");
-          fileExt = fileExt[fileExt.length - 1];
-
-          //create the new file name
-          let fileName = `profile_${req.session.UserId}.${fileExt}`.toLowerCase();
+      //if a file was uploaded (profile image)
+      if (req.files) {
+        let tmpFileName = req.files.file.name;
         
-          //rename the file and move it to definitive folder
-          fs.renameSync(`${uploadFolder}/tmp/${req.body.image}`, `${uploadFolder}/${fileName}`);
+        //get the file extension
+        let fileExt = tmpFileName.split(".");
+        fileExt = fileExt[fileExt.length - 1];
 
-          req.body.image = fileName;
-          data.fileName = fileName;
-        }
-      }      
+        //give a name with the extension to the file
+        let fileName = `profile_${req.session.UserId}.${fileExt}`.toLowerCase();
+        req.body.image = fileName;
+
+        //upload the file to tmp folder
+        req.files.file.mv(req.files.file.tempFilePath, function(err) {
+          if (!err) {
+            //move the file from the tmp folder to the final folder
+            fs.renameSync(req.files.file.tempFilePath, `${uploadFolder}/${fileName}`);
+
+            const fullFileName = (`${uploadFolder}/${fileName}`).replace("client/public/", "");
+            data = {
+              fileName: fileName,
+              fullFileName: fullFileName
+            };
+            
+            res.json(data);
+          }
+          else {
+            res.status(400).end(err.message);
+          }
+        });  
+        
+      }
+      // //if there is file sent
+      // if (req.body.image !== "") {
+                  
+      //   //check if the exists in the temp folder
+      //   if (fs.existsSync(`${uploadFolder}/tmp/${req.body.image}`)) {
+      //     let fileExt = req.body.image.split(".");
+      //     fileExt = fileExt[fileExt.length - 1];
+
+      //     //create the new file name
+      //     let fileName = `profile_${req.session.UserId}.${fileExt}`.toLowerCase();
+        
+      //     //rename the file and move it to definitive folder
+      //     fs.renameSync(`${uploadFolder}/tmp/${req.body.image}`, `${uploadFolder}/${fileName}`);
+
+      //     req.body.image = fileName;
+      //     data.fileName = fileName;
+      //     req.session.UserImage = fileName;
+      //   }
+      // }      
 
       db.User
         .update(req.body, { where: { id: req.session.UserId } })

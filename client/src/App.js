@@ -25,6 +25,8 @@ class App extends Component {
     viewType: "signin"
   }
 
+  
+
   componentDidMount = ()=>{
     //check authentication status
     API.getUserSession().then(res => {
