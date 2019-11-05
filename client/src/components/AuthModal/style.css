@@ -1,5 +1,11 @@
 .justify-content-center{
   justify-content: center;
+  
+}
+
+.btn-secondary{
+  background-color: #FF593E;
+  border-color: aliceblue;
 }
 
 .hide-self{
