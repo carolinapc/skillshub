@@ -49,6 +49,10 @@ export default {
     data.categoryId = data.categoryId || "";
 
     return axios.get(`/api/skill?id=${data.id}&search=${data.search}&categoryId=${data.categoryId}`);  
-  }
+  },
 
+  //REVIEWS
+  addReview: function (data) {
+    return axios.post("/api/skill/review", data);
+  }
 };

@@ -7,4 +7,8 @@ router.route("/")
   //.put(skillController.update)
   //.post(skillController.create);
 
+// Matches with "/api/skill/review"
+router.route("/review")
+  .post(skillController.addReview);
+
 module.exports = router;

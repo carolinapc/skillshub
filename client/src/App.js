@@ -80,7 +80,7 @@ class App extends Component {
           <Route exact path="/search" component={Search} />
           <Route exact path="/search/:category" component={Search} />
           <Route exact path="/search/skill/:search" component={Search} />
-          <Route exact path="/skill/:id" component={Skill} />
+          <Route exact path="/skill/:id" render={props => <Skill userData={this.state.userData} {...props} />} />
           <Route exact path="/profile" component={WithAuth(Profile)}  />
           <Route path="*">
             <Redirect to="/" />
