@@ -13,8 +13,8 @@ class Profile extends React.Component {
   state = {
     image: this.props.userData.UserImage || "profile.jpg",
     pageView: {
-      title: "Personal Info",
-      page: "info"
+      title: "Skills",
+      page: "skills"
     }
   };
   
@@ -64,7 +64,7 @@ class Profile extends React.Component {
               <input type="file" id="file" name="file" onChange={this.onChangeHandler}/>
             </label>
             
-            <ListGroup defaultActiveKey="#link1">
+            <ListGroup defaultActiveKey="#link2">
               <ListGroup.Item action href="#link1" name="info" title="Personal Info" onClick={this.selectMenu}>
                 Personal Info
             </ListGroup.Item>

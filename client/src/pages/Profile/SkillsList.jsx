@@ -3,13 +3,14 @@ import { Table, Button } from 'react-bootstrap';
 
 const SkillsList = props => {
   return ( 
-    <Table responsive>
+  <div className="shadow">
+    <Table responsive striped>
       <thead>
         <tr>
           <th>Skill</th>
           <th>Category</th>
           <th>Available</th>
-          <th><Button onClick={props.addSkill}>Add</Button></th>
+          <th><Button onClick={props.addSkill}><i class="fas fa-plus"></i> New</Button></th>
         </tr>
       </thead>
       <tbody>
@@ -20,13 +21,14 @@ const SkillsList = props => {
             <td>{skill.Category.name}</td>
             <td>{skill.active ? "Yes" : "No"}</td>
             <td>
-              <Button onClick={()=>props.editSkill(skill)}>Edit</Button>
+              <Button onClick={()=>props.editSkill(skill)}><i class="fas fa-pen"></i> Edit</Button>
             </td>
           </tr>
         );
       })}      
       </tbody>
     </Table>
+  </div>
   );
 }
  
