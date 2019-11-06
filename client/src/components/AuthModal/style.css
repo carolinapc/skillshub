@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Londrina+Outline|Londrina+Solid|Roboto&display=swap');
+
 .justify-content-center{
   justify-content: center;
-  
 }
 
 .btn-secondary{
@@ -10,4 +11,13 @@
 
 .hide-self{
   display: none !important;
+}
+
+.modal-body{
+  background: aliceblue;
+}
+.modal-header{
+  background:  rgb(38, 35, 50);
+  color: aliceblue;
+  font-family: 'Londrina Solid', cursive;
 }
