@@ -2,7 +2,7 @@
 
 -- /*test data*/
 INSERT INTO User 
-(id,firstName,lastName,email,password,image,zipCode)
+(id,firstName,lastName,email,password,zipCode,image)
 VALUES 
 (1,'Carol','Cavalcanti','carolinapc@gmail.com','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra','M4Y1H5','profile_1.jpg'),
 (2,'John','Doe','user1','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_2.jpg'),
