@@ -20,27 +20,27 @@ INSERT INTO Category VALUES
 INSERT INTO Skill
 (id,name,description,price,pricetype,zipcode,CategoryId,UserId,score)
 VALUES
-(1,'Skill 1','Description of Skill 1',100,'J','M4Y1H5',1,1,3),
-(2,'Skill 2','Description of Skill 2',50,'H','M4Y1H5',1,2,2),
-(3,'Skill 3','Description of Skill 3',10.5,'H','M4Y1H5',1,2,5),
-(4,'Skill 4','Description of Skill 4',500,'D','M4Y1H5',3,2,0),
-(5,'Skill 5','Description of Skill 5',90.50,'H','M4Y1H5',3,1,0),
-(6,'Skill 6','Description of Skill 6',60,'J','M4Y1H5',5,1,0),
-(7,'Skill 7','Description of Skill 7',5000,'J','M4Y1H5',3,1,0),
-(8,'Skill 8','Description of Skill 8',45.80,'H','M4Y1H5',6,1,0),
-(9,'Skill 9','Description of Skill 9',349,'D','M4Y1H5',6,2,0),
-(10,'Skill 10','Description of Skill 10',400,'D','M4Y1H5',6,1,0),
-(11,'Skill 11','Description of Skill 11',160,'J','M4Y1H5',3,1,0);
+(1,'roofing','fast responsible roofers for comming winter',100,'J','M4Y1H5',2,1,3),
+(2,'accounting','skilled accounter comes and teaches all you need to manage your business',50,'H','M4Y1H5',4,2,2),
+(3,'teaching','math teacher for kids ',10.5,'H','M4Y1H5',1,2,5),
+(4,'translating','chinese translater in toronto',500,'D','M4Y1H5',6,2,0),
+(5,'developer','software developers make programs ',90.50,'H','M4Y1H5',3,1,0),
+(6,'mechanic','we fix your car cheaper,faster,better',60,'J','M4Y1H5',8,1,0),
+(7,'flooring','we are experienced flooring group, you will love our job',20,'J','M4Y1H5',2,1,0),
+(8,'law','strong lawyers team help you in hard times',450.80,'H','M4Y1H5',5,1,0),
+(9,'cleaning','cleaners around GTA',250,'D','M4Y1H5',1,2,0),
+(10,'dancing','dance club',20,'D','M4Y1H5',4,1,0),
+(11,'painting','painter team reasonable and fast jobs',160,'J','M4Y1H5',2,1,0);
 
 
 INSERT INTO Review
 (review,score,UserId,SkillId)
 VALUES
-('Review 1 comment',3,1,1),
-('Review 2 comment',3,1,1),
-('Review 3 comment',3,1,1),
-('Review 4 comment',5,2,3),
-('Review 5 comment',5,3,3),
-('Review 6 comment',2,4,2),
-('Review 7 comment',2,1,2),
-('Review 8 comment',2,1,2);
+('he was late but job was good',3,1,1),
+('thank you sir',3,1,1),
+('i love this web site',3,1,1),
+('amazing job',5,2,3),
+('thank you so much',5,3,3),
+('i dont know',2,4,2),
+('not good',2,1,2),
+('wouldnot recomend',2,1,2);
