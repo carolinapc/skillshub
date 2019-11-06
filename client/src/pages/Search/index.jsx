@@ -105,7 +105,7 @@ class Search extends React.Component {
       </Form>
 
       {this.state.skills.length > 0 ? 
-        <SkillsSearchList skills={this.state.skills} getPriceTypeName={API.getPriceTypeName} />
+        <SkillsSearchList skills={this.state.skills} />
           : <div className="message">{this.state.notFoundMsg}</div>
       }
     </PageContainer>

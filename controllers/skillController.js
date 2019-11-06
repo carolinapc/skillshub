@@ -3,9 +3,14 @@ const db = require("../models");
 // Defining methods for the booksController
 module.exports = {
   findAll: function (req, res) {
-    const { search, categoryId } = req.query;
+    const { search, categoryId, id } = req.query;
     let where = {};
-    
+    let include = [{ all: true }];
+
+    if (id) {
+      where.id = id;
+      include = [{ all: true, nested: true }];
+    }
     if (categoryId) {
       where.CategoryId = categoryId;
     }
@@ -17,7 +22,7 @@ module.exports = {
     
     db.Skill
       .findAll({
-        include: [{ all: true }],
+        include: include,
         where: where
       })
       .then(dbModel => res.json(dbModel))

@@ -44,39 +44,11 @@ export default {
 
   //SKILLS
   getSkills: function (data) {
-    return axios.get(`/api/skill?search=${data.search}&categoryId=${data.categoryId}`);  
-  },
+    data.id = data.id || "";
+    data.search = data.search || "";
+    data.categoryId = data.categoryId || "";
 
-  //CONSTANTS
-  getPriceTypes: () => {
-    const priceTypes = [
-      {
-        type: "H",
-        name: "Per Hour"
-      },
-      {
-        type: "D",
-        name: "Per Day"
-      },
-      {
-        type: "J",
-        name: "Per Job"
-      }
-    ];
-    return priceTypes;
-  },
-  getPriceTypeName: type => {
-    switch (type.toUpperCase()) {
-      case "H":
-        return "hour";
-      case "D":
-        return "day";
-      case "J":
-        return "job";
-      default:
-        return "undefined";
-    }
+    return axios.get(`/api/skill?id=${data.id}&search=${data.search}&categoryId=${data.categoryId}`);  
   }
-
 
 };
