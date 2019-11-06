@@ -7,7 +7,7 @@ import "./style.css";
 function MenuTop(props) {
   return (
       
-    <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect fixed="top" expand="lg" >
     <Navbar.Brand>
       <NavLink
           exact
@@ -15,7 +15,7 @@ function MenuTop(props) {
           activeClassName="active"
           className="nav-link"
           >
-          SkillsHub
+          Skills HUB
         </NavLink>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />

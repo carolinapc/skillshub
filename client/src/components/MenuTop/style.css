@@ -1,15 +1,23 @@
-@import url('https://fonts.googleapis.com/css?family=Londrina+Outline|Roboto:500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Londrina+Outline|Londrina+Solid|Roboto&display=swap');
 
 
 .navbar-brand {
-  font-family: 'Londrina Outline', cursive;
+  font-family: 'Londrina Solid', cursive;
+  letter-spacing: 0.07em;
   color: aliceblue;
+  font-size-adjust: inherit;
 }
 
 .nav-link{
-  color: aliceblue;
+  color: aliceblue !important;
+ 
 }
 
 nav.navbar.navbar-default {
   margin-bottom: 0;
+}
+
+nav.navbar{
+  background: rgb(38, 35, 50);
+  color: aliceblue;
 }
