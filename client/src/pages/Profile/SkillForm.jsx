@@ -1,5 +1,5 @@
 import React from 'react';
-import API from '../../utils/API';
+import Utils from '../../utils';
 import {Form, Button, ButtonToolbar} from 'react-bootstrap';
 
 const SkillForm = props => {
@@ -43,7 +43,7 @@ const SkillForm = props => {
         <Form.Label>Price Type</Form.Label>
         <Form.Control as="select" name="priceType" onChange={props.handleInputChange} value={props.skill.priceType}>
           <option key="blankPriceType" value="">-- select one --</option>
-          {API.getPriceTypes().map(priceType => {
+          {Utils.getPriceTypes().map(priceType => {
             return (
               <option key={priceType.type} value={priceType.type}>{priceType.name}</option>
             );
