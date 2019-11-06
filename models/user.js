@@ -52,11 +52,6 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    score: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
     active: {
       type: DataTypes.BOOLEAN,
       defaultValue: true

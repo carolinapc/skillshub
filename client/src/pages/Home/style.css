@@ -1,10 +1,13 @@
-/*overriding bootstrap card class*/
-.card{
+.card-custom {
   margin: 20px;
   cursor: pointer;
 }
-.card:hover{
+.card-custom:hover{
   background-color: #ccc;
+}
+.card-custom img{
+  width: 100% !important;
+  height: 180px;
 }
 
 /*overriding bootstrap card class*/
