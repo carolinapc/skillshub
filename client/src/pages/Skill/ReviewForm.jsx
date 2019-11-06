@@ -8,11 +8,14 @@ class ReviewForm extends React.Component {
     skillId: this.props.skillId,
     review: "",
     score: 0,
-    scoreChosen: false
+    scoreChosen: false,
+    loading: false
   }
 
   saveReview = event => {
     event.preventDefault();
+    this.setState({ loading: true });
+
     const data = {
       SkillId: this.state.skillId,
       score: this.state.score,
@@ -20,6 +23,7 @@ class ReviewForm extends React.Component {
     };
 
     API.addReview(data).then(res => {
+      this.setState({ loading: false, scoreChosen: false, review: "", score: 0 });
       this.props.getSkillFromDb({ id: res.data.SkillId });
     }).catch(err => console.log(err.response));
   }
@@ -69,7 +73,10 @@ class ReviewForm extends React.Component {
         <h5>Add Your Review</h5>
         <h5>{this.getStars()}</h5>
         <Form.Control as="textarea" rows="5" name="review" value={this.state.review} placeholder="Comment your review..." onChange={this.handleInputChange} />
-        <Button onClick={this.saveReview} className="mt-3">Submit</Button>
+        <Button
+          className="mt-3"
+          disabled={this.state.loading || this.state.review.trim() === ""}
+          onClick={(!this.state.loading && this.state.review.trim() !== "") ? this.saveReview : null}>Submit</Button>
       </>
     );
   }

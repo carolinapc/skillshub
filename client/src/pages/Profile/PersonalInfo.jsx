@@ -100,6 +100,7 @@ class PersonalInfo extends React.Component {
           variant="secondary"
           disabled={this.state.isLoading}
           onClick={!this.state.isLoading ? this.updateInfo : null}
+          className="mt-3"
         >
           Save
         </Button>

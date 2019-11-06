@@ -5,13 +5,6 @@
   border: 1px solid rgb(65, 62, 62);
 }
 
-.btn-toolbar{
-  margin-top: 20px
-}
-.btn{
-  margin-right: 5px;
-}
-
 .input-file {
   position: relative;
   padding: 10px;

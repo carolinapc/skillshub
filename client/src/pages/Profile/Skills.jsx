@@ -2,6 +2,8 @@ import React from 'react';
 import API from '../../utils/API';
 import SkillsList from './SkillsList';
 import SkillForm from './SkillForm';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Skills extends React.Component {
   mounted = false;
@@ -132,6 +134,7 @@ class Skills extends React.Component {
           this.setState({ controllers });
           this.refreshUserSkills();
           this.viewSkillsList();
+          toast.info("Skill was updated successfully",{position: toast.POSITION.BOTTOM_CENTER});
         })
         .catch(err => {
           if (err.response.data.errors) {
@@ -149,11 +152,12 @@ class Skills extends React.Component {
     else {
       API.createUserSkill(this.state.fields)
       .then(res => {
-        controllers.message = "Skill created successfully";
+        controllers.message = "Skill was created successfully";
         controllers.isLoading = false;
         this.setState({ controllers });
         this.refreshUserSkills();
         this.viewSkillsList();
+        toast.info("Skill was created successfully!",{position: toast.POSITION.BOTTOM_CENTER});
       })
       .catch(err => {
         if (err.response.data.errors) {
@@ -176,6 +180,7 @@ class Skills extends React.Component {
   
     return (
       <>
+        <ToastContainer />
         {this.state.editionView ?
           <SkillForm
             skill={this.state.fields}
