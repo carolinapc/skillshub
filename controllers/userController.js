@@ -27,7 +27,7 @@ module.exports = {
     let pwd;
 
     try {
-      if (req.body.firstname.trim() === "") {
+      if (req.body.firstName.trim() === "") {
         res.status(422).end("First name must be informed!");        
       }
     }
@@ -36,7 +36,7 @@ module.exports = {
     }
 
     try {
-      if (req.body.lastname.trim() === "") {
+      if (req.body.lastName.trim() === "") {
         res.status(422).end("Last name must be informed!");        
       }
     }
@@ -45,7 +45,7 @@ module.exports = {
     }
 
     try {
-      if (req.body.firstname.trim() === "") {
+      if (req.body.firstName.trim() === "") {
         res.status(422).end("E-mail must be informed!");        
       }
     }
@@ -107,24 +107,37 @@ module.exports = {
         //nothing to do, and the password won't be updated
       }
 
-      //if there is file sent
-      if (req.body.image !== "") {
-                  
-        //check if the exists in the temp folder
-        if (fs.existsSync(`${uploadFolder}/tmp/${req.body.image}`)) {
-          let fileExt = req.body.image.split(".");
-          fileExt = fileExt[fileExt.length - 1];
-
-          //create the new file name
-          let fileName = `profile_${req.session.UserId}.${fileExt}`.toLowerCase();
+      //if a file was uploaded (profile image)
+      if (req.files) {
+        let tmpFileName = req.files.file.name;
         
-          //rename the file and move it to definitive folder
-          fs.renameSync(`${uploadFolder}/tmp/${req.body.image}`, `${uploadFolder}/${fileName}`);
+        //get the file extension
+        let fileExt = tmpFileName.split(".");
+        fileExt = fileExt[fileExt.length - 1];
 
-          req.body.image = fileName;
-          data.fileName = fileName;
-        }
-      }      
+        //give a name with the extension to the file
+        let fileName = `profile_${req.session.UserId}.${fileExt}`.toLowerCase();
+        req.body.image = fileName;
+        req.session.UserImage = fileName;
+
+        //upload the file to tmp folder
+        req.files.file.mv(req.files.file.tempFilePath, function(err) {
+          if (!err) {
+            //move the file from the tmp folder to the final folder
+            fs.renameSync(req.files.file.tempFilePath, `${uploadFolder}/${fileName}`);
+
+            const fullFileName = (`${uploadFolder}/${fileName}`).replace("client/public/", "");
+            data = {
+              fileName: fileName,
+              fullFileName: fullFileName
+            };
+          }
+          else {
+            res.status(400).end(err.message);
+          }
+        });  
+        
+      }
 
       db.User
         .update(req.body, { where: { id: req.session.UserId } })
@@ -173,7 +186,7 @@ module.exports = {
             }
           }).then(function () {
               
-            let body = `Hello ${user.firstname},`+
+            let body = `Hello ${user.firstName},`+
             "<p>You've requested to reset your password on Skillshub website.</p>" +
             `<p>Your new password: <b>${newPassword}</b></p>` +
             "<p>We strongly recommend that you change it as soon as possible</p>" +
@@ -220,7 +233,7 @@ module.exports = {
             // Passwords match
             req.session.loggedin = true;
             req.session.UserId = user.id;
-            req.session.UserName = user.firstname;
+            req.session.UserName = user.firstName;
             req.session.UserImage = user.image;
             res.status(200).json(req.session);
               
@@ -273,6 +286,65 @@ module.exports = {
         })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
+    }
+  },
+  //get the user skills
+  getUserSkills: function (req, res) {
+    //checks if the user is logged in
+    if (!req.session.loggedin) {
+      res.status(400).end("You need to sign in to update a user.");
+    }
+    else {
+      db.Skill.findAll({
+        include: [{all:true}],
+        where: {
+          UserId: req.session.UserId
+        },
+        })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    }
+  },
+
+  //update user skill
+  createUserSkill: function (req, res) {
+    delete req.body.id;
+    req.body.UserId = req.session.UserId;
+
+    //checks if the user is logged in
+    if (!req.session.loggedin) {
+      res.status(400).end("You need to sign in to update a skill.");
+    }
+    else {
+      db.Skill.create(
+        req.body
+      )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+    }
+  },
+
+  //update user skill
+  updateUserSkill: function (req, res) {
+    const skillId = req.body.id;
+    delete req.body.id;
+
+    //checks if the user is logged in
+    if (!req.session.loggedin) {
+      res.status(400).end("You need to sign in to update a skill.");
+    }
+    else {
+      db.Skill.update(
+        req.body,
+        {
+          where: {
+            id: skillId,
+            UserId: req.session.UserId //guarantees an update only for if the skill belongs to the logged user
+          }
+        }
+      )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
     }
   }
 };

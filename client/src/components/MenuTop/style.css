@@ -17,7 +17,14 @@ nav.navbar.navbar-default {
   margin-bottom: 0;
 }
 
+
 nav.navbar{
   background: rgb(38, 35, 50);
   color: aliceblue;
 }
+
+.menu-auth{
+  min-width: 150px;
+  text-align: right;
+}
+

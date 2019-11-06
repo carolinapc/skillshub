@@ -17,23 +17,44 @@ module.exports = function (sequelize, DataTypes) {
     } 
   },
   {
-      freezeTableName: true
+    freezeTableName: true,
+    hooks: {
+      afterCreate: function (review) {
+        let Skill = this.sequelize.models.Skill;
+        
+        Review.count({ where: { SkillId: review.SkillId } }).then(tot => {
+          Review.sum("score", { where: { SkillId: review.SkillId } }).then(sum => {
+            let skillScore = Math.round(sum / tot);
+            console.log(skillScore);
+
+            //update the skill score
+            Skill.update({
+              score: skillScore
+            },
+            {
+              where: { id: review.SkillId }
+            }).then(() => {
+              console.log("Skill score was updated!");          
+            });
+          });
+        });
+      }
+    }
   });
       
-// Review.associate = function (models) {
-//   User.hasMany(models.Review, {
-    
-//     foreignKey: {
-//       allowNull: false
-//     }
-//   });
+  Review.associate = function (models) {
+    Review.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
 
-//   User.hasMany(models.Service, {
-//     foreignKey: {
-//       allowNull: false
-//     }
-//   });
-// };  
+    Review.belongsTo(models.Skill, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };  
 
   return Review;
 };

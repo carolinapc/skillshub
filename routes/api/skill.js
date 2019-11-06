@@ -3,8 +3,8 @@ const skillController = require("../../controllers/skillController");
 
 // Matches with "/api/skill"
 router.route("/")
-  .get(skillController.findAll)
-  .put(skillController.update)
-  .post(skillController.create);
+  .get(skillController.findAll);
+  //.put(skillController.update)
+  //.post(skillController.create);
 
 module.exports = router;

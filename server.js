@@ -8,6 +8,15 @@ const express = require("express");
 const app = express();
 const db = require("./models");
 const uploadFolder = require("./config/config").uploadFolder;
+const cors = require('cors');
+
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+};
+
+//allow cors
+app.use(cors(corsOptions));
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -21,7 +30,7 @@ app.use(fileUpload({
 
 
 app.use(session({
-  secret: "SkillshubKey",
+  secret: process.env.SESSION_KEY,
   resave: true,
   saveUninitialized: true
 }));
@@ -30,7 +39,13 @@ app.use(session({
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
+  app.use(express.static("client/build/images/uploads"));
 }
+
+app.use(express.static("client/public/images/uploads"));  
+
+
+
 
 // API routes
 app.use(routes);
@@ -51,7 +66,8 @@ function runServer() {
   });
 }
 
-let syncOptions = { force: false };
+///GO BACK TO FALSE ONCE IS DONE!!!
+let syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
