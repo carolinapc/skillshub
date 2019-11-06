@@ -12,10 +12,10 @@ module.exports = {
   //get categories that have most skills available
   findAllGrouped: function (req, res) {
     db.sequelize.query(`
-      SELECT c.id as id, c.name as name, count(*) as tot 
+      SELECT c.id as id, c.name as name, c.image, count(*) as tot 
       FROM Category c, Skill s  
       WHERE s.CategoryId = c.id and s.active = true
-      GROUP BY c.id, c.name 
+      GROUP BY c.id, c.name, c.image
       ORDER BY 3 DESC
       LIMIT 6;
     `,

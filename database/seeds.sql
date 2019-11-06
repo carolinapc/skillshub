@@ -1,21 +1,25 @@
 /*Automatic execution when the server starts up on the development enviroment */
 
 -- /*test data*/
-INSERT INTO User VALUES 
-(1,'Carol','Cavalcanti','carolinapc@gmail.com','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra','M4Y1H5',null,5,1,'2019-09-14 14:31:49','2019-09-14 14:32:51'),
-(2,'John','Doe','user1','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,null,3,1,'2019-09-14 14:31:49','2019-09-14 14:32:51'),
-(3,'Mary','Jane','user2','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,null,3,1,'2019-09-14 14:31:49','2019-09-14 14:32:51'),
-(4,'Frank','Russel','user3','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,null,3,1,'2019-09-14 14:31:49','2019-09-14 14:32:51');
+INSERT INTO User 
+(id,firstName,lastName,email,password,image,zipCode)
+VALUES 
+(1,'Carol','Cavalcanti','carolinapc@gmail.com','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra','M4Y1H5','profile_1.jpg'),
+(2,'John','Doe','user1','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_2.jpg'),
+(3,'Mary','Jane','user2','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_3.jpg'),
+(4,'Frank','Russel','user3','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_4.jpg');
 
-INSERT INTO Category VALUES
-(1, 'Maintaning','2019-11-01 12:00:00','2019-11-01 12:00:00'),
-(2, 'Construction','2019-11-01 12:00:00','2019-11-01 12:00:00'),
-(3, 'Softwares','2019-11-01 12:00:00','2019-11-01 12:00:00'),
-(4, 'Training','2019-11-01 12:00:00','2019-11-01 12:00:00'),
-(5, 'Consulting','2019-11-01 12:00:00','2019-11-01 12:00:00'),
-(6, 'Translating/Interpreter','2019-11-01 12:00:00','2019-11-01 12:00:00'),
-(7, 'Teaching','2019-11-01 12:00:00','2019-11-01 12:00:00'),
-(8, 'Other','2019-11-01 12:00:00','2019-11-01 12:00:00');
+INSERT INTO Category 
+(id, name, image)
+VALUES
+(1, 'Maintenance','maintenance.jpg'),
+(2, 'Construction','construction.jpg'),
+(3, 'Softwares','software.jpg'),
+(4, 'Training','training.jpg'),
+(5, 'Consulting','consulting.jpg'),
+(6, 'Translating/Interpreter','translate.jpg'),
+(7, 'Teaching','teaching.jpg'),
+(8, 'Others','other.png');
 
 INSERT INTO Skill
 (id,name,description,price,pricetype,zipcode,CategoryId,UserId,score)
