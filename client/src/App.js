@@ -16,8 +16,7 @@ import WithAuth from './components/WithAuth';
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
-
-
+import Skill from "./pages/Skill";
 
 class App extends Component {
 
@@ -27,8 +26,6 @@ class App extends Component {
     authModalShow: false,
     viewType: "signin"
   }
-
-  
 
   componentDidMount = ()=>{
     //check authentication status
@@ -83,6 +80,7 @@ class App extends Component {
           <Route exact path="/search" component={Search} />
           <Route exact path="/search/:category" component={Search} />
           <Route exact path="/search/skill/:search" component={Search} />
+          <Route exact path="/skill/:id" component={Skill} />
           <Route exact path="/profile" component={WithAuth(Profile)}  />
           <Route path="*">
             <Redirect to="/" />

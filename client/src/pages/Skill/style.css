@@ -1,0 +1,27 @@
+.profile-img {
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid rgb(65, 62, 62);
+}
+
+.skill-description{
+  margin: 20px 0;
+  font-size: 16px;
+}
+.wrap-review-header{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  width: 100%;
+}
+.wrap-review-header span:last-child{
+  text-align: right;
+}
+
+.card footer img{
+  float: right;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
