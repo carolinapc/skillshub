@@ -10,7 +10,13 @@ class Contact extends React.Component {
   }
 
   componentDidMount = () => {
-
+    const skillId = this.props.match.params.skill;
+    console.log(skillId);
+    if (skillId)
+      console.log("informed");
+    else
+      console.log("not informed");
+    
   }
 
   render() { 
