@@ -66,7 +66,7 @@ class Skill extends React.Component {
           <Col md="4">
             <img src={skill.User.image? `/${skill.User.image}` : "/profile.jpg"} alt="Profile" className="profile-img shadow-lg mb-4" />
             <h3 className="card-subtitle mb-2 text-muted">{skill.User.firstName + " " + skill.User.lastName}</h3>
-            <Button>View Profile</Button>
+            <Button className="mr-3">View Profile</Button>
             <Button>Chat</Button>
           </Col>
           <Col md="8" className="pt-3">

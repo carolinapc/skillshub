@@ -119,6 +119,23 @@ class Skills extends React.Component {
 
     this.editSkill(skill);    
   }
+
+  toogleActive = event => {
+    const { id, checked } = event.target;
+    
+    API.updateUserSkill({ active: checked, id }).then(res => {
+      let userSkills = [...this.state.userSkills];
+
+      userSkills.map(skill => {
+        if (skill.id.toString() === id) {
+          skill.active = checked;
+        }
+        return skill;
+      });
+
+      this.setState({userSkills});
+    }).catch(err => console.log(err.response));
+  }
   
   saveSkill = () => {
     let controllers = { ...this.state.controlers };
@@ -195,6 +212,7 @@ class Skills extends React.Component {
             addSkill={this.addSkill}
             editSkill={this.editSkill}
             userSkills={this.state.userSkills}
+            toogleActive={this.toogleActive}
           />
         }
       </>

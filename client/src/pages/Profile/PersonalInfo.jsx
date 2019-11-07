@@ -102,7 +102,7 @@ class PersonalInfo extends React.Component {
           onClick={!this.state.isLoading ? this.updateInfo : null}
           className="mt-3"
         >
-          <i class="fas fa-check"></i> Save
+          <i className="fas fa-check"></i> Save
         </Button>
       </Form>
     );
