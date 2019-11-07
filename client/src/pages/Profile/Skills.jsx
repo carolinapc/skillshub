@@ -69,17 +69,13 @@ class Skills extends React.Component {
   }
 
   handleInputChange = event => {
-    let fields = {...this.state.fields};
     let { name, value } = event.target;
+    let fields = { ...this.state.fields };
 
     //if it's a checkbox gets the checked value
     if (event.target.type === "checkbox") {
       value = event.target.checked;
     }
-    else {
-      value = value.trim();
-    }
-      
 
     fields[name] = value;
     
