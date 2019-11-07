@@ -2,7 +2,7 @@ module.exports = function (sequelize, DataTypes) {
   let Contact = sequelize.define("Contact", {
     agreedDate: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: true
     },
     note: {
       type: DataTypes.TEXT,
@@ -10,11 +10,11 @@ module.exports = function (sequelize, DataTypes) {
     },
     price: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     priceType: {
       type: DataTypes.CHAR,
-      allowNull: false
+      allowNull: true
     },
     chat: {
       type: DataTypes.TEXT,

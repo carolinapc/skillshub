@@ -17,6 +17,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
 import Skill from "./pages/Skill";
+import Contact from "./pages/Contact";
 
 class App extends Component {
 
@@ -80,8 +81,9 @@ class App extends Component {
           <Route exact path="/search" component={Search} />
           <Route exact path="/search/:category" component={Search} />
           <Route exact path="/search/skill/:search" component={Search} />
-          <Route exact path="/skill/:id" render={props => <Skill userData={this.state.userData} {...props} />} />
+          <Route exact path="/skill/:id" render={props => <Skill userData={this.state.userData} toggleAuthModalShow={this.toggleAuthModalShow} {...props} />} />
           <Route exact path="/profile" component={WithAuth(Profile)}  />
+          <Route exact path="/contact/:skill" component={WithAuth(Contact)}  />
           <Route path="*">
             <Redirect to="/" />
           </Route>
