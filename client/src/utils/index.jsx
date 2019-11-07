@@ -39,5 +39,9 @@ export default {
       default:
         return "undefined";
     }
+  },
+
+  replaceNewLines: text => {
+    return text.split("\n").map((item, key) => <React.Fragment key={key}>{item}<br /></React.Fragment>);
   }
 }

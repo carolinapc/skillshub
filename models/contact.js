@@ -1,10 +1,10 @@
 module.exports = function (sequelize, DataTypes) {
   let Contact = sequelize.define("Contact", {
-    date: {
+    agreedDate: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    description: {
+    note: {
       type: DataTypes.TEXT,
       allowNull: true
     },
@@ -19,6 +19,10 @@ module.exports = function (sequelize, DataTypes) {
     chat: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    dealClosed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
     active: {
       type: DataTypes.BOOLEAN,

@@ -78,7 +78,7 @@ class Skill extends React.Component {
               </div>
             </div>    
 
-            <div className="skill-description">{skill.description}</div>
+            <div className="skill-description">{Utils.replaceNewLines(skill.description)}</div>
             
           </Col>
         </Row>

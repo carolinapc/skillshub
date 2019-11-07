@@ -9,6 +9,9 @@ const app = express();
 const db = require("./models");
 const uploadFolder = require("./config/config").uploadFolder;
 const cors = require('cors');
+const http = require('http');
+const socketIO = require('socket.io');
+
 
 const corsOptions = {
   origin: '*',
@@ -56,8 +59,19 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+const server = http.createServer(app);
+const io = socketIO(server);
+
+// socket
+io.on("connect", socket => {
+  //broadcast msg when a book is saved
+  socket.on("save_book", msg => {
+    io.emit("book_saved", msg);
+  });
+});
+
 function runServer() {
-  app.listen(PORT, function () {
+  server.listen(PORT, function () {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,

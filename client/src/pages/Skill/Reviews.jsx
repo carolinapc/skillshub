@@ -18,7 +18,7 @@ const Reviews = props => {
             </Card.Header>
             <Card.Body>
               <blockquote className="blockquote mb-0">
-                <p>{review.review}</p>
+                <p>{Utils.replaceNewLines(review.review)}</p>
                 <footer className="blockquote-footer">
                   {review.User.firstName + " " + review.User.lastName}
                   <img src={review.User.image? `/images/uploads/${review.User.image}`  : "/profile.jpg"} alt="User" />
