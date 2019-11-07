@@ -68,15 +68,17 @@ const SkillForm = props => {
           variant="primary"
           disabled={props.controllers.isLoading}
           onClick={!props.controllers.isLoading ? props.saveSkill : null}
+          className="mt-3 mr-2"
           >
-          Save
+          <i className="fas fa-check"></i> Save
         </Button>
 
         <Button
           variant="secondary"
           onClick={props.viewSkillsList}
+          className="mt-3"
           >
-          Cancel
+          <i className="fas fa-long-arrow-alt-left"></i> Cancel
         </Button>
       </ButtonToolbar>
     </Form>

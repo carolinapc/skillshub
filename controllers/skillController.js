@@ -4,7 +4,7 @@ const db = require("../models");
 module.exports = {
   findAll: function (req, res) {
     const { search, categoryId, id } = req.query;
-    let where = {};
+    let where = {active: true};
     let include = [{ all: true }];
 
     if (id) {
@@ -23,9 +23,24 @@ module.exports = {
     db.Skill
       .findAll({
         include: include,
-        where: where
+        where: where,
+        order:[['createdAt', 'DESC'],[db.Review,'createdAt','DESC']]
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+
+  addReview: function (req, res) {
+    //checks if the user is logged in
+    if (!req.session.loggedin) {
+      res.status(400).end("You need to sign in to update an user.");
+    }
+    else {
+      req.body.UserId = req.session.UserId;      
+      db.Review.create(req.body)
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+
+    }
   }
 }

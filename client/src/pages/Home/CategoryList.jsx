@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import './style.css';
 
 const CategoryList = props => {
-  console.log(props.categories);
+  
   return (
     <Row className="justify-content-md-center mt-5">
       {props.categories.map(category => {

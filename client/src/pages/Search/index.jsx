@@ -88,21 +88,19 @@ class Search extends React.Component {
   render() { 
     return (
     <PageContainer title="Search Skills">
-      <Form>
-        <Form.Group controlId="formBasicName">
-          <Form.Control type="text" name="search" value={this.state.search} placeholder="Enter a skill to search" onChange={this.handleInputChange} />
-        </Form.Group>
+      <Form.Group controlId="formBasicName">
+        <Form.Control type="text" name="search" value={this.state.search} placeholder="Enter a skill to search" onChange={this.handleInputChange} />
+      </Form.Group>
 
-        <Form.Control as="select" name="categoryId" onChange={this.handleInputChange} value={this.state.categoryId}>
-          <option key="blankCategory" value="">-- All Categories --</option>
-          {this.state.categories.map(category => {
-            return (
-              <option key={category.id} value={category.id}>{category.name}</option>
-            );
-          })}
-         </Form.Control>
-        <Button onClick={this.handleSearch} className="mt-3">Search</Button>
-      </Form>
+      <Form.Control as="select" name="categoryId" onChange={this.handleInputChange} value={this.state.categoryId}>
+        <option key="blankCategory" value="">-- All Categories --</option>
+        {this.state.categories.map(category => {
+          return (
+            <option key={category.id} value={category.id}>{category.name}</option>
+          );
+        })}
+        </Form.Control>
+      <Button onClick={this.handleSearch} className="mt-3">Search</Button>
 
       {this.state.skills.length > 0 ? 
         <SkillsSearchList skills={this.state.skills} />
