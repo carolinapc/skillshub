@@ -89,10 +89,10 @@ class Search extends React.Component {
     return (
     <PageContainer title="Search Skills">
       <Form.Group controlId="formBasicName">
-        <Form.Control type="text" name="search" value={this.state.search} placeholder="Enter a skill to search" onChange={this.handleInputChange} />
+        <Form.Control type="text" name="search" value={this.state.search||""} placeholder="Enter a skill to search" onChange={this.handleInputChange} />
       </Form.Group>
 
-      <Form.Control as="select" name="categoryId" onChange={this.handleInputChange} value={this.state.categoryId}>
+      <Form.Control as="select" name="categoryId" onChange={this.handleInputChange} value={this.state.categoryId||""}>
         <option key="blankCategory" value="">-- All Categories --</option>
         {this.state.categories.map(category => {
           return (

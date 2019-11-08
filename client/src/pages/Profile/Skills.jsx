@@ -29,19 +29,8 @@ class Skills extends React.Component {
     }
   }
 
-  refreshUserSkills = () => {
-    //fill all the fields from database
-    API.getUserSkills().then(res => {
-      if (res.data) {
-          this.setState({
-            userSkills: res.data
-          });
-      }
-      else {
-        console.log("User doesn't have skills registered!");
-      }
-    }).catch(err => console.log(err.response));
-  }
+  //guarantees the setState won't be called after component unmounts
+  componentWillUnmount = () => this.mounted = false;
 
   componentDidMount = () => {
     this.mounted = true;
@@ -52,20 +41,27 @@ class Skills extends React.Component {
     API.getCategories().then(res => {
       if (res.data) {
         if (this.mounted) {
-          this.setState({
-            categories: res.data
-          });
+          this.setState({categories: res.data});
         }
       }
       else {
         console.log("There are no categories stored!");
       }
     }).catch(err => console.log(err.response));
-
   }
 
-  componentWillUnmount() {
-    this.mounted = false;
+  refreshUserSkills = () => {
+    //fill all the fields from database
+    API.getUserSkills().then(res => {
+      if (res.data) {
+        if (this.mounted) {
+          this.setState({ userSkills: res.data });
+        }
+      }
+      else {
+        console.log("User doesn't have skills registered!");
+      }
+    }).catch(err => console.log(err.response));
   }
 
   handleInputChange = event => {
@@ -95,11 +91,7 @@ class Skills extends React.Component {
     });
   }
   
-  viewSkillsList = () => {
-    this.setState({
-      editionView: false
-    });
-  }
+  viewSkillsList = () => this.setState({ editionView: false });
 
   addSkill = () => {
     let skill = {
@@ -129,7 +121,9 @@ class Skills extends React.Component {
         return skill;
       });
 
-      this.setState({userSkills});
+      if (this.mounted) {
+        this.setState({userSkills});
+      }
     }).catch(err => console.log(err.response));
   }
   
@@ -144,7 +138,10 @@ class Skills extends React.Component {
         .then(res => {
           controllers.message = "Skill updated successfully";
           controllers.isLoading = false;
-          this.setState({ controllers });
+          if (this.mounted) {
+            this.setState({ controllers });  
+          }
+          
           this.refreshUserSkills();
           this.viewSkillsList();
           toast.info("Skill was updated successfully",{position: toast.POSITION.BOTTOM_CENTER});
@@ -159,7 +156,10 @@ class Skills extends React.Component {
         
           controllers.isLoading = false;
           controllers.error = true;
-          this.setState({ controllers: controllers });
+
+          if (this.mounted) {
+            this.setState({ controllers: controllers });  
+          }
         });
     }
     else {
@@ -167,7 +167,9 @@ class Skills extends React.Component {
       .then(res => {
         controllers.message = "Skill was created successfully";
         controllers.isLoading = false;
-        this.setState({ controllers });
+        if (this.mounted) {
+          this.setState({ controllers });
+        }
         this.refreshUserSkills();
         this.viewSkillsList();
         toast.info("Skill was created successfully!",{position: toast.POSITION.BOTTOM_CENTER});
@@ -182,7 +184,10 @@ class Skills extends React.Component {
       
         controllers.isLoading = false;
         controllers.error = true;
-        this.setState({ controllers: controllers });
+
+        if (this.mounted) {
+          this.setState({ controllers });
+        }
       });
 
     }

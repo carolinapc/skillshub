@@ -4,6 +4,7 @@ import API from '../../utils/API';
 
 export default function WithAuth(ComponentToProtect) {
   return class extends Component {
+    mounted = false;
     constructor() {
       super();
       this.state = {
@@ -11,18 +12,26 @@ export default function WithAuth(ComponentToProtect) {
         redirect: false,
         userData: {}
       };
+      
     }
 
-    componentDidMount = ()=>{
+    componentDidMount = () => {
+      this.mounted = true;
       //check authentication status
       API.getUserSession().then(res => {
-        if (res.data.loggedin) {
-          this.setState({ loading: false, userData: res.data });
-        }
-        else {
-          this.setState({ loading: false, redirect: true });
+        if (this.mounted) {
+          if (res.data.loggedin) {
+            this.setState({ loading: false, userData: res.data });
+          }
+          else {
+            this.setState({ loading: false, redirect: true });
+          }
         }
       }).catch(err => console.log(err));
+    }
+
+    componentWillUnmount = () => {
+      this.mounted = false;
     }
 
     render() {

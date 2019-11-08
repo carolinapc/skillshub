@@ -20,7 +20,7 @@ import Skill from "./pages/Skill";
 import Contact from "./pages/Contact";
 
 class App extends Component {
-
+  mounted = false;
   state = {
     userData: {},
     authenticated: false,
@@ -28,14 +28,17 @@ class App extends Component {
     viewType: "signin"
   }
 
-  componentDidMount = ()=>{
+  componentDidMount = () => {
+    this.mounted = true;
     //check authentication status
     API.getUserSession().then(res => {
-      if (res.data.loggedin) {
-        this.setState({
-          userData: res.data,
-          authenticated: true
-        });
+      if (this.mounted) {
+        if (res.data.loggedin) {
+          this.setState({
+            userData: res.data,
+            authenticated: true
+          });
+        }
       }
     }).catch(err => console.log(err.response.data));
   }

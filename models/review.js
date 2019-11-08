@@ -25,7 +25,6 @@ module.exports = function (sequelize, DataTypes) {
         Review.count({ where: { SkillId: review.SkillId } }).then(tot => {
           Review.sum("score", { where: { SkillId: review.SkillId } }).then(sum => {
             let skillScore = Math.round(sum / tot);
-            console.log(skillScore);
 
             //update the skill score
             Skill.update({

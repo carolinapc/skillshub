@@ -30,9 +30,33 @@ module.exports = function (sequelize, DataTypes) {
     }
   },
   {
-    freezeTableName: true
+    freezeTableName: true,
+    hooks: {
+      beforeCreate: function(contact) {
+        const Skill = this.sequelize.models.Skill;
+        //get the skills info to update Contact        
+        return Skill.findByPk(contact.SkillId).then(skill => {
+          contact.price = skill.price;
+          contact.priceType = skill.priceType;
+        }).catch(err => console.log(err));
+
+      }
+    }
   });
 
+  Contact.associate = function (models) {
+    Contact.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
+    Contact.belongsTo(models.Skill, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };  
 
   return Contact;
 };
