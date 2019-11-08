@@ -32,6 +32,8 @@ VALUES
 (17, 'Auto Services', 'mechanic.jpg');
 
 
+
+
 INSERT INTO Skill
 (id,name,description,price,pricetype,zipcode,CategoryId,UserId,score)
 VALUES
