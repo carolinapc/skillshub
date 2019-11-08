@@ -18,9 +18,9 @@ VALUES
 (3, 'Technology','technology.jpg'),
 (4, 'DIY & Arts and Crafts','DIY.jpg'),
 (5, 'Coaching','coaching.jpg'),
-(6, 'Language','Translation.jpg'),
+(6, 'Language','translation.jpg'),
 (7, 'Education','education.jpg'),
-(8, 'Misc. Errands','errands.png'),
+(8, 'Misc. Errands','errands.jpg'),
 (9, 'Childcare', 'childcare.jpg'),
 (10, 'Supernatural Services', 'psychic.jpg'),
 (11, 'Cleaning', 'cleaning.jpg'),
@@ -30,6 +30,8 @@ VALUES
 (15, 'Beauty', 'beauty.jpg'),
 (16, 'Alterations & Tailoring', 'tailoring.jpg'),
 (17, 'Auto Services', 'mechanic.jpg');
+
+
 
 
 INSERT INTO Skill
