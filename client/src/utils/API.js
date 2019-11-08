@@ -54,5 +54,14 @@ export default {
   //REVIEWS
   addReview: function (data) {
     return axios.post("/api/skill/review", data);
+  },
+
+  //CONTACTS
+  getSkillContact: function (skillId) {
+    return axios.get(`/api/contact/skill/${skillId}`);
+  },
+
+  getUserRequests: function () {
+    return axios.get(`/api/contact`);
   }
 };

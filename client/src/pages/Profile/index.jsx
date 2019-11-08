@@ -9,7 +9,8 @@ import "./style.css";
 
 
 class Profile extends React.Component {
-  
+  mounted = false;
+
   state = {
     image: this.props.userData.UserImage || "profile.jpg",
     pageView: {
@@ -17,10 +18,15 @@ class Profile extends React.Component {
       page: "skills"
     }
   };
-  
+
+  //guarantees the setState won't be called after component unmounts
+  componentWillUnmount = () => this.mounted = false;
+  componentDidMount = () => this.mounted = true;
+
   selectMenu = event => {
     event.preventDefault();
     const { title, name } = event.target;
+
     this.setState({
       pageView: {
         title: title,
@@ -37,18 +43,20 @@ class Profile extends React.Component {
     let reader = new FileReader();
      
     reader.onloadend = () => {
-      this.setState({
-        image: reader.result
-      });
-      
-      API.updateUser(data)
-        .then(res => console.log(res))
-        .catch(err => console.log(err.response));
+      if (this.mounted) {
+        this.setState({
+          image: reader.result
+        });
+        
+        API.updateUser(data)
+          .then(res => console.log(res))
+          .catch(err => console.log(err.response));
+      }
     }  
     reader.readAsDataURL(event.target.files[0]);
     //------
 
-}
+  }
 
   render() {
     const { pageView, image } = this.state;
@@ -67,13 +75,13 @@ class Profile extends React.Component {
             <ListGroup defaultActiveKey="#link2">
               <ListGroup.Item action href="#link1" name="info" title="Personal Info" onClick={this.selectMenu}>
                 Personal Info
-            </ListGroup.Item>
+              </ListGroup.Item>
               <ListGroup.Item action href="#link2" name="skills" title="Skills" onClick={this.selectMenu}>
                 Skills
-            </ListGroup.Item>
+              </ListGroup.Item>
               <ListGroup.Item action href="#link3" name="password" title="Change Password" onClick={this.selectMenu}>
                 Change Password
-            </ListGroup.Item>
+              </ListGroup.Item>
             </ListGroup>
           </div>
           <div className="col-md-8">
