@@ -7,19 +7,30 @@ VALUES
 (1,'Carol','Cavalcanti','carolinapc@gmail.com','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra','M4Y1H5','profile_1.jpg'),
 (2,'John','Doe','user1','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_2.jpg'),
 (3,'Mary','Jane','user2','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_3.jpg'),
-(4,'Frank','Russel','user3','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_4.jpg');
+(4,'Frank','Russel','user3','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_4.jpg'),
+(5, 'Maggie', 'MacVey', 'user4', '$2b$10$odgCqiMprJfgLJPGXiLS4eCbr0dQYXIVSuxFHsZT76ismKyzyXfiy', null, 'profile_5.jpg' );
 
 INSERT INTO Category 
 (id, name, image)
 VALUES
-(1, 'Maintenance','maintenance.jpg'),
-(2, 'Construction','construction.jpg'),
-(3, 'Softwares','software.jpg'),
-(4, 'Training','training.jpg'),
-(5, 'Consulting','consulting.jpg'),
-(6, 'Translating/Interpreter','translate.jpg'),
-(7, 'Teaching','teaching.jpg'),
-(8, 'Others','other.png');
+(1, 'Handy Work','handyman.jpg'),
+(2, 'Home Reno','construction.jpg'),
+(3, 'Technology','technology.jpg'),
+(4, 'DIY & Arts and Crafts','DIY.jpg'),
+(5, 'Coaching','coaching.jpg'),
+(6, 'Language','Translation.jpg'),
+(7, 'Education','education.jpg'),
+(8, 'Misc. Errands','errands.png'),
+(9, 'Childcare', 'childcare.jpg'),
+(10, 'Supernatural Services', 'psychic.jpg'),
+(11, 'Cleaning', 'cleaning.jpg'),
+(12, 'Pet Care', 'pet.jpg'),
+(13, 'Cooking', 'cooking.jpg'),
+(14, 'Health & Fitness', 'health.jpg'),
+(15, 'Beauty', 'beauty.jpg'),
+(16, 'Alterations & Tailoring', 'tailoring.jpg'),
+(17, 'Auto Services', 'mechanic.jpg');
+
 
 INSERT INTO Skill
 (id,name,description,price,pricetype,zipcode,CategoryId,UserId,score)
