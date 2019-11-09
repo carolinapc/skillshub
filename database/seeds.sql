@@ -8,7 +8,36 @@ VALUES
 (2,'John','Doe','user1','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_2.jpg'),
 (3,'Mary','Jane','user2','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_3.jpg'),
 (4,'Frank','Russel','user3','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'profile_4.jpg'),
-(5, 'Maggie', 'MacVey', 'user4', '$2b$10$odgCqiMprJfgLJPGXiLS4eCbr0dQYXIVSuxFHsZT76ismKyzyXfiy', null, 'profile_5.jpg' );
+(5, 'Maggie', 'MacVey', 'maggimacvey7@gmail.com', '$2b$10$odgCqiMprJfgLJPGXiLS4eCbr0dQYXIVSuxFHsZT76ismKyzyXfiy', null, 'profile_5.jpg' ),
+(6,'Angie','Dob','user4','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'angieprofile.jpg'),
+(7,'Jenn','Siggy','user5','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'jennprofile.jpg'),
+(8,'Jeremy','Delzo','user6','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'jeremyprofile.jpg'),
+(9,'Sam','McK','user7','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'samprofile.jpg'),
+(10,'Amanda','Dob','user8','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'amandaprofile.jpg'),
+(11,'Matty','Bort','user9','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'mattprofile.jpg'),
+(12,'Andy','Jam','user10','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'andyprofile.jpg'),
+(13,'Jordan','Caddle','user11','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'jordanprofile.jpg'),
+(14,'Andrew','Harden','user12','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'hardyprofile.jpg'),
+(15,'Emily','Lem','user13','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'emilyprofile.jpg'),
+(16,'Rachael','G','user14','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'rachaelprofile.jpg'),
+(17,'Alex','Alto','user15','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'alexprofile.jpg'),
+(18,'Robyn','Bird','user16','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'robynprofile.jpg'),
+(19,'Anna','Jan','user17','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'annaprofile.jpg'),
+(20,'Veronika','Trolley','user18','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'veronikaprofile.jpg'),
+(21,'Alexis','Amb','user19','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'alexisprofile.jpg'),
+(22,'Jay','Beach','user20','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'jayprofile.jpg'),
+(23,'Kallvis','Sew','user21','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'kallvisprofile.jpg'),
+(24,'Julien','Craig','user22','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'julienprofile.jpg'),
+(25,'Jorge','Mex','user23','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'jorgeprofile.jpg'),
+(26,'Kevin','Kevon','user24','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'kevinprofile.jpg'),
+(27,'Melissa','Lima','user25','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'melissaprofile.jpg'),
+(28,'Mike','Carlo','user26','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'mikeprofile.jpg'),
+(29,'Stefanie','Barr','user27','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'stefanieprofile.jpg'),
+(30,'Phoenix','Pink','user28','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'phoenixprofile.jpg'),
+(31,'Sandra','Rose','user29','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'sandraprofile.jpg'),
+(32,'Tara','Wells','user30','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'taraprofile.jpg'),
+(33,'Wade','Edmon','user31','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'wadeprofile.jpg'),
+;
 
 INSERT INTO Category 
 (id, name, image)
@@ -29,7 +58,8 @@ VALUES
 (14, 'Health & Fitness', 'health.jpg'),
 (15, 'Beauty', 'beauty.jpg'),
 (16, 'Alterations & Tailoring', 'tailoring.jpg'),
-(17, 'Auto Services', 'mechanic.jpg');
+(17, 'Auto Services', 'mechanic.jpg'),
+(18, 'Landscaping', 'landscaping.jpg');
 
 
 
