@@ -38,8 +38,8 @@ export default {
     return axios.get("/api/category");
   },
 
-  getCategoriesMostAvailable: function () {
-    return axios.get("/api/category/grouped");
+  getCategoriesMostAvailable: function (nolimit) {
+    return axios.get(`/api/category/grouped?nolimit=${nolimit}`);
   },
 
   //SKILLS

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Card, Row } from 'react-bootstrap';
+import { Card, Row, Button } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './style.css';
 
 const CategoryList = props => {
   
   return (
+    <>
     <Row className="justify-content-md-center mt-5">
       {props.categories.map(category => {
         return (
@@ -22,6 +23,12 @@ const CategoryList = props => {
         );
       })}
     </Row>
+    <Row className="justify-content-md-center">
+      {!props.showingAllCategories ?
+        <Button onClick={props.pullAllCategories} className="justify-content-md-center mt-2">More Categories...</Button>
+      : null}
+    </Row>
+  </>
   );
 }
  
