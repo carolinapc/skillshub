@@ -77,7 +77,35 @@ VALUES
 (8,'law','strong lawyers team help you in hard times',450.80,'H','M4Y1H5',5,1,0),
 (9,'cleaning','cleaners around GTA',250,'D','M4Y1H5',1,2,0),
 (10,'dancing','dance club',20,'D','M4Y1H5',4,1,0),
-(11,'painting','painter team reasonable and fast jobs',160,'J','M4Y1H5',2,1,0);
+(11,'painting','painter team reasonable and fast jobs',160,'J','M4Y1H5',2,1,0),
+(12,'Plumber','Licensed plumber with 5 years experience',45.50,'H','M4Y1H5',2,6,0);
+(13,'Front-end Developer','Web developer with 3 years experience, comfortable with most front-end technologies.',27,'H','M4Y1H5',3,7,0);
+(14,'Clay pot Making','Come learn how to make your own custom clay pots',60,'J','M4Y1H5',4,8,0);
+(15,'Life Coach','Let me help you find your unlimted potential',150,'D','M4Y1H5',5,9,0);
+(16,'Learn Spanish','Native spanish speaker who is fluent in english seeking to help you learn some spanish',20,'H','M4Y1H5',6,10,0);
+(17,'Math Tutor','Providing Math tutoring for students form grade 8 to 12',40,'H','M4Y1H5',7,11,0);
+(18,'Errand Runner','Busy? I can run those pesky errands that you have dreading for you!',15,'H','M4Y1H5',8,12,0);
+(19,'Home Daycare','I run a home daycare, I have my ECE license and have 5 years expierence of child care services',60,'D','M4Y1H5',9,13,0);
+(20,'Psychic','Curious about what lies ahead, come and see me so we can discover it',40,'J','M4Y1H5',10,14,0);
+(21,'Home Cleaning','I prefrom all house cleaning duties, I am highly detailed oriented',15,'H','M4Y1H5',11,15,0);
+(22,'Dog Walker','I am an animal lover and more specifically a dog lover, so let me walk your dog!',50,'H','M4Y1H5',12,16,0);
+(23,'Meal Planner','I help design and prepare meal plans for a variety of dietary needs!',400,'J','M4Y1H5',13,17,0);
+(24,'Personal Trainer','I can help you achieve your fitness goals.  I have 5 years of expierence in creating and designing personalized work outs.',30,'H','M4Y1H5',14,18,0);
+(25,'Nail technician','I am a nail artist, i do acrylic and gel nails',40,'H','M4Y1H5',15,19,0);
+(26,'Dress alterations','I have 15 years of clothes alterations and specialize in wedding dresses alterations',600,'J','M4Y1H5',16,20,0);
+(27,'Tire Services','Need tire care and no time to deal with it? I provide mobile tire care services!',55,'H','M4Y1H5',17,21,0);
+(28,'Lawn Care','I provide you with all your lawn care needs, will water and treat your lawn for all its needs',30,'H','M4Y1H5',18,22,0);
+(29,'Handy man','I provide simple home repairs for a low price!',25,'H','M4Y1H5',1,23,0);
+(30,'Electrician','Licensed electrician with 5 years experience.',45,'H','M4Y1H5',2,24,0);
+(31,'Full Stack Developer','You can fulfil all of your web design and developments needs.',50,'H','M4Y1H5',4,25,0);
+(32,'Vocal Coach','Trained professioanl vocal coach ',55,'H','M4Y1H5',5,26,0);
+(33,'Learn French','Let me help you improve your french language skills',25,'H','M4Y1H5',6,27,0);
+(34,'Essay writing help','Let me help you write those annoying essays!',60,'H','M4Y1H5',7,28,0);
+(35,'Taroat card reading','Dont know what the future has in store for you?  Well I do!',42,'H','M4Y1H5',10,29,0);
+(36,'Mobile pet groomers','Welcome to mutt cutts, we come to you and!',150,'j','M4Y1H5',12,30,0);
+(37,'Nutritionist','Have speacial dietary needs, need help knowing how to cope and what to eat. let me help you! ',200,'j','M4Y1H5',14,31,0);
+(38,'Mobile car detailing ','WE come to you and detail your car.  We use the safest products that produce teh best results!',200,'j','M4Y1H5',17,32,0);
+(39,'Eye Lash Technician','3 years experience in making your eyes pop!',300,'j','M4Y1H5',15,33,0);
 
 
 INSERT INTO Review
