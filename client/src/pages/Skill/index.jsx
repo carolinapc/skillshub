@@ -67,7 +67,7 @@ class Skill extends React.Component {
           <Col md="4">
             <img src={skill.User.image? `/${skill.User.image}` : "/profile.jpg"} alt="Profile" className="profile-img shadow-lg mb-4" />
             <h3 className="card-subtitle mb-2 text-muted">{skill.User.firstName + " " + skill.User.lastName}</h3>
-            <Button className="mr-3"><i class="far fa-user-circle"></i> View Profile</Button>
+            <Button className="mr-3"><i className="far fa-user-circle"></i> View Profile</Button>
             {(this.state.loggedin || this.props.userData.loggedin) ?
               <NavLink
                 exact
@@ -75,7 +75,7 @@ class Skill extends React.Component {
                 activeClassName="active"
                 className="btn btn-primary mr-3"
               >
-                  <i class="far fa-comments"></i> Contact
+                  <i className="far fa-comments"></i> Contact
               </NavLink>
             :
               <Button className="btn-secondary mr-3" onClick={() => this.props.toggleAuthModalShow("signin")}>Sign-In to Contact</Button>

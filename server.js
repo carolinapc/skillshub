@@ -12,7 +12,6 @@ const cors = require('cors');
 const http = require('http');
 const socketIO = require('socket.io');
 
-
 const corsOptions = {
   origin: '*',
   optionsSuccessStatus: 200,
@@ -31,13 +30,11 @@ app.use(fileUpload({
   tempFileDir : `${uploadFolder}/tmp/`
 }));
 
-
 app.use(session({
   secret: process.env.SESSION_KEY,
   resave: true,
   saveUninitialized: true
 }));
-
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -46,9 +43,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use(express.static("client/public/images/uploads"));  
-
-
-
 
 // API routes
 app.use(routes);
@@ -64,9 +58,11 @@ const io = socketIO(server);
 
 // socket
 io.on("connect", socket => {
-  //broadcast msg when a book is saved
-  socket.on("save_book", msg => {
-    io.emit("book_saved", msg);
+
+  //CHAT: when user send a msg
+  socket.on("chat_msg_sent", contactMsg => {
+    //broadcast the message for the contact chat
+    io.emit("chat_msg_received", contactMsg);
   });
 });
 

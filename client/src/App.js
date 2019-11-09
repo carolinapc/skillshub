@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import API from './utils/API';
+//import io from "socket.io-client";
 
 //CSS
 import "normalize.css";
@@ -18,6 +19,7 @@ import Search from "./pages/Search";
 import Profile from "./pages/Profile";
 import Skill from "./pages/Skill";
 import Contact from "./pages/Contact";
+import Clients from "./pages/Clients";
 
 class App extends Component {
   mounted = false;
@@ -30,6 +32,15 @@ class App extends Component {
 
   componentDidMount = () => {
     this.mounted = true;
+
+    // const socket = io();
+    // socket.on("chat_msg_sent", msg => {
+    //   //this.setState({ broadcastMsg: msg });
+    //   toast.info(msg,{
+    //     position: toast.POSITION.BOTTOM_CENTER
+    //   });
+    // });
+
     //check authentication status
     API.getUserSession().then(res => {
       if (this.mounted) {
@@ -85,8 +96,10 @@ class App extends Component {
           <Route exact path="/search/:category" component={Search} />
           <Route exact path="/search/skill/:search" component={Search} />
           <Route exact path="/skill/:id" render={props => <Skill userData={this.state.userData} toggleAuthModalShow={this.toggleAuthModalShow} {...props} />} />
-          <Route exact path="/profile" component={WithAuth(Profile)}  />
+          <Route exact path="/profile" component={WithAuth(Profile)} />
+          <Route exact path="/contact" component={WithAuth(Contact)}  />
           <Route exact path="/contact/:skill" component={WithAuth(Contact)}  />
+          <Route exact path="/clients" component={WithAuth(Clients)}  />
           <Route path="*">
             <Redirect to="/" />
           </Route>
