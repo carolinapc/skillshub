@@ -138,7 +138,6 @@ class Contact extends React.Component {
       chatShot.push(chat);
 
       this.setState({ text: "" });
-      this.refChatText.current.focus();
 
       const socket = io();
       socket.emit("chat_msg_sent", { chat, contactId });
@@ -171,7 +170,15 @@ class Contact extends React.Component {
           </Col>
           <Col md="8">
             {this.state.currentContact.id?
-              <Chat text={this.state.text} loading={this.state.loading} submitMessage={this.submitMessage} handleInputChange={this.handleInputChange} contact={this.state.currentContact} />
+              <Chat
+                text={this.state.text}
+                loading={this.state.loading}
+                submitMessage={this.submitMessage}
+                handleInputChange={this.handleInputChange}
+                contact={this.state.currentContact}
+                refChatScreen={this.refChatScreen}
+                refChatText={this.refChatText}
+              />
             :null}
           </Col>
         </Row>
