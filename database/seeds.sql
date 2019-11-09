@@ -36,7 +36,7 @@ VALUES
 (30,'Phoenix','Pink','user28','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'phoenixprofile.jpg'),
 (31,'Sandra','Rose','user29','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'sandraprofile.jpg'),
 (32,'Tara','Wells','user30','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'taraprofile.jpg'),
-(33,'Wade','Edmon','user31','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'wadeprofile.jpg'),
+(33,'Wade','Edmon','user31','$2b$10$fo85sCgXJsNGGC0Sk28d/u5j7TmmjyxgVbETTYzKwKOAEFobJD8Ra',null,'wadeprofile.jpg')
 ;
 
 INSERT INTO Category 
