@@ -12,25 +12,31 @@ class Home extends React.Component {
     search: "",
     services: [],
     categories: [],
-    notFoundMsg: ""
+    notFoundMsg: "",
+    showingAllCategories: false
   }
   
   componentDidMount = () => {
     this.mounted = true;
-
-    API.getCategoriesMostAvailable()
-      .then(res => {
-        if (this.mounted) {
-          this.setState({ categories: res.data });
-        }
-      })
-      .catch(err => console.log(err.response));
+    this.searchCategories(false);
   }
 
   componentWillUnmount() {
     this.mounted = false;
   }
   
+  searchCategories = nolimit => {
+
+    API.getCategoriesMostAvailable(nolimit)
+    .then(res => {
+      if (this.mounted) {
+        this.setState({ categories: res.data, showingAllCategories: nolimit });
+      }
+    })
+    .catch(err => console.log(err.response));
+
+  }
+
   onSubmit = event => {
     event.preventDefault();
     this.props.history.push(`search/skill/${this.state.search}`);
@@ -39,6 +45,10 @@ class Home extends React.Component {
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+  }
+
+  pullAllCategories = () => {
+    this.searchCategories(true);
   }
 
   render() { 
@@ -72,7 +82,7 @@ class Home extends React.Component {
         </form>
 
         {this.state.categories.length > 0 ? 
-          <CategoryList categories={this.state.categories} />
+          <CategoryList categories={this.state.categories} pullAllCategories={this.pullAllCategories} showingAllCategories={this.state.showingAllCategories} />
           : null
         }
       </PageContainer>

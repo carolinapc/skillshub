@@ -63,8 +63,6 @@ class Search extends React.Component {
         }
       })
       .catch(err => {
-        console.log("Error");
-        console.log(err.response);
         this.setState({ skills: [], notFoundMsg: "Oops.. something is wrong. Please try again." });
       });
   }
