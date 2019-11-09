@@ -141,7 +141,7 @@ module.exports = {
 
       db.User
         .update(req.body, { where: { id: req.session.UserId } })
-        .then(() => res.json(data))
+        .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
     }
       

@@ -9,7 +9,7 @@ const SkillsSearchList = props => {
     <>
       {props.skills.map(skill => {
         return (
-          <div className="card shadow-sm bg-light" key={skill.id}>
+          <div className="card shadow-sm bg-light mt-3" key={skill.id}>
             <div className="card-body">
               <h4 className="card-title">{skill.User.firstName}</h4>
               <div className="wrap-price">

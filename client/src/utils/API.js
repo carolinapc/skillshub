@@ -63,5 +63,13 @@ export default {
 
   getUserRequests: function () {
     return axios.get(`/api/contact`);
+  },
+
+  getUserClients: function () {
+    return axios.get(`/api/contact/clients`);
+  },
+
+  updateContact: function (data) {
+    return axios.put("/api/contact/chat", data);
   }
 };
