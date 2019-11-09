@@ -13,12 +13,17 @@ class Home extends React.Component {
     services: [],
     categories: [],
     notFoundMsg: "",
-    showingAllCategories: false
+    showingAllCategories: false,
+    skills: []
   }
   
   componentDidMount = () => {
     this.mounted = true;
     this.searchCategories(false);
+
+    API.allSkills()
+      .then(res => this.setState({ skills: res.data }))
+      .catch(err => console.log(err));
   }
 
   componentWillUnmount() {
@@ -67,6 +72,7 @@ class Home extends React.Component {
               aria-label="Search"
               aria-describedby="btn-search"
               autoComplete="off"
+              list="skills"
               onChange={this.handleInputChange}
             />
             <div className="input-group-append">
@@ -80,6 +86,11 @@ class Home extends React.Component {
             </div>
           </div>
         </form>
+        <datalist id="skills">
+          {this.state.skills.map(skill => (
+            <option value={skill.name} key={skill.id} />
+          ))}
+        </datalist>
 
         {this.state.categories.length > 0 ? 
           <CategoryList categories={this.state.categories} pullAllCategories={this.pullAllCategories} showingAllCategories={this.state.showingAllCategories} />
