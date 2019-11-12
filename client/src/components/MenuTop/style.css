@@ -10,7 +10,9 @@
 
 .nav-link{
   color: aliceblue !important;
- 
+}
+.nav-link:hover{
+  color: #ccc !important;
 }
 
 nav.navbar.navbar-default {

@@ -27,7 +27,7 @@ function MenuTop(props) {
           activeClassName="active"
           className="nav-link"
           >
-          Your Skills
+          Search
         </NavLink>
         <NavLink
           exact
