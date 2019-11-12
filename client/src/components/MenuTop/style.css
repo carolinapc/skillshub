@@ -30,3 +30,8 @@ nav.navbar{
   text-align: right;
 }
 
+@media screen and (max-width: 991px){
+  .menu-auth{
+    text-align: left;
+  }
+}
