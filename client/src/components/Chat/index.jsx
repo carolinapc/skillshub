@@ -7,7 +7,7 @@ const Chat = props => {
 
   const { contact, text } = props;
   let userDefault;
-  
+  console.log("chat contact",contact);
   //set an userDefault to handle the baloon class toggle
   try {
     if (contact.chat.length > 0) {

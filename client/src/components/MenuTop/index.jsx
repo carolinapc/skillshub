@@ -43,8 +43,8 @@ function MenuTop(props) {
         {/* show buttons according to authentication status */}
         {props.authenticated ?
             <NavDropdown title={<><i className="fas fa-user"></i> {props.userInfo.UserName}</>} id="basic-nav-dropdown" className="menu-auth">
-              <NavDropdown.Item href="/contact">Your Requests</NavDropdown.Item>
-              <NavDropdown.Item href="/clients">Your Clients</NavDropdown.Item>
+              <NavDropdown.Item href="/contact/request">Your Requests</NavDropdown.Item>
+              <NavDropdown.Item href="/contact/client">Your Clients</NavDropdown.Item>
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={() => props.signOut()}>Sign-Out</NavDropdown.Item>
