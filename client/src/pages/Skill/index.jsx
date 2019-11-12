@@ -26,7 +26,6 @@ class Skill extends React.Component {
       Reviews: []
     },
     found: false,
-    loggedin: false,
     contactText: "",
     showContactModal: false
   };
@@ -35,14 +34,6 @@ class Skill extends React.Component {
     this.mounted = true;
     let data = { id: this.props.match.params.id };
 
-    if (!this.props.userData) {
-      if (this.mounted) {
-        //check user session
-        API.getUserSession().then(res => {
-          this.setState({ loggedin: res.data.loggedin });
-        });
-      }
-    }
     this.getSkillFromDb(data);        
   }
 
@@ -97,7 +88,7 @@ class Skill extends React.Component {
                 >
                 <i className="far fa-user-circle"></i> View Profile
               </NavLink>
-              {(this.state.loggedin || this.props.userData.loggedin) ?
+              {(this.props.userData.loggedin) ?
                 <Button
                   className="btn btn-primary"
                   onClick={this.contactHandle}
@@ -123,10 +114,11 @@ class Skill extends React.Component {
           </Row>
           <Row className="border-top mt-4 p-2">
             <Col md="4">
-              {(this.state.loggedin || this.props.userData.loggedin )?
+            {(this.props.userData.loggedin )?
               <ReviewForm skillId={skill.id} getSkillFromDb={this.getSkillFromDb} />
-              : "Sign in to add a review"
-              }
+            :
+              "Sign in to add a review"
+            }
             </Col>            
             <Col md="8">
               <h3>Reviews</h3>
