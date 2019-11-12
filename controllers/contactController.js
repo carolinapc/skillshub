@@ -90,14 +90,15 @@ module.exports = {
     if (!req.session.loggedin) {
       res.status(400).end("You need to sign in to see contacts.");
     }
+    else if (req.body.text === "") {
+      res.status(400).end("A text must be informed.");
+    }
     else {
       req.body.UserId = req.session.UserId;
-      if (!req.body.text) {
-        res.status(400).end("A text must be informed.");
-      }
-
+      console.log("text", req.body.text);
+      
       let chat = [];
-
+      
       chat.push({
         text: req.body.text,
         user: `${req.session.UserName} ${req.session.UserLastName}`,
