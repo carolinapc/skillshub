@@ -17,7 +17,10 @@ class Contact extends React.Component {
     this.refChatText = React.createRef();
     
     this.mounted = false;
+    this.pageType = "";
+
     this.state = {
+      pageType: "",
       currentContact: {},
       contacts: [],
       text: "",
@@ -52,18 +55,15 @@ class Contact extends React.Component {
   componentDidMount = () => {
     this.mounted = true;
 
-    const skillId = this.props.match.params.skill;
-    
-    if (skillId) {
-        //get all the conversation related to this skill and user loggedin
-      API.getSkillContact(skillId).then(res => {
-        this.getAllContacts(res.data[0].id);
-      }).catch(err => console.log(err));
+    this.pageType = this.props.match.params.pagetype; //client or request
+    const contactId = this.props.match.params.id; //contactId
+
+    if (this.pageType !== "client" && this.pageType !== "request") {
+      this.props.history.push('/');
     }
-    else {
-      this.getAllContacts();
-    }
-    
+
+    this.getAllContacts(contactId);
+
   }
 
   setCurrentContact = data => {
@@ -72,15 +72,23 @@ class Contact extends React.Component {
       id: data.id,
       SkillId: data.SkillId,
       skillName: data.Skill.name,
-      userId: data.UserId,
-      userName: `${data.User.firstName} ${data.User.lastName}`,
-      contactName: `${data.Skill.User.firstName} ${data.Skill.User.lastName}`,      
       price: `${data.price} per ${Utils.getPriceTypeName(data.priceType)}`,
       dealClosed: data.dealClosed,
       active: data.active,
       createdAt: data.createdAt,
       chat: data.chat
     };
+
+    if (this.props.match.params.pagetype === "client") {
+      currentContact.userId = data.Skill.UserId;
+      currentContact.userName = `${data.Skill.User.firstName} ${data.Skill.User.lastName}`;
+      currentContact.contactName = `${data.User.firstName} ${data.User.lastName}`;
+    }
+    else {
+      currentContact.userId = data.UserId;
+      currentContact.userName = `${data.User.firstName} ${data.User.lastName}`;
+      currentContact.contactName = `${data.Skill.User.firstName} ${data.Skill.User.lastName}`;
+    }
 
     if (this.mounted) {
       this.setState({ currentContact });
@@ -89,8 +97,9 @@ class Contact extends React.Component {
   }
 
   getAllContacts = contactId => {
-    //get all the conversation related to this skill and user loggedin
-    API.getUserRequests().then(res => {
+
+    const handleResult = res => {
+      
       if (this.mounted) {
         let data = res.data.map(item => {
           try { item.chat = item.chat ? JSON.parse(item.chat) : [];}
@@ -99,17 +108,26 @@ class Contact extends React.Component {
         });
 
         this.setState({ contacts: data });
-
+        
         if (res.data.length > 0 && contactId) {
+          //set the default opened chat 
           this.selectContact(contactId);  
         }
       }
-    }).catch(err => console.log(err));
+    }
     
+    if (this.pageType === "client") {
+      //get all clients from the user loggedin
+      API.getUserClients().then(res => handleResult(res)).catch(err => console.log(err));
+    }
+    else {
+      //get all requests from the user loggedin
+      API.getUserRequests().then(res => handleResult(res)).catch(err => console.log(err));
+    }
   }
 
   selectContact = id => {
-    let currentContact = this.state.contacts.filter(contact => contact.id === id)[0];
+    let currentContact = this.state.contacts.filter(contact => contact.id == id)[0]; //the condition must use "==" and not "===" because the value could be number or string
     this.setCurrentContact(currentContact);
   }
 
@@ -124,6 +142,7 @@ class Contact extends React.Component {
   }
 
   submitMessage = event => {
+    event.preventDefault();
     if (this.state.text.trim() !== "") {
       this.setState({ loading: true });
 
@@ -154,15 +173,24 @@ class Contact extends React.Component {
 
   render() { 
     return (
-      <PageContainer title="Your Requests">
+      <PageContainer title={this.pageType === "client"?"Your Clients":"Your Requests"}>
         <Row>
           <Col md="4">
             <ListGroup defaultActiveKey={`#link${this.state.currentContact.id}`}>
               {this.state.contacts.map(contact => {
                 return (
-                  <ListGroup.Item key={contact.id} action active={this.state.currentContact.id===contact.id} href={`#link${contact.id}`} name={contact.id} title="Personal Info" onClick={this.handleSelectContact}>
-                    <b>{contact.Skill.name}</b><br />
-                    {`${contact.Skill.User.firstName} ${contact.Skill.User.lastName}`}
+                  <ListGroup.Item key={contact.id} action active={this.state.currentContact.id === contact.id} href={`#link${contact.id}`} name={contact.id} title="Personal Info" onClick={this.handleSelectContact}>
+                    {this.pageType === "client" ?
+                      <>
+                        <b>{`${contact.User.firstName} ${contact.User.lastName}`}</b><br />
+                        <i>{contact.Skill.name}</i>
+                      </>
+                    :
+                      <>
+                        <b>{contact.Skill.name}</b><br />
+                        {`${contact.Skill.User.firstName} ${contact.Skill.User.lastName}`}
+                      </>
+                    } 
                   </ListGroup.Item>    
                 );
               })}

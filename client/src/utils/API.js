@@ -65,6 +65,10 @@ export default {
     return axios.get(`/api/contact/skill/${skillId}`);
   },
 
+  createSkillContact: function (data) {
+    return axios.post(`/api/contact/skill`, data);
+  },
+
   getUserRequests: function () {
     return axios.get(`/api/contact`);
   },
