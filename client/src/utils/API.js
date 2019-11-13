@@ -48,13 +48,17 @@ export default {
 
   //SKILLS
   getSkills: function (data) {
+    console.log(data);
     data.id = data.id || "";
     data.search = data.search || "";
     data.categoryId = data.categoryId || "";
+    data.zipCode = data.zipCode || "";
+    data.distanceRange = data.distanceRange || "";
 
-    return axios.get(`/api/skill?id=${data.id}&search=${data.search}&categoryId=${data.categoryId}`);  
+    return axios.get(`/api/skill?id=${data.id}&search=${data.search}&categoryId=${data.categoryId}&zipCode=${data.zipCode}&distanceRange=${data.distanceRange}`);  
   },
 
+  //get all skills to fill data list
   allSkills: function () {
     return axios.get("/api/skill/all");
   },

@@ -1,9 +1,13 @@
 const db = require("../models");
+const geo = require("../utils/geo");
 
 // Defining methods for the booksController
 module.exports = {
+  /*
+  Gets all skills filtering by category, search text, id, zipCode and distance range
+  */
   findAll: function (req, res) {
-    const { search, categoryId, id } = req.query;
+    let { search, categoryId, id, zipCode, distanceRange } = req.query;
     let where = {active: true};
     let include = [{ all: true }];
 
@@ -26,10 +30,20 @@ module.exports = {
         where: where,
         order:[['createdAt', 'DESC'],[db.Review,'createdAt','DESC']]
       })
-      .then(dbModel => {
-        console.log("result", dbModel);
-        console.log("where", where);
-        res.json(dbModel)
+      .then(data => {
+
+        //if zipCode was passed
+        if (zipCode) {
+          distanceRange = distanceRange || "5"; //default 5km - if the distance ranges wasn't passed
+          //get lat/lng from zip code
+          /**
+           * 1. call api to get lat/lgn
+           * 2. filter the results by distance
+           *    data = results.filter(item=>{return (true || false)})
+           */
+        }
+        
+        res.json(data);
       })
       .catch(err => res.status(422).json(err));
   },

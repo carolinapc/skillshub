@@ -11,6 +11,7 @@ class Search extends React.Component {
   state = {
     search: "",
     zipCode: "",
+    distanceRange: "",
     skills: [],
     categoryId: "",
     categories: [],
@@ -20,21 +21,17 @@ class Search extends React.Component {
   componentDidMount = () => {
     this.mounted = true;
     const params = new URLSearchParams(this.props.location.search);
-    let data = {};
-
-    data.categoryId = params.get('category') || "";
-    data.search = params.get('search') || "";
-    data.zipCode = params.get('postal') || "";
 
     if (this.mounted) {
       this.setState({
-        categoryId: data.categoryId,
-        search: data.search,
-        zipCode: data.zipCode
+        categoryId: params.get('category') || "",
+        search: params.get('search') || "",
+        zipCode: params.get('postal') || "",
+        distanceRange: ""
       });  
     }
     
-    this.searchSkills(data);
+    this.searchSkills();
 
     //get all categories to fill dropdown list
     API.getCategories().then(res => {
@@ -54,14 +51,19 @@ class Search extends React.Component {
     this.mounted = false;
   }
 
-  searchSkills = data => {
-    
+  searchSkills = () => {
+    let data = {
+      search: this.state.search || "",
+      categoryId: this.state.categoryId || "",
+      zipCode: this.state.zipCode || "",
+      distanceRange: this.state.distanceRange || ""
+    }
+    console.log("data", data);
     //get all skills filtering by data passed
     API.getSkills(data)
       .then(res => {
         if (this.mounted) {
           if (res.data.length > 0) {
-          
             this.setState({ skills: res.data, notFoundMsg: "" });
           }
           else {
@@ -76,14 +78,7 @@ class Search extends React.Component {
 
   handleSearch = event => {
     event.preventDefault();
-
-    let data = {
-      search: this.state.search || "",
-      categoryId: this.state.categoryId || "",
-      zipCode: this.state.zipCode || ""
-    }
-    this.searchSkills(data);
-
+    this.searchSkills();
   }
 
   handleInputChange = event => {
