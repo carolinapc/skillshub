@@ -240,6 +240,7 @@ module.exports = {
             req.session.loggedin = true;
             req.session.UserId = user.id;
             req.session.UserName = user.firstName;
+            req.session.UserLastName = user.lastName;
             req.session.UserImage = user.image;
             res.status(200).json(req.session);
               

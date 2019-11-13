@@ -17,10 +17,9 @@ import WithAuth from './components/WithAuth';
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
+import UserProfile from "./pages/UserProfile";
 import Skill from "./pages/Skill";
 import Contact from "./pages/Contact";
-import Clients from "./pages/Clients";
-import UserProfile from "./pages/UserProfile";
 
 class App extends Component {
   mounted = false;
@@ -97,11 +96,10 @@ class App extends Component {
           <Route exact path="/search/:category" component={Search} />
           <Route exact path="/search/skill/:search" component={Search} />
           <Route exact path="/skill/:id" render={props => <Skill userData={this.state.userData} toggleAuthModalShow={this.toggleAuthModalShow} {...props} />} />
-          <Route exact path="/contact" component={WithAuth(Contact)}  />
           <Route exact path="/profile" component={WithAuth(Profile)} />
           <Route exact path="/profile/:id" component={UserProfile} />
-          <Route exact path="/contact/:skill" component={WithAuth(Contact)}  />
-          <Route exact path="/clients" component={WithAuth(Clients)}  />
+          <Route exact path="/contact/:pagetype" component={WithAuth(Contact)}  />
+          <Route exact path="/contact/:pagetype/:id" component={WithAuth(Contact)}  />
           <Route path="*">
             <Redirect to="/" />
           </Route>

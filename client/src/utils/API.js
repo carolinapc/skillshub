@@ -55,6 +55,10 @@ export default {
     return axios.get(`/api/skill?id=${data.id}&search=${data.search}&categoryId=${data.categoryId}`);  
   },
 
+  allSkills: function () {
+    return axios.get("/api/skill/all");
+  },
+
   //REVIEWS
   addReview: function (data) {
     return axios.post("/api/skill/review", data);
@@ -63,6 +67,10 @@ export default {
   //CONTACTS
   getSkillContact: function (skillId) {
     return axios.get(`/api/contact/skill/${skillId}`);
+  },
+
+  createSkillContact: function (data) {
+    return axios.post(`/api/contact/skill`, data);
   },
 
   getUserRequests: function () {
