@@ -20,3 +20,47 @@
   text-decoration: none;
   color: inherit;
 }
+
+.search-box{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  height: 39px;
+}
+
+.search, .postal{
+  border: 0px;
+  height: 100%;
+  padding-left: 10px;
+}
+.search{
+  width: Calc(60%);
+}
+.postal{
+  width: Calc(40% - 128.52px);
+}
+.search:focus, .postal:focus{
+  outline: none !important;
+}
+.search-box .btn{
+  float: right;
+  border: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 100%;
+}
+
+.search-box .divider::before{
+  content: "|";
+  color: #ccc;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.search-box i{
+  cursor: pointer;
+}
+.search-box i:hover{
+  color: blue;
+}
+
