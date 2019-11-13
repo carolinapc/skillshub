@@ -17,6 +17,7 @@ import WithAuth from './components/WithAuth';
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
+import UserProfile from "./pages/UserProfile";
 import Skill from "./pages/Skill";
 import Contact from "./pages/Contact";
 
