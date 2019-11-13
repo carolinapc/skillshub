@@ -47,13 +47,12 @@ class Home extends React.Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.history.push(`search/skill/${this.state.search}`);
+    this.props.history.push(`search/?search=${this.state.search}&postal=${this.state.postalCode}`);
   }
 
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    console.log(value);
   }
 
   pullAllCategories = () => {
@@ -85,7 +84,6 @@ class Home extends React.Component {
       <PageContainer title="Search Professionals">
 
         <form onSubmit={this.onSubmit}>
-              
           <div className="search-box">
             <input
               name="search"
@@ -112,7 +110,7 @@ class Home extends React.Component {
             />
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-secondary"
               id="btn-search"
             >
               <i className="fas fa-search"></i> Search

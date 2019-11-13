@@ -25,7 +25,7 @@ const SkillsSearchList = props => {
                   exact
                   to={"/skill/"+skill.id}
                   activeClassName="active"
-                  className="btn btn-primary"
+                  className="btn btn-secondary"
                   >
                   View
                 </NavLink>

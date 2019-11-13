@@ -93,8 +93,6 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/search/:category" component={Search} />
-          <Route exact path="/search/skill/:search" component={Search} />
           <Route exact path="/skill/:id" render={props => <Skill userData={this.state.userData} toggleAuthModalShow={this.toggleAuthModalShow} {...props} />} />
           <Route exact path="/profile" component={WithAuth(Profile)} />
           <Route exact path="/profile/:id" component={UserProfile} />

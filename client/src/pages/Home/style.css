@@ -57,10 +57,10 @@
   margin-right: 10px;
 }
 
-.search-box i{
+.search-box .fa-map-marker-alt{
   cursor: pointer;
 }
-.search-box i:hover{
+.search-box .fa-map-marker-alt:hover{
   color: blue;
 }
 

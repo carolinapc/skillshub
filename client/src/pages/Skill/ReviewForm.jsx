@@ -75,6 +75,7 @@ class ReviewForm extends React.Component {
         <Form.Control as="textarea" rows="5" name="review" value={this.state.review} placeholder="Comment your review..." onChange={this.handleInputChange} />
         <Button
           className="mt-3"
+          variant="secondary"
           disabled={this.state.loading || this.state.review.trim() === ""}
           onClick={(!this.state.loading && this.state.review.trim() !== "") ? this.saveReview : null}>Submit</Button>
       </>
