@@ -35,7 +35,7 @@ class Search extends React.Component {
     }
     
     this.searchSkills(data);
-    
+
     //get all categories to fill dropdown list
     API.getCategories().then(res => {
       if (res.data) {
@@ -117,7 +117,7 @@ class Search extends React.Component {
                 );
               })}
             </Form.Control>
-            <Button onClick={this.handleSearch} className="mt-3">Search</Button>
+            <Button variant="secondary" onClick={this.handleSearch} className="mt-3">Search</Button>
             {this.state.skills.length > 0 ? 
               <SkillsSearchList skills={this.state.skills} />
               : <div className="message">{this.state.notFoundMsg}</div>

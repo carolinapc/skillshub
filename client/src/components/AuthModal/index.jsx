@@ -251,7 +251,7 @@ class AuthModal extends React.Component {
           <span className={this.state.error?"text-danger":"text-success"}>{this.state.message}</span>  
           <ButtonToolbar className="justify-content-center">
             <Button
-              variant="secondary"
+              variant="danger"
               disabled={this.state.isLoading}
               className={showBtnSignIn ? "" : "hide-self"}
               block
@@ -260,7 +260,7 @@ class AuthModal extends React.Component {
               Sign In
             </Button>
             <Button
-              variant="secondary"
+              variant="danger"
               disabled={this.state.isLoading}
               className={showBtnSignUp ? "" : "hide-self"}
               block
@@ -269,7 +269,7 @@ class AuthModal extends React.Component {
               Sign Up
             </Button>
             <Button
-              variant="secondary"
+              variant="danger"
               disabled={this.state.isLoading}
               className={showBtnReset ? "" : "hide-self"}
               block

@@ -10,7 +10,7 @@ const SkillsList = props => {
           <th>Skill</th>
           <th>Category</th>
           <th>Available</th>
-          <th><Button onClick={props.addSkill}><i className="fas fa-plus"></i> New</Button></th>
+          <th><Button onClick={props.addSkill} variant="primary"><i className="fas fa-plus"></i> New</Button></th>
         </tr>
       </thead>
       <tbody>
@@ -32,7 +32,7 @@ const SkillsList = props => {
             </td>
 
             <td>
-              <Button onClick={()=>props.editSkill(skill)}><i className="fas fa-pen"></i> Edit</Button>
+              <Button onClick={()=>props.editSkill(skill)} variant="secondary"><i className="fas fa-pen"></i> Edit</Button>
             </td>
           </tr>
         );

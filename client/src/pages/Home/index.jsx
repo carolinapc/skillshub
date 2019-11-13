@@ -110,7 +110,7 @@ class Home extends React.Component {
             />
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-secondary"
               id="btn-search"
             >
               <i className="fas fa-search"></i> Search

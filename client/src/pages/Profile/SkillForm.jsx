@@ -65,7 +65,7 @@ const SkillForm = props => {
       
       <ButtonToolbar>
         <Button
-          variant="primary"
+          variant="secondary"
           disabled={props.controllers.isLoading}
           onClick={!props.controllers.isLoading ? props.saveSkill : null}
           className="mt-3 mr-2"

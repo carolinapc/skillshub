@@ -84,19 +84,19 @@ class Skill extends React.Component {
                 exact
                 to={"/profile/"+skill.UserId}
                 activeClassName="active"
-                className="btn btn-primary mr-3"
+                className="btn btn-secondary mr-3"
                 >
                 <i className="far fa-user-circle"></i> View Profile
               </NavLink>
               {(this.props.userData.loggedin) ?
                 <Button
-                  className="btn btn-primary"
+                  className="btn btn-secondary"
                   onClick={this.contactHandle}
                 >
                   <i className="far fa-comments"></i> Contact
                 </Button>
               :
-                <Button className="btn-secondary mr-3" onClick={() => this.props.toggleAuthModalShow("signin")}>Sign-In to Contact</Button>
+                <Button className="btn-danger mr-3" onClick={() => this.props.toggleAuthModalShow("signin")}>Sign-In to Contact</Button>
               }
             </Col>
             <Col md="8" className="pt-3">
