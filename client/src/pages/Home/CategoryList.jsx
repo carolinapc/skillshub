@@ -10,7 +10,7 @@ const CategoryList = props => {
     <Row className="justify-content-md-center mt-5">
       {props.categories.map(category => {
         return (
-          <Link key={category.id} to={`/search/${category.id}`} role="button" className="btn btn-link">
+          <Link key={category.id} to={`/search/?category=${category.id}`} role="button" className="btn btn-link">
             <Card style={{ width: '18rem' }} className="shadow card-custom">
               <Card.Body>
                 <Card.Title>{category.name}</Card.Title>

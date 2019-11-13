@@ -26,7 +26,11 @@ module.exports = {
         where: where,
         order:[['createdAt', 'DESC'],[db.Review,'createdAt','DESC']]
       })
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        console.log("result", dbModel);
+        console.log("where", where);
+        res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
 
