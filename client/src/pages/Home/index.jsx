@@ -10,6 +10,7 @@ class Home extends React.Component {
 
   state = {
     search: "",
+    postalcode: "",
     services: [],
     categories: [],
     notFoundMsg: "",
@@ -24,6 +25,18 @@ class Home extends React.Component {
     API.allSkills()
       .then(res => this.setState({ skills: res.data }))
       .catch(err => console.log(err));
+    
+    //checks whether the browser supports geolocation
+    if (window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(position => {
+        API.getPostalCodeFromGeoLocation(position.coords)
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+    
   }
 
   componentWillUnmount() {
@@ -73,6 +86,13 @@ class Home extends React.Component {
               aria-describedby="btn-search"
               autoComplete="off"
               list="skills"
+              onChange={this.handleInputChange}
+              />
+            <input
+              name="postalcode"
+              type="text"
+              placeholder="Postal Code"
+              autoComplete="off"
               onChange={this.handleInputChange}
             />
             <div className="input-group-append">
