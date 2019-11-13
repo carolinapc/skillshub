@@ -84,6 +84,10 @@ export default {
   updateContact: function (data) {
     return axios.put("/api/contact/chat", data);
   
+  },
+
+  getPostalCodeFromGeoLocation: function (data) {
+    return axios.get(`/api/google/postalcode/${data.latitude}/${data.longitude}`);
   }
 
 };

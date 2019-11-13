@@ -1,13 +1,13 @@
+require("dotenv").config();
+const axios = require("axios");
+const googleApiKey = process.env.GOOGLE_API_KEY;
 
-var googleApiKey = "AIzaSyBwPxzjMTFenaxV8gFHtYqVTcGgt7kH_c4";
-var x = document.getElementById("gpsPos");
-
-var map, infoWindow;
-
-var pos2 = {
-    lat: 43.681408,
-    lng: -79.416137
-}
+//var x = document.getElementById("gpsPos");
+// var map, infoWindow;
+// var pos2 = {
+//     lat: 43.681408,
+//     lng: -79.416137
+// }
 
 
 function showPosition(position, postalCode) {
@@ -52,34 +52,37 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
 }
 
-var getPostalCode = function (pos) {
-    $.ajax({
+const getPostalCode = function (pos) {
+    
+    return axios({
+        method: 'get',
         url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + pos.lat + ',' + pos.lng + '&key=' + googleApiKey,
-        dataType: "json",
-        success: function (data) {
-            var addresses = data.results; // cache results in a local var
-            console.log(data);
-            $.each(addresses, function (i) { // iterate through to find a postal code
-                if (this.types[0] == "postal_code") { // check that the type is a postal code
-                    var postal = this['address_components'][0]['long_name']; // grab postal string
-                    if (postal.length > 3) { // is the result is more then 3 letter shorthand use it
-                        // do something with your result and then lets break the iteration
-                        console.log("teste: ");
-                        zipToGeo(postal);
-                        showPosition(pos, postal);
-                        infoWindow.setContent(postal);
-                        // infoWindow.setContent("" + getStraightDistance(pos1, pos2));
-                        drawCircle(pos, getStraightDistance(pos, pos2));
+        responseType: 'json'
+    });
+    //     success: function (data) {
+    //         var addresses = data.results; // cache results in a local var
+    //         console.log(data);
+    //         $.each(addresses, function (i) { // iterate through to find a postal code
+    //             if (this.types[0] == "postal_code") { // check that the type is a postal code
+    //                 var postal = this['address_components'][0]['long_name']; // grab postal string
+    //                 if (postal.length > 3) { // is the result is more then 3 letter shorthand use it
+    //                     // do something with your result and then lets break the iteration
+    //                     console.log("teste: ");
+    //                     zipToGeo(postal);
+    //                     showPosition(pos, postal);
+    //                     infoWindow.setContent(postal);
+    //                     // infoWindow.setContent("" + getStraightDistance(pos1, pos2));
+    //                     drawCircle(pos, getStraightDistance(pos, pos2));
 
-                        map.zoom = 15;
-                        infoWindow.open(map);
-                        map.setCenter(pos);
-                        return false;
-                    }
-                }
-            });
-        } // end success
-    }); // end ajax
+    //                     map.zoom = 15;
+    //                     infoWindow.open(map);
+    //                     map.setCenter(pos);
+    //                     return false;
+    //                 }
+    //             }
+    //         });
+    //     } // end success
+    // }); // end ajax
 };
 
 //BACK END  //retornar uma promessa om axios
@@ -141,5 +144,6 @@ function drawCircle(pos, rad) {
 }
 
 module.exports = {
-    zipToGeo: zipToGeo
+    zipToGeo: zipToGeo,
+    getPostalCode: getPostalCode
 };
