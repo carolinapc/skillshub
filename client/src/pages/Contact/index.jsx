@@ -44,7 +44,13 @@ class Contact extends React.Component {
 
       if (this.mounted) {
         this.setState({ contacts });
-        this.refChatScreen.current.scrollTop = this.refChatScreen.current.scrollHeight;
+        try {
+          this.refChatScreen.current.scrollTop = this.refChatScreen.current.scrollHeight;  
+        }
+        catch {
+          
+        }
+        
       }
 
     });
@@ -68,7 +74,7 @@ class Contact extends React.Component {
   }
 
   setCurrentContact = data => {
-    console.log(data);
+    
     let currentContact = {
       id: data.id,
       SkillId: data.SkillId,
@@ -83,11 +89,15 @@ class Contact extends React.Component {
 
     if (this.props.match.params.pagetype === "client") {
       currentContact.userId = data.Skill.UserId;
+      currentContact.userOriginId = data.Skill.UserId;
+      currentContact.userDestinyId = data.UserId;
       currentContact.userName = `${data.Skill.User.firstName} ${data.Skill.User.lastName}`;
       currentContact.contactName = `${data.User.firstName} ${data.User.lastName}`;
     }
     else {
       currentContact.userId = data.UserId;
+      currentContact.userOriginId = data.UserId;
+      currentContact.userDestinyId = data.Skill.UserId;
       currentContact.userName = `${data.User.firstName} ${data.User.lastName}`;
       currentContact.contactName = `${data.Skill.User.firstName} ${data.Skill.User.lastName}`;
     }
@@ -150,6 +160,7 @@ class Contact extends React.Component {
 
       let chatShot = [...this.state.currentContact.chat];
       const contactId = this.state.currentContact.id;
+      const { userOriginId, userDestinyId } = this.state.currentContact;
       let chat = {};
 
       chat.text = this.state.text;
@@ -161,7 +172,7 @@ class Contact extends React.Component {
       this.setState({ text: "" });
 
       const socket = io();
-      socket.emit("chat_msg_sent", { chat, contactId });
+      socket.emit("chat_msg_sent", { chat, contactId, userOriginId, userDestinyId });
 
       API.updateContact({ id: contactId, chat: JSON.stringify(chatShot) })
       .then(() => {

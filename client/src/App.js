@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import API from './utils/API';
-//import io from "socket.io-client";
+import io from "socket.io-client";
+import { ToastContainer, toast } from 'react-toastify';
 
 //CSS
 import "normalize.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 
 //Stateless Components
@@ -33,13 +35,14 @@ class App extends Component {
   componentDidMount = () => {
     this.mounted = true;
 
-    // const socket = io();
-    // socket.on("chat_msg_sent", msg => {
-    //   //this.setState({ broadcastMsg: msg });
-    //   toast.info(msg,{
-    //     position: toast.POSITION.BOTTOM_CENTER
-    //   });
-    // });
+    const socket = io();
+    socket.on("chat_notification", msg => {
+      if (msg.userDestinyId == this.state.userData.UserId) {
+        let notify = `${msg.chat.user} sent a message`;
+        toast.info(notify,{ position: toast.POSITION.BOTTOM_LEFT });  
+      }
+      
+    });
 
     //check authentication status
     API.getUserSession().then(res => {
@@ -84,6 +87,7 @@ class App extends Component {
   render() {
     return (
       <Router>
+        <ToastContainer />
         <MenuTop
           toggleAuthModalShow={this.toggleAuthModalShow}
           authenticated={this.state.authenticated}
