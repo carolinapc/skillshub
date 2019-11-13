@@ -99,7 +99,7 @@ class Home extends React.Component {
               onChange={this.handleInputChange}
               />
             <span className="divider">
-              <i class="fas fa-map-marker-alt" title="Get current location" onClick={this.getPostalCodeFromGps}></i>
+              <i className="fas fa-map-marker-alt" title="Get current location" onClick={this.getPostalCodeFromGps}></i>
             </span>
             <input
               name="postalCode"
