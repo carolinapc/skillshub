@@ -1,9 +1,10 @@
 import React from 'react';
 import PageContainer from '../../components/PageContainer';
+import ContactDetail from './ContactDetail';
+import Chat from '../../components/Chat';
 import { ListGroup, Row, Col } from 'react-bootstrap';
 import API from '../../utils/API';
 import Utils from '../../utils';
-import Chat from '../../components/Chat';
 import Moment from 'moment';
 import io from "socket.io-client";
 
@@ -67,7 +68,7 @@ class Contact extends React.Component {
   }
 
   setCurrentContact = data => {
-    
+    console.log(data);
     let currentContact = {
       id: data.id,
       SkillId: data.SkillId,
@@ -76,7 +77,8 @@ class Contact extends React.Component {
       dealClosed: data.dealClosed,
       active: data.active,
       createdAt: data.createdAt,
-      chat: data.chat
+      chat: data.chat,
+      agreedDate: data.agreedDate
     };
 
     if (this.props.match.params.pagetype === "client") {
@@ -197,16 +199,19 @@ class Contact extends React.Component {
             </ListGroup>            
           </Col>
           <Col md="8">
-            {this.state.currentContact.id?
-              <Chat
-                text={this.state.text}
-                loading={this.state.loading}
-                submitMessage={this.submitMessage}
-                handleInputChange={this.handleInputChange}
-                contact={this.state.currentContact}
-                refChatScreen={this.refChatScreen}
-                refChatText={this.refChatText}
-              />
+            {this.state.currentContact.id ?
+              <>
+                <Chat
+                  text={this.state.text}
+                  loading={this.state.loading}
+                  submitMessage={this.submitMessage}
+                  handleInputChange={this.handleInputChange}
+                  contact={this.state.currentContact}
+                  refChatScreen={this.refChatScreen}
+                  refChatText={this.refChatText}
+                />
+                <ContactDetail contact={this.state.currentContact} />
+              </>
             :null}
           </Col>
         </Row>
