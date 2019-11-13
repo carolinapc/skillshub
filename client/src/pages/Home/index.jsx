@@ -10,7 +10,7 @@ class Home extends React.Component {
 
   state = {
     search: "",
-    postalcode: "",
+    postalCode: "",
     services: [],
     categories: [],
     notFoundMsg: "",
@@ -26,17 +26,7 @@ class Home extends React.Component {
       .then(res => this.setState({ skills: res.data }))
       .catch(err => console.log(err));
     
-    //checks whether the browser supports geolocation
-    if (window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition(position => {
-        API.getPostalCodeFromGeoLocation(position.coords)
-          .then(res => console.log("res",res))
-          .catch(err => console.log(err));
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-    
+    this.getPostalCodeFromGps();    
   }
 
   componentWillUnmount() {
@@ -63,10 +53,29 @@ class Home extends React.Component {
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    console.log(value);
   }
 
   pullAllCategories = () => {
     this.searchCategories(true);
+  }
+
+  getPostalCodeFromGps = () => {
+    //checks whether the browser supports geolocation
+    if (window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(position => {
+        API.getPostalCodeFromGeoLocation(position.coords)
+          .then(res => {
+            if (this.mounted) {
+              this.setState({ postalCode: res.data[0].long_name });
+            }
+          })
+          .catch(err => console.log(err));
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+    
   }
 
   render() { 
@@ -76,11 +85,12 @@ class Home extends React.Component {
       <PageContainer title="Search Professionals">
 
         <form onSubmit={this.onSubmit}>
-          <div className="input-group mb-3">
+              
+          <div className="search-box">
             <input
               name="search"
               type="text"
-              className="form-control"
+              className="search"
               placeholder="What kind of service are you looking for?"
               aria-label="Search"
               aria-describedby="btn-search"
@@ -88,22 +98,25 @@ class Home extends React.Component {
               list="skills"
               onChange={this.handleInputChange}
               />
+            <span className="divider">
+              <i className="fas fa-map-marker-alt" title="Get current location" onClick={this.getPostalCodeFromGps}></i>
+            </span>
             <input
-              name="postalcode"
+              name="postalCode"
               type="text"
+              className="postal"
               placeholder="Postal Code"
               autoComplete="off"
+              value={this.state.postalCode}
               onChange={this.handleInputChange}
             />
-            <div className="input-group-append">
-              <button
-                type="submit"
-                className="btn btn-outline-secondary"
-                id="btn-search"
-              >
-                <i className="fas fa-search"></i> Search
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              id="btn-search"
+            >
+              <i className="fas fa-search"></i> Search
+            </button>
           </div>
         </form>
         <datalist id="skills">
