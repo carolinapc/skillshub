@@ -10,7 +10,7 @@ class Home extends React.Component {
 
   state = {
     search: "",
-    postalcode: "",
+    postalCode: "",
     services: [],
     categories: [],
     notFoundMsg: "",
@@ -30,7 +30,10 @@ class Home extends React.Component {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(position => {
         API.getPostalCodeFromGeoLocation(position.coords)
-          .then(res => console.log("res",res))
+          .then(res => {
+            this.setState({ postalCode: res.data[0].long_name });
+            console.log("postal code",this.state.postalCode);
+          })
           .catch(err => console.log(err));
       });
     } else {
@@ -93,6 +96,8 @@ class Home extends React.Component {
               type="text"
               placeholder="Postal Code"
               autoComplete="off"
+              maxLength="7"
+              value={this.state.postalCode||""}
               onChange={this.handleInputChange}
             />
             <div className="input-group-append">
