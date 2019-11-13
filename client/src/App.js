@@ -37,7 +37,7 @@ class App extends Component {
 
     const socket = io();
     socket.on("chat_notification", msg => {
-      if (msg.userDestinyId == this.state.userData.UserId) {
+      if (msg.userDestinyId === this.state.userData.UserId) {
         let notify = `${msg.chat.user} sent a message`;
         toast.info(notify,{ position: toast.POSITION.BOTTOM_LEFT });  
       }
