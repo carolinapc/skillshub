@@ -112,7 +112,7 @@ module.exports = {
       console.log(req.body);
       db.Contact.create(req.body)
         .then(data => res.json(data))
-        .catch(err => { console.log("ERROR WHEN CREATING CONTACT", err); res.status(422).json(err) });
+        .catch(err => res.status(422).json(err));
     }
   },
  
@@ -122,7 +122,7 @@ module.exports = {
   update: function (req, res) {
     const contactId = req.body.id;
     delete req.body.id;
-    console.log("data to be updated", req.body);
+    
     //checks if the user is logged in
     if (!req.session.loggedin) {
       res.status(400).end("You need to sign in to update a contact.");
@@ -132,7 +132,7 @@ module.exports = {
       db.Contact
         .update(req.body, {where: {id: contactId} })
         .then(data => res.json(data))
-        .catch(err => { console.log("ERROR WHEN UPDATING",err); res.status(422).json(err) });
+        .catch(err => res.status(422).json(err));
     }
   }
 
