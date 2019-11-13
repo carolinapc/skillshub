@@ -10,7 +10,7 @@ module.exports = {
     let { search, categoryId, id, zipCode, distanceRange } = req.query;
     let where = {active: true};
     let include = [{ all: true }];
-
+    
     if (id) {
       where.id = id;
       include = [{ all: true, nested: true }];

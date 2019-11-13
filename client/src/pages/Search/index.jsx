@@ -11,7 +11,7 @@ class Search extends React.Component {
   state = {
     search: "",
     zipCode: "",
-    distanceRange: "",
+    distanceRange: "5",
     skills: [],
     categoryId: "",
     categories: [],
@@ -26,8 +26,7 @@ class Search extends React.Component {
       this.setState({
         categoryId: params.get('category') || "",
         search: params.get('search') || "",
-        zipCode: params.get('postal') || "",
-        distanceRange: ""
+        zipCode: params.get('postal') || ""
       });  
     }
     
@@ -58,7 +57,7 @@ class Search extends React.Component {
       zipCode: this.state.zipCode || "",
       distanceRange: this.state.distanceRange || ""
     }
-    console.log("data", data);
+    
     //get all skills filtering by data passed
     API.getSkills(data)
       .then(res => {
@@ -84,6 +83,8 @@ class Search extends React.Component {
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    console.log(name, value);
+    console.log(this.state.distanceRange);
   }
 
   render() { 
@@ -104,7 +105,8 @@ class Search extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col md="12">
+          <Col>
+            <Form.Label>Category</Form.Label>
             <Form.Control as="select" name="categoryId" onChange={this.handleInputChange} value={this.state.categoryId||""}>
               <option key="blankCategory" value="">-- All Categories --</option>
               {this.state.categories.map(category => {
@@ -113,7 +115,21 @@ class Search extends React.Component {
                 );
               })}
             </Form.Control>
+          </Col>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="formControlRange">Distance Range: {this.state.distanceRange} km</label>
+              <input type="range" name="distanceRange" className="custom-range" min="5" max="100" step="1" id="formControlRange" value={this.state.distanceRange} onChange={this.handleInputChange} />
+            </div>
+          </Col>
+        </Row>
+        <Row className="mb-4 mt-0">
+          <Col md="12">
             <Button variant="secondary" onClick={this.handleSearch} className="mt-3">Search</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col md="12">
             {this.state.skills.length > 0 ? 
               <SkillsSearchList skills={this.state.skills} />
               : <div className="message">{this.state.notFoundMsg}</div>
