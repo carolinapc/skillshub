@@ -9,7 +9,7 @@ module.exports = {
     };
 
     geo.getPostalCode(pos).then(data => {
-      res.json(data);
+      res.json(data.data);
     }).catch(err => { console.log(err); res.status(422).json(err);});
   }
 }

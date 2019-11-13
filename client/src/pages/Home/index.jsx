@@ -30,7 +30,7 @@ class Home extends React.Component {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(position => {
         API.getPostalCodeFromGeoLocation(position.coords)
-          .then(res => console.log(res))
+          .then(res => console.log("res",res))
           .catch(err => console.log(err));
       });
     } else {
