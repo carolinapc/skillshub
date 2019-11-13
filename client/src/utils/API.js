@@ -48,7 +48,6 @@ export default {
 
   //SKILLS
   getSkills: function (data) {
-    console.log(data);
     data.id = data.id || "";
     data.search = data.search || "";
     data.categoryId = data.categoryId || "";
