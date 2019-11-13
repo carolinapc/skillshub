@@ -1,7 +1,7 @@
 import React from 'react';
 import API from '../../utils/API';
 import PageContainer from '../../components/PageContainer';
-import {Row, Col, Card, Image} from 'react-bootstrap'
+import {Row, Col, Card, Image, Button} from 'react-bootstrap'
 import Utils from '../../utils';
 import './style.css';
 
@@ -45,8 +45,8 @@ class UserProfile extends React.Component {
         <PageContainer title="Profile">
             <Row>
                 <Col xs="6" md="3">
-                <Image src={image?`/images/uploads/${image}`:"profile.jpg"} thumbnail />
-                    <p>{firstName + " " + lastName}</p>
+                <Image src={image?`/images/uploads/${image}`:"profile.jpg"} thumbnail /> 
+                    <p><br></br>{firstName + " " + lastName}</p>
                 </Col>
                 <Col xs="6" md="9">
                     <div className="wrap-skills">
@@ -54,13 +54,20 @@ class UserProfile extends React.Component {
                         Skills.map(skill => {
                             return(
                             <Card bg="light" key={skill.id} className="mx-2 mb-2">
-                                <Card.Header>{skill.name}</Card.Header>
+                                <Card.Header>{skill.name} {" "} 
+                               
+                                </Card.Header>
                                 <Card.Body>
                                     <Card.Title>{Utils.getStars(skill.score)}</Card.Title>
                                     <Card.Text>{skill.description}</Card.Text>
+                                    
                                 </Card.Body>
+                                <Card.Footer>
+                                    <Button variant="link" href={`/skill/${skill.id}`}>view more</Button>
+
+                                </Card.Footer>
                             </Card>
-                            );
+                            );  
                         })
                     : "There are no skills"}
                     </div>
