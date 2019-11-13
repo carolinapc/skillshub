@@ -46,7 +46,7 @@ class UserProfile extends React.Component {
             <Row>
                 <Col xs="6" md="3">
                 <Image src={image?`/images/uploads/${image}`:"profile.jpg"} thumbnail /> 
-                    <p id="ProfileNamee"><br></br>{firstName + " " + lastName}</p>
+                    <p><br></br>{firstName + " " + lastName}</p>
                 </Col>
                 <Col xs="6" md="9">
                     <div className="wrap-skills">
@@ -67,7 +67,7 @@ class UserProfile extends React.Component {
 
                                 </Card.Footer>
                             </Card>
-                            );
+                            );  
                         })
                     : "There are no skills"}
                     </div>
