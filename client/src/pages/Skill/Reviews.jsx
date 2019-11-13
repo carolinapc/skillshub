@@ -9,7 +9,7 @@ const Reviews = props => {
     <>
       {props.reviews.map(review => {
         return (
-          <Card key={review.id}>
+          <Card key={review.id} className="mt-3">
             <Card.Header>
               <div className="wrap-review-header">
                 <span>{Utils.getStars(review.score)}</span>

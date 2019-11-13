@@ -42,5 +42,12 @@ module.exports = {
         .catch(err => res.status(422).json(err));
 
     }
+  },
+
+  //get all skills without its relations and no filters
+  allSkills: function (req, res) {
+    db.Skill.findAll()
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 }
