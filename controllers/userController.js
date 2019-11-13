@@ -16,10 +16,16 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
+    
     db.User
-      .findById(req.params.id)
+      .findOne({
+        include: [{all:true, nested:true}],
+        where:{
+          id:req.params.id
+        }
+      })
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .catch(err => {console.log(err);res.status(422).json(err)});
   },
 
   //create new one

@@ -33,6 +33,10 @@ export default {
     return axios.put("/api/user/skills", data);
   },
 
+  userProfile: function (id) {
+    return axios.get(`/api/user/find/${id}`);
+  }, 
+
   //CATEGORY
   getCategories: function () {
     return axios.get("/api/category");
@@ -71,5 +75,7 @@ export default {
 
   updateContact: function (data) {
     return axios.put("/api/contact/chat", data);
+  
   }
+
 };

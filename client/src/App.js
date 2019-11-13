@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import Skill from "./pages/Skill";
 import Contact from "./pages/Contact";
 import Clients from "./pages/Clients";
+import UserProfile from "./pages/UserProfile";
 
 class App extends Component {
   mounted = false;
@@ -96,8 +97,9 @@ class App extends Component {
           <Route exact path="/search/:category" component={Search} />
           <Route exact path="/search/skill/:search" component={Search} />
           <Route exact path="/skill/:id" render={props => <Skill userData={this.state.userData} toggleAuthModalShow={this.toggleAuthModalShow} {...props} />} />
-          <Route exact path="/profile" component={WithAuth(Profile)} />
           <Route exact path="/contact" component={WithAuth(Contact)}  />
+          <Route exact path="/profile" component={WithAuth(Profile)} />
+          <Route exact path="/profile/:id" component={UserProfile} />
           <Route exact path="/contact/:skill" component={WithAuth(Contact)}  />
           <Route exact path="/clients" component={WithAuth(Clients)}  />
           <Route path="*">
