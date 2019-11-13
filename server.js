@@ -63,6 +63,8 @@ io.on("connect", socket => {
   socket.on("chat_msg_sent", contactMsg => {
     //broadcast the message for the contact chat
     io.emit("chat_msg_received", contactMsg);
+
+    io.emit("chat_notification", contactMsg);
   });
 });
 

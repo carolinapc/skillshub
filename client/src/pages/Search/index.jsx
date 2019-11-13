@@ -79,7 +79,8 @@ class Search extends React.Component {
 
     let data = {
       search: this.state.search || "",
-      categoryId: this.state.categoryId || ""
+      categoryId: this.state.categoryId || "",
+      zipCode: this.state.zipCode || ""
     }
     this.searchSkills(data);
 

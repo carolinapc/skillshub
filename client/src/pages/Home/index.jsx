@@ -105,6 +105,7 @@ class Home extends React.Component {
               className="postal"
               placeholder="Postal Code"
               autoComplete="off"
+              maxLength="7"
               value={this.state.postalCode}
               onChange={this.handleInputChange}
             />
@@ -113,7 +114,7 @@ class Home extends React.Component {
               className="btn btn-secondary"
               id="btn-search"
             >
-              <i className="fas fa-search"></i> Search
+              <i className="fas fa-search"></i>
             </button>
           </div>
         </form>

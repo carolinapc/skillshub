@@ -34,10 +34,10 @@
   padding-left: 10px;
 }
 .search{
-  width: Calc(60%);
+  width: Calc(55%);
 }
 .postal{
-  width: Calc(40% - 128.52px);
+  width: Calc(45% - 80px);
 }
 .search:focus, .postal:focus{
   outline: none !important;
@@ -64,3 +64,14 @@
   color: blue;
 }
 
+@media screen and (max-width: 940px){
+  .search, .postal{
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 640px){
+  .search, .postal{
+    font-size: 10px;
+  }
+}
