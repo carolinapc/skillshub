@@ -83,8 +83,6 @@ class Search extends React.Component {
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    console.log(name, value);
-    console.log(this.state.distanceRange);
   }
 
   render() { 
