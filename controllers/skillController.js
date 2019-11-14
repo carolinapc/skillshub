@@ -59,8 +59,9 @@ module.exports = {
             });
           }          
         }
-        
-        
+        else {
+          res.json(data);
+        }
       })
       .catch(err => res.status(422).json(err));
   },
