@@ -53,36 +53,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 const getPostalCode = function (pos) {
-    
     return axios({
         method: 'get',
         url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + pos.lat + ',' + pos.lng + '&key=' + googleApiKey,
         responseType: 'json'
     });
-    //     success: function (data) {
-    //         var addresses = data.results; // cache results in a local var
-    //         console.log(data);
-    //         $.each(addresses, function (i) { // iterate through to find a postal code
-    //             if (this.types[0] == "postal_code") { // check that the type is a postal code
-    //                 var postal = this['address_components'][0]['long_name']; // grab postal string
-    //                 if (postal.length > 3) { // is the result is more then 3 letter shorthand use it
-    //                     // do something with your result and then lets break the iteration
-    //                     console.log("teste: ");
-    //                     zipToGeo(postal);
-    //                     showPosition(pos, postal);
-    //                     infoWindow.setContent(postal);
-    //                     // infoWindow.setContent("" + getStraightDistance(pos1, pos2));
-    //                     drawCircle(pos, getStraightDistance(pos, pos2));
-
-    //                     map.zoom = 15;
-    //                     infoWindow.open(map);
-    //                     map.setCenter(pos);
-    //                     return false;
-    //                 }
-    //             }
-    //         });
-    //     } // end success
-    // }); // end ajax
 };
 
 //BACK END  //retornar uma promessa om axios
