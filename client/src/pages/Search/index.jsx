@@ -7,29 +7,27 @@ import SkillsSearchList from './SkillsSearchList';
 
 class Search extends React.Component {
   mounted = false;
-
-  state = {
-    search: "",
-    zipCode: "",
-    distanceRange: "5",
-    skills: [],
-    categoryId: "",
-    categories: [],
-    notFoundMsg: ""
-  }
   
+  constructor(props) {
+    super(props);
+    let params = new URLSearchParams(this.props.location.search);
+
+    this.state = {
+      categoryId: params.get('category') || "",
+      search: params.get('search') || "",
+      zipCode: params.get('postal') || "",
+      latitude: params.get('lat') || "",
+      longitude: params.get('lng') || "",
+      distanceRange: "5",
+      skills: [],
+      categories: [],
+      notFoundMsg: ""
+    }
+  }
+
   componentDidMount = () => {
     this.mounted = true;
-    const params = new URLSearchParams(this.props.location.search);
 
-    if (this.mounted) {
-      this.setState({
-        categoryId: params.get('category') || "",
-        search: params.get('search') || "",
-        zipCode: params.get('postal') || ""
-      });  
-    }
-    
     this.searchSkills();
 
     //get all categories to fill dropdown list
@@ -55,7 +53,9 @@ class Search extends React.Component {
       search: this.state.search || "",
       categoryId: this.state.categoryId || "",
       zipCode: this.state.zipCode || "",
-      distanceRange: this.state.distanceRange || ""
+      distanceRange: this.state.distanceRange || "",
+      latitude: this.state.latitude || "",
+      longitude: this.state.longitude || ""
     }
     
     //get all skills filtering by data passed
@@ -82,7 +82,15 @@ class Search extends React.Component {
 
   handleInputChange = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+
+    //if a new postal code is informed then it cleans the geo location
+    if (name === "postalCode") {
+      this.setState({ [name]: value, latitude: "", longitude: "" });  
+    }
+    else {
+      this.setState({ [name]: value });  
+    }
+    
   }
 
   render() { 
