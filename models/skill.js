@@ -80,11 +80,11 @@ module.exports = function (sequelize, DataTypes) {
     {
       freezeTableName: true, //tratar o retorno do axios
       hooks: {
-        afterCreate: function (skill) {
+        afterValidate: function (skill) {
           return Geo.zipToGeo(skill.zipCode).then(res => {
-            skill.latitude = res.results[0].geometry.location.latitude;
-            skill.longitude = res.results[0].geometry.location.longitude;
-          }).catch(err => console.log(err));
+            skill.latitude = res.data.results[0].geometry.location.lat;
+            skill.longitude = res.data.results[0].geometry.location.lng;
+          }).catch(err => console.log("Error", err));
         }
       }
     });

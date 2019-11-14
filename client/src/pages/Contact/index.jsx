@@ -1,6 +1,6 @@
 import React from 'react';
 import PageContainer from '../../components/PageContainer';
-//import ContactDetail from './ContactDetail';
+import ContactDetail from './ContactDetail';
 import Chat from '../../components/Chat';
 import { ListGroup, Row, Col } from 'react-bootstrap';
 import API from '../../utils/API';
