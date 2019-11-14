@@ -66,6 +66,11 @@ io.on("connect", socket => {
 
     io.emit("chat_notification", contactMsg);
   });
+
+  //CONTACT: when a contact is created
+  socket.on("new_contact_created", msg => {
+    io.emit("new_contact_notification", msg);
+  });
 });
 
 function runServer() {

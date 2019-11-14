@@ -18,6 +18,7 @@ class Skill extends React.Component {
       price: "",
       priceType: "",
       score: 0,
+      UserId: "",
       User: {
         firstName: "",
         lastName: "",
@@ -135,6 +136,7 @@ class Skill extends React.Component {
         handleCloseModal={this.closeContactModal}
         show={this.state.showContactModal}
         skillId={skill.id}
+        skillUserId={skill.UserId}
         {...this.props}
       />
     </>
