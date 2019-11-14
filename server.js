@@ -71,6 +71,17 @@ io.on("connect", socket => {
   socket.on("new_contact_created", msg => {
     io.emit("new_contact_notification", msg);
   });
+
+  //CONTACT: when a contact is removed
+  socket.on("remove_contact", msg => {
+    io.emit("contact_removed", msg);
+  });
+
+  //CONTACT: when a contact is updated
+  socket.on("update_contact", msg => {
+    io.emit("contact_updated", msg);
+  });
+
 });
 
 function runServer() {

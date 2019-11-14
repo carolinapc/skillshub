@@ -2,7 +2,19 @@ const Utils = require("../utils/functions");
 
 module.exports = function (sequelize, DataTypes) {
   let Contact = sequelize.define("Contact", {
+    dealClosed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    dealStatus: {
+      type: DataTypes.CHAR,
+      defaultValue: "O" //[O]pened - [P]ending -[D]enied - [C]losed
+    },
     agreedDate: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    dealDate: {
       type: DataTypes.DATE,
       allowNull: true
     },
@@ -21,10 +33,6 @@ module.exports = function (sequelize, DataTypes) {
     chat: {
       type: DataTypes.TEXT,
       allowNull: true
-    },
-    dealClosed: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
     },
     active: {
       type: DataTypes.BOOLEAN,
