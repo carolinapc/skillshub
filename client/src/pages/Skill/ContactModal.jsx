@@ -3,7 +3,7 @@ import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import API from '../../utils/API';
 import "./style.css";
-
+import io from "socket.io-client";
 
 class ContactModal extends React.Component {
   
@@ -34,8 +34,11 @@ class ContactModal extends React.Component {
     };
 
     API.createSkillContact(data).then(res => {
+      const socket = io();
+      socket.emit("new_contact_created", { destinyUserId: this.props.skillUserId, originUserName: this.props.userData.UserName + " " + this.props.userData.UserLastName });
       //redirect to the chat page opened for this new contact created
       this.props.history.push(`/contact/request/${res.data.id}`);
+
     }).catch(err => {
       if (err.response.data) {
         this.setState({ error: true, message: err.response.data, isLoading: false });

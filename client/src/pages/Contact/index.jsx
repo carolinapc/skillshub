@@ -29,8 +29,19 @@ class Contact extends React.Component {
     };
 
     this.socket = io();
+
+    //update all contacts if a new contact was created
+    this.socket.on("new_contact_notification", msg => {
+      //check if the user from the skill contacted is the same of the user loggedin
+      if (msg.destinyUserId === this.props.userData.UserId) {
+        if (this.state.currentContact.id) {
+          this.getAllContacts(this.state.currentContact.id);  
+        }
+      }
+    });
+
+    //update chat if a message was received
     this.socket.on("chat_msg_received", msg => {
-      
       let contacts = [...this.state.contacts];
       
       if (contacts.length > 0) {
@@ -46,10 +57,7 @@ class Contact extends React.Component {
         this.setState({ contacts });
         try {
           this.refChatScreen.current.scrollTop = this.refChatScreen.current.scrollHeight;  
-        }
-        catch {
-          
-        }
+        } catch {} //on error do nothing
         
       }
 
@@ -145,7 +153,11 @@ class Contact extends React.Component {
 
   handleSelectContact = event => {
     event.preventDefault();
-    this.selectContact(parseInt(event.target.name));
+    
+    if (event.target.name) {
+      this.selectContact(parseInt(event.target.name));  
+    }
+    
   }
 
   handleInputChange = event => {
@@ -184,6 +196,10 @@ class Contact extends React.Component {
     }
   }
 
+  chatLoaded = () => {
+    this.refChatScreen.current.scrollTop = this.refChatScreen.current.scrollHeight;  
+  }
+
   render() { 
     return (
       <PageContainer title={this.pageType === "client"?"Your Clients":"Your Requests"}>
@@ -220,6 +236,7 @@ class Contact extends React.Component {
                   contact={this.state.currentContact}
                   refChatScreen={this.refChatScreen}
                   refChatText={this.refChatText}
+                  chatLoaded={this.chatLoaded}
                 />
                 <ContactDetail contact={this.state.currentContact} />
               </>

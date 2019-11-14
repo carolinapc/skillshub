@@ -44,6 +44,13 @@ class App extends Component {
       
     });
 
+    socket.on("new_contact_notification", msg => {
+      if (msg.destinyUserId === this.state.userData.UserId) {
+        let notify = `You have a new contact from ${msg.originUserName}`;
+        toast.info(notify, { position: toast.POSITION.BOTTOM_LEFT });
+      }
+    });
+
     //check authentication status
     API.getUserSession().then(res => {
       if (this.mounted) {

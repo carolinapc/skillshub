@@ -45,7 +45,7 @@ module.exports = function (sequelize, DataTypes) {
       },
       afterCreate: function (contact) {
         const Skill = this.sequelize.models.Skill;
-
+        
         //send email to provider
         return Skill.findOne({
           include: [{ all: true }],
