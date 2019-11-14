@@ -53,8 +53,10 @@ export default {
     data.categoryId = data.categoryId || "";
     data.zipCode = data.zipCode || "";
     data.distanceRange = data.distanceRange || "";
+    data.latitude = data.latitude || "";
+    data.longitude = data.longitude || "";
 
-    return axios.get(`/api/skill?id=${data.id}&search=${data.search}&categoryId=${data.categoryId}&zipCode=${data.zipCode}&distanceRange=${data.distanceRange}`);  
+    return axios.get(`/api/skill?id=${data.id}&search=${data.search}&categoryId=${data.categoryId}&zipCode=${data.zipCode}&distanceRange=${data.distanceRange}&latitude=${data.latitude}&longitude=${data.longitude}`);  
   },
 
   //get all skills to fill data list

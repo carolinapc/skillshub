@@ -1,6 +1,6 @@
 import React from 'react';
 import PageContainer from '../../components/PageContainer';
-import ContactDetail from './ContactDetail';
+//import ContactDetail from './ContactDetail';
 import Chat from '../../components/Chat';
 import { ListGroup, Row, Col } from 'react-bootstrap';
 import API from '../../utils/API';
@@ -238,7 +238,7 @@ class Contact extends React.Component {
                   refChatText={this.refChatText}
                   chatLoaded={this.chatLoaded}
                 />
-                <ContactDetail contact={this.state.currentContact} />
+                {/* <ContactDetail contact={this.state.currentContact} /> */}
               </>
             :null}
           </Col>

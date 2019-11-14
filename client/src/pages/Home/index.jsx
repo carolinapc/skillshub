@@ -11,6 +11,8 @@ class Home extends React.Component {
   state = {
     search: "",
     postalCode: "",
+    latitude: "",
+    longitude: "",
     services: [],
     categories: [],
     notFoundMsg: "",
@@ -47,12 +49,20 @@ class Home extends React.Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.history.push(`search/?search=${this.state.search}&postal=${this.state.postalCode}`);
+    this.props.history.push(`search/?search=${this.state.search}&postal=${this.state.postalCode}&lat=${this.state.latitude}&lng=${this.state.longitude}`);
   }
 
   handleInputChange = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    //if a new postal code is informed then it cleans the geo location
+    if (name === "postalCode") {
+      this.setState({ [name]: value, latitude: "", longitude: "" });  
+      console.log(this.state.latitude);
+    }
+    else {
+      this.setState({ [name]: value });  
+    }
+    
   }
 
   pullAllCategories = () => {
@@ -66,10 +76,22 @@ class Home extends React.Component {
         API.getPostalCodeFromGeoLocation(position.coords)
           .then(res => {
             if (this.mounted) {
-              this.setState({ postalCode: res.data[0].long_name });
+              this.setState({
+                postalCode: res.data[0].long_name,
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+              });
             }
           })
-          .catch(err => console.log(err));
+          .catch(err => {
+            if (this.mounted) {
+              this.setState({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+              });
+            }
+            console.log(err);
+          });
       });
     } else {
       console.log("Geolocation is not supported by this browser.");
