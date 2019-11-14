@@ -2,7 +2,7 @@ const db = require("../models");
 const geo = require("../utils/geo");
 
 //filter results from findAll method by distance
-const filterSkillsByDistance = (results, distance) => {
+const filterSkillsByDistance = (results, distance, latitude, longitude) => {
   let data = results.filter(item => { return (true||false) });
   return data;
 };
@@ -45,13 +45,13 @@ module.exports = {
           //if geo locattion was passed
           if (latitude && longitude) {
             //filter the results by distance
-            res.json(filterSkillsByDistance(data, distanceRange));
+            res.json(filterSkillsByDistance(data, distanceRange, latitude, longitude));
           }
           else {
             //get lat/lng from zip code
             geo.zipToGeo(zipCode).then(resp => {
               //filter the results by distance
-              res.json(filterSkillsByDistance(data, distanceRange));
+              res.json(filterSkillsByDistance(data, distanceRange, latitude, longitude));
 
             }).catch(err => {
               console.log("Error at skillController->findAll->zipToGeo:", err);
