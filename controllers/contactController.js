@@ -95,7 +95,6 @@ module.exports = {
     }
     else {
       req.body.UserId = req.session.UserId;
-      console.log("text", req.body.text);
       
       let chat = [];
       
@@ -109,7 +108,7 @@ module.exports = {
       req.body.chat = JSON.stringify(chat);
 
       delete req.body.text;
-      console.log(req.body);
+      
       db.Contact.create(req.body)
         .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
