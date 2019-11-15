@@ -8,7 +8,7 @@ const SkillForm = props => {
   return ( 
     <Form>
       <Form.Group controlId="formBasicName">
-        <Form.Label>Business Name</Form.Label>
+        <Form.Label>Title</Form.Label>
         <Form.Control type="text" name="name" value={props.skill.name} placeholder="Enter first name" onChange={props.handleInputChange} />
       </Form.Group>
 
