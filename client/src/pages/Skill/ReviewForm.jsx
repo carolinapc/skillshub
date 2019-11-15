@@ -9,7 +9,9 @@ class ReviewForm extends React.Component {
     review: "",
     score: 0,
     scoreChosen: false,
-    loading: false
+    loading: false,
+    message: "",
+    error: false
   }
 
   saveReview = event => {
@@ -23,9 +25,19 @@ class ReviewForm extends React.Component {
     };
 
     API.addReview(data).then(res => {
-      this.setState({ loading: false, scoreChosen: false, review: "", score: 0 });
+      this.setState({ loading: false, scoreChosen: false, review: "", score: 0, error: false, message: "Review Sent! Thank you!" });
       this.props.getSkillFromDb({ id: res.data.SkillId });
-    }).catch(err => console.log(err.response));
+    }).catch(err => {
+      let message = "";
+
+      if (err.response.data.errors)
+        message = err.response.data.errors[0].message;
+      else
+        message = "Unexpected error sending review. Please try again.";
+      
+      this.setState({ loading: false, error: true, message });
+      console.log("error sending a review");
+    });
   }
 
   handleInputChange = event => {
@@ -73,6 +85,7 @@ class ReviewForm extends React.Component {
         <h5>Add Your Review</h5>
         <h5>{this.getStars()}</h5>
         <Form.Control as="textarea" rows="5" name="review" value={this.state.review} placeholder="Comment your review..." onChange={this.handleInputChange} />
+        <div className={this.state.error ? "text-danger" : "text-success"}>{this.state.message}</div>  
         <Button
           className="mt-3"
           variant="secondary"

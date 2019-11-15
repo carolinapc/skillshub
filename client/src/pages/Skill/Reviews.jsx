@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 import './style.css';
 
 const Reviews = props => {
+
   return (
     <>
       {props.reviews.map(review => {
@@ -21,7 +22,7 @@ const Reviews = props => {
                 <p>{Utils.replaceNewLines(review.review)}</p>
                 <footer className="blockquote-footer">
                   {review.User.firstName + " " + review.User.lastName}
-                  <img src={review.User.image? `/images/uploads/${review.User.image}`  : "/profile.jpg"} alt="User" />
+                  <img src={review.User.image? `/${review.User.image}`  : "/profile.jpg"} alt="User" />
                 </footer>
               </blockquote>
             </Card.Body>

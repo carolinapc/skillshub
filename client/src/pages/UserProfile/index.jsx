@@ -38,7 +38,7 @@ class UserProfile extends React.Component {
         <PageContainer title="Profile">
             <Row>
                 <Col xs="6" md="3">
-                    <Image src={image ? `/images/uploads/${image}` : "/profile.jpg"} thumbnail className="mb-3" /> 
+                    <Image src={`/${image}`} thumbnail className="mb-3" /> 
                     <h4>{firstName + " " + lastName}</h4>
                 </Col>
                 <Col xs="6" md="9">
