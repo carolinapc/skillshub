@@ -3,7 +3,7 @@ const geo = require("../utils/geo");
 
 //filter results from findAll method by distance
 const filterSkillsByDistance = (results, distance, latitude, longitude) => {
-  let data = results.filter(item => { return (true||false) });
+  let data = results.filter(item => geo.getStraightDistance(item,{latitude,longitude})<=distance );
   return data;
 };
 

@@ -59,14 +59,6 @@ module.exports = function (sequelize, DataTypes) {
           }
         }
       },
-      latitude: {
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      longitude: {
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
       active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
@@ -75,6 +67,14 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0
+      },
+      latitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: true
+      },
+      longitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: true
       }
     },
     {
