@@ -57,7 +57,6 @@ class Home extends React.Component {
     //if a new postal code is informed then it cleans the geo location
     if (name === "postalCode") {
       this.setState({ [name]: value, latitude: "", longitude: "" });  
-      console.log(this.state.latitude);
     }
     else {
       this.setState({ [name]: value });  

@@ -2,11 +2,10 @@
 
 
 .jumbotron{
-  margin-top: 56px;
+  margin: 56px 0 0 0;
   background-image: url('./cleaningBanner.jpg');
   position: relative;
   padding: 0;
-
 }
 
 .display-4 {
