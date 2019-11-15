@@ -87,7 +87,6 @@ module.exports = {
 
   //update
   update: function (req, res) {
-    let data = {};
 
     //checks if the user is logged in
     if (!req.session.loggedin) {
@@ -95,24 +94,6 @@ module.exports = {
     }
     else {
       
-      //checks if the password field was passed
-      try {
-        pwd = req.body.password.trim();
-        //password validations
-        if (pwd === "") {
-          res.status(500).end("Password must be informed!");
-        }
-        if (pwd.length < 6) {
-          res.status(500).end("Password must have at least 6 characters!");
-        }
-
-        //crypt the password
-        req.body.password = bcrypt.hashSync(pwd, 10);
-      }
-      catch (e) {
-        //nothing to do, and the password won't be updated
-      }
-
       //if a file was uploaded (profile image)
       if (req.files) {
         let tmpFileName = req.files.file.name;
@@ -131,11 +112,6 @@ module.exports = {
           if (!err) {
             //move the file from the tmp folder to the final folder
             fs.renameSync(req.files.file.tempFilePath, `${uploadFolder}/${fileName}`);
-            const fullFileName = (`${uploadFolder}/${fileName}`).replace("client/public/", "");
-            data = {
-              fileName: fileName,
-              fullFileName: fullFileName
-            };
           }
           else {
             res.status(400).end(err.message);
@@ -164,11 +140,7 @@ module.exports = {
   //reset user's password
   resetPassword: function (req, res) {
     db.User
-      .findOne({
-        where: {
-          email: req.body.email
-        }
-      })
+      .findOne({ where: { email: req.body.email } })
       .then(function (user) {
       
         if (user) {
@@ -210,6 +182,51 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  changePassword: function (req, res) {
+        //checks if the user is logged in
+    if (!req.session.loggedin) {
+      res.status(400).end("You need to sign in to change password.");
+    }
+    else {
+          
+      //checks if the password field was passed
+      pwd = req.body.password.trim();
+      newPwd = req.body.newPassword.trim();
+
+      //password validations
+      if (pwd === "") {
+        res.status(500).end("Current password must be informed!");
+      }
+
+      //new password validations
+      if (newPwd === "") {
+        res.status(500).end("New password must be informed!");
+      }
+      if (newPwd.length < 6) {
+        res.status(500).end("New password must be at least 6 characters!");
+      }
+    
+      //crypt new password
+      newPwd = bcrypt.hashSync(newPwd, 10);
+
+      db.User.findOne({ where: { id: req.session.UserId } })
+        .then(user => {
+          //if old password match
+          if (bcrypt.compareSync(pwd, user.password)) {
+            //change it
+            db.User
+              .update({ password: newPwd }, { where: { id: req.session.UserId } })
+              .then(user => res.json(user))
+              .catch(err => res.status(422).json(err));
+          }
+          else {
+            res.status(422).end("Incorrect password!");    
+          }
+        })
+        .catch(err => res.status(422).json(err));
+    }    
+  },
+
   //authenticate user (sign in)
   auth: function (req, res) {
     
@@ -224,12 +241,7 @@ module.exports = {
     }
     
     //find the user by email in the database
-    db.User
-      .findOne({
-        where: {
-          email: req.body.email
-        }
-      })
+    db.User.findOne({ where: { email: req.body.email } })
       .then(function (user) {
       
         if (user) {
