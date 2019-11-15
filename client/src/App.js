@@ -19,6 +19,7 @@ import Search from "./pages/Search";
 import Profile from "./pages/Profile";
 import Skill from "./pages/Skill";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
 
 class App extends Component {
   mounted = false;
@@ -92,6 +93,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/about" component={About} />
           <Route exact path="/search/:category" component={Search} />
           <Route exact path="/search/skill/:search" component={Search} />
           <Route exact path="/skill/:id" render={props => <Skill userData={this.state.userData} toggleAuthModalShow={this.toggleAuthModalShow} {...props} />} />

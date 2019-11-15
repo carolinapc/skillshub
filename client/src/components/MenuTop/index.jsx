@@ -35,7 +35,7 @@ function MenuTop(props) {
           activeClassName="active"
           className="nav-link"
           >
-          The HUB
+          About
         </NavLink>
       </Nav>
       <Nav>
