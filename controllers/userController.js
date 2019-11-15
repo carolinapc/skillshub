@@ -128,11 +128,11 @@ module.exports = {
         
         //upload the file to tmp folder
         req.files.file.mv(req.files.file.tempFilePath, function (err) {
-          console.log("upload file to:",`${ uploadFolder } / ${ fileName }`);
+          console.log(`try to move file req.files.file.tempFilePath to ${uploadFolder}/${fileName}`);
           if (!err) {
             //move the file from the tmp folder to the final folder
             fs.renameSync(req.files.file.tempFilePath, `${uploadFolder}/${fileName}`);
-
+            console.log("file moved");
             const fullFileName = (`${uploadFolder}/${fileName}`).replace("client/public/", "");
             data = {
               fileName: fileName,
