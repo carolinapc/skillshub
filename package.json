@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "description": "Mern Demo",
   "main": "server.js",
-  "proxy": {
-    "/api": {
-      "target": "https://localhost:3001",
-      "secure": false
-    }
-  },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
