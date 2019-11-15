@@ -32,6 +32,8 @@ const Chat = props => {
     case "D":
       bgTitleColor = "bg-danger";
       break;
+    default:
+      break;
   }
   
   return (
