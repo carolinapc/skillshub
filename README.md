@@ -19,3 +19,5 @@ Removed:
 Skills Hub provides a secure payment platform so their users never need to worry about awkward, in-person monetary transactions.
 
 The application’s option to process the payment removes the awkwardness of money changing hands in person - It also eliminates under cutting or haggling after the fact when an amount is agreed upon up front. 
+
+[View Website](https://skillshub.herokuapp.com/)
