@@ -30,5 +30,5 @@ module.exports = {
       "multipleStatements": true
     }
   },
-  "uploadFolder": "./client/public/images/uploads"
+  "uploadFolder": "./client/build/images/uploads"
 };
