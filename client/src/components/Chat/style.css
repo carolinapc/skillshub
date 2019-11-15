@@ -61,3 +61,15 @@
 	text-align: right;
 	margin-top: 20px;
 }
+
+.card .bg-success{
+	background-color: #ade4ac;
+}
+
+.card .bg-warning{
+	background-color: #f0f59e;
+}
+
+.card .bg-danger{
+	background-color: #f5b3b3;
+}
