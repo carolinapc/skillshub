@@ -94,8 +94,7 @@ function runServer() {
   });
 }
 
-///GO BACK TO FALSE ONCE IS DONE!!!
-let syncOptions = { force: true };
+let syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`

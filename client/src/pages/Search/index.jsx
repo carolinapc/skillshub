@@ -57,7 +57,7 @@ class Search extends React.Component {
       latitude: this.state.latitude || "",
       longitude: this.state.longitude || ""
     }
-    console.log("data searched", data);
+    
     //get all skills filtering by data passed
     API.getSkills(data)
       .then(res => {

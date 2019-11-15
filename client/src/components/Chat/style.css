@@ -63,13 +63,13 @@
 }
 
 .card .bg-success{
-	background-color: #ade4ac;
+	background-color: #ade4ac !important;
 }
 
 .card .bg-warning{
-	background-color: #f0f59e;
+	background-color: #f0f59e !important;
 }
 
 .card .bg-danger{
-	background-color: #f5b3b3;
+	background-color: #f5b3b3 !important;
 }
