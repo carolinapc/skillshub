@@ -7,7 +7,7 @@ const CategoryList = props => {
   
   return (
     <>
-    <Row className="justify-content-md-center mt-5">
+    <Row className="justify-content-md-center justify-content-sm-center mt-5 mx-auto">
       {props.categories.map(category => {
         return (
           <Link key={category.id} to={`/search/?category=${category.id}`} role="button" className="btn btn-link">
@@ -25,7 +25,7 @@ const CategoryList = props => {
     </Row>
     <Row className="justify-content-md-center">
       {!props.showingAllCategories ?
-        <Button onClick={props.pullAllCategories} className="justify-content-md-center mt-2">More Categories...</Button>
+        <Button onClick={props.pullAllCategories} variant="secondary" className="justify-content-md-center my-4 mx-auto">More Categories...</Button>
       : null}
     </Row>
   </>
