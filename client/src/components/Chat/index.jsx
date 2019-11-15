@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import { Form, Button, Card } from 'react-bootstrap';
 import './style.css';
 import Moment from 'moment';
@@ -8,6 +8,10 @@ const Chat = props => {
   const { contact, text } = props;
   let userDefault;
   
+  useEffect(() => {
+    props.chatLoaded();
+  });
+    
   //set an userDefault to handle the baloon class toggle
   try {
     if (contact.chat.length > 0) {
@@ -16,7 +20,7 @@ const Chat = props => {
   } catch{
     contact.chat = [];
   }
-
+  
   return (
     <>
       <Card>

@@ -144,7 +144,7 @@ class Skills extends React.Component {
           
           this.refreshUserSkills();
           this.viewSkillsList();
-          toast.info("Skill was updated successfully",{position: toast.POSITION.BOTTOM_CENTER});
+          toast.info("Skill was updated successfully",{position: toast.POSITION.BOTTOM_RIGHT});
         })
         .catch(err => {
           if (err.response.data.errors) {
@@ -172,7 +172,7 @@ class Skills extends React.Component {
         }
         this.refreshUserSkills();
         this.viewSkillsList();
-        toast.info("Skill was created successfully!",{position: toast.POSITION.BOTTOM_CENTER});
+        toast.info("Skill was created successfully!",{position: toast.POSITION.BOTTOM_RIGHT});
       })
       .catch(err => {
         if (err.response.data.errors) {

@@ -33,6 +33,10 @@ export default {
     return axios.put("/api/user/skills", data);
   },
 
+  userProfile: function (id) {
+    return axios.get(`/api/user/find/${id}`);
+  }, 
+
   //CATEGORY
   getCategories: function () {
     return axios.get("/api/category");
@@ -47,10 +51,15 @@ export default {
     data.id = data.id || "";
     data.search = data.search || "";
     data.categoryId = data.categoryId || "";
+    data.zipCode = data.zipCode || "";
+    data.distanceRange = data.distanceRange || "";
+    data.latitude = data.latitude || "";
+    data.longitude = data.longitude || "";
 
-    return axios.get(`/api/skill?id=${data.id}&search=${data.search}&categoryId=${data.categoryId}`);  
+    return axios.get(`/api/skill?id=${data.id}&search=${data.search}&categoryId=${data.categoryId}&zipCode=${data.zipCode}&distanceRange=${data.distanceRange}&latitude=${data.latitude}&longitude=${data.longitude}`);  
   },
 
+  //get all skills to fill data list
   allSkills: function () {
     return axios.get("/api/skill/all");
   },
@@ -79,5 +88,11 @@ export default {
 
   updateContact: function (data) {
     return axios.put("/api/contact/chat", data);
+  
+  },
+
+  getPostalCodeFromGeoLocation: function (data) {
+    return axios.get(`/api/google/postalcode/${data.latitude}/${data.longitude}`);
   }
+
 };

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import API from './utils/API';
-//import io from "socket.io-client";
+import io from "socket.io-client";
+import { ToastContainer, toast } from 'react-toastify';
 
 //CSS
 import "normalize.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 
 //Stateless Components
@@ -17,6 +19,7 @@ import WithAuth from './components/WithAuth';
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
+import UserProfile from "./pages/UserProfile";
 import Skill from "./pages/Skill";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
@@ -33,13 +36,21 @@ class App extends Component {
   componentDidMount = () => {
     this.mounted = true;
 
-    // const socket = io();
-    // socket.on("chat_msg_sent", msg => {
-    //   //this.setState({ broadcastMsg: msg });
-    //   toast.info(msg,{
-    //     position: toast.POSITION.BOTTOM_CENTER
-    //   });
-    // });
+    const socket = io();
+    socket.on("chat_notification", msg => {
+      if (msg.userDestinyId === this.state.userData.UserId) {
+        let notify = `${msg.chat.user} sent a message`;
+        toast.info(notify,{ position: toast.POSITION.BOTTOM_LEFT });  
+      }
+      
+    });
+
+    socket.on("new_contact_notification", msg => {
+      if (msg.destinyUserId === this.state.userData.UserId) {
+        let notify = `You have a new contact from ${msg.originUserName}`;
+        toast.info(notify, { position: toast.POSITION.BOTTOM_LEFT });
+      }
+    });
 
     //check authentication status
     API.getUserSession().then(res => {
@@ -84,6 +95,7 @@ class App extends Component {
   render() {
     return (
       <Router>
+        <ToastContainer />
         <MenuTop
           toggleAuthModalShow={this.toggleAuthModalShow}
           authenticated={this.state.authenticated}
@@ -94,13 +106,11 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/about" component={About} />
-          <Route exact path="/search/:category" component={Search} />
-          <Route exact path="/search/skill/:search" component={Search} />
           <Route exact path="/skill/:id" render={props => <Skill userData={this.state.userData} toggleAuthModalShow={this.toggleAuthModalShow} {...props} />} />
           <Route exact path="/profile" component={WithAuth(Profile)} />
+          <Route exact path="/profile/:id" component={UserProfile} />
           <Route exact path="/contact/:pagetype" component={WithAuth(Contact)}  />
           <Route exact path="/contact/:pagetype/:id" component={WithAuth(Contact)}  />
-          {/* <Route exact path="/profile/:id" component={UserProfile} /> */}
           <Route path="*">
             <Redirect to="/" />
           </Route>

@@ -20,3 +20,58 @@
   text-decoration: none;
   color: inherit;
 }
+
+.search-box{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  height: 39px;
+}
+
+.search, .postal{
+  border: 0px;
+  height: 100%;
+  padding-left: 10px;
+}
+.search{
+  width: Calc(55%);
+}
+.postal{
+  width: Calc(45% - 80px);
+}
+.search:focus, .postal:focus{
+  outline: none !important;
+}
+.search-box .btn{
+  float: right;
+  border: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 100%;
+}
+
+.search-box .divider::before{
+  content: "|";
+  color: #ccc;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.search-box .fa-map-marker-alt{
+  cursor: pointer;
+}
+.search-box .fa-map-marker-alt:hover{
+  color: blue;
+}
+
+@media screen and (max-width: 940px){
+  .search, .postal{
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 640px){
+  .search, .postal{
+    font-size: 10px;
+  }
+}

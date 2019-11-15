@@ -1,9 +1,10 @@
 import React from 'react';
 import PageContainer from '../../components/PageContainer';
+import ContactDetail from './ContactDetail';
+import Chat from '../../components/Chat';
 import { ListGroup, Row, Col } from 'react-bootstrap';
 import API from '../../utils/API';
 import Utils from '../../utils';
-import Chat from '../../components/Chat';
 import Moment from 'moment';
 import io from "socket.io-client";
 
@@ -28,8 +29,19 @@ class Contact extends React.Component {
     };
 
     this.socket = io();
+
+    //update all contacts if a new contact was created
+    this.socket.on("new_contact_notification", msg => {
+      //check if the user from the skill contacted is the same of the user loggedin
+      if (msg.destinyUserId === this.props.userData.UserId) {
+        if (this.state.currentContact.id) {
+          this.getAllContacts(this.state.currentContact.id);  
+        }
+      }
+    });
+
+    //update chat if a message was received
     this.socket.on("chat_msg_received", msg => {
-      
       let contacts = [...this.state.contacts];
       
       if (contacts.length > 0) {
@@ -43,7 +55,10 @@ class Contact extends React.Component {
 
       if (this.mounted) {
         this.setState({ contacts });
-        this.refChatScreen.current.scrollTop = this.refChatScreen.current.scrollHeight;
+        try {
+          this.refChatScreen.current.scrollTop = this.refChatScreen.current.scrollHeight;  
+        } catch {} //on error do nothing
+        
       }
 
     });
@@ -76,16 +91,21 @@ class Contact extends React.Component {
       dealClosed: data.dealClosed,
       active: data.active,
       createdAt: data.createdAt,
-      chat: data.chat
+      chat: data.chat,
+      agreedDate: data.agreedDate
     };
 
     if (this.props.match.params.pagetype === "client") {
       currentContact.userId = data.Skill.UserId;
+      currentContact.userOriginId = data.Skill.UserId;
+      currentContact.userDestinyId = data.UserId;
       currentContact.userName = `${data.Skill.User.firstName} ${data.Skill.User.lastName}`;
       currentContact.contactName = `${data.User.firstName} ${data.User.lastName}`;
     }
     else {
       currentContact.userId = data.UserId;
+      currentContact.userOriginId = data.UserId;
+      currentContact.userDestinyId = data.Skill.UserId;
       currentContact.userName = `${data.User.firstName} ${data.User.lastName}`;
       currentContact.contactName = `${data.Skill.User.firstName} ${data.Skill.User.lastName}`;
     }
@@ -133,7 +153,11 @@ class Contact extends React.Component {
 
   handleSelectContact = event => {
     event.preventDefault();
-    this.selectContact(parseInt(event.target.name));
+    
+    if (event.target.name) {
+      this.selectContact(parseInt(event.target.name));  
+    }
+    
   }
 
   handleInputChange = event => {
@@ -148,6 +172,7 @@ class Contact extends React.Component {
 
       let chatShot = [...this.state.currentContact.chat];
       const contactId = this.state.currentContact.id;
+      const { userOriginId, userDestinyId } = this.state.currentContact;
       let chat = {};
 
       chat.text = this.state.text;
@@ -159,7 +184,7 @@ class Contact extends React.Component {
       this.setState({ text: "" });
 
       const socket = io();
-      socket.emit("chat_msg_sent", { chat, contactId });
+      socket.emit("chat_msg_sent", { chat, contactId, userOriginId, userDestinyId });
 
       API.updateContact({ id: contactId, chat: JSON.stringify(chatShot) })
       .then(() => {
@@ -169,6 +194,10 @@ class Contact extends React.Component {
       .catch(err => console.log("update error", err.response));
 
     }
+  }
+
+  chatLoaded = () => {
+    this.refChatScreen.current.scrollTop = this.refChatScreen.current.scrollHeight;  
   }
 
   render() { 
@@ -197,16 +226,20 @@ class Contact extends React.Component {
             </ListGroup>            
           </Col>
           <Col md="8">
-            {this.state.currentContact.id?
-              <Chat
-                text={this.state.text}
-                loading={this.state.loading}
-                submitMessage={this.submitMessage}
-                handleInputChange={this.handleInputChange}
-                contact={this.state.currentContact}
-                refChatScreen={this.refChatScreen}
-                refChatText={this.refChatText}
-              />
+            {this.state.currentContact.id ?
+              <>
+                <Chat
+                  text={this.state.text}
+                  loading={this.state.loading}
+                  submitMessage={this.submitMessage}
+                  handleInputChange={this.handleInputChange}
+                  contact={this.state.currentContact}
+                  refChatScreen={this.refChatScreen}
+                  refChatText={this.refChatText}
+                  chatLoaded={this.chatLoaded}
+                />
+                {/* <ContactDetail contact={this.state.currentContact} /> */}
+              </>
             :null}
           </Col>
         </Row>

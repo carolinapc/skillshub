@@ -18,6 +18,7 @@ class Skill extends React.Component {
       price: "",
       priceType: "",
       score: 0,
+      UserId: "",
       User: {
         firstName: "",
         lastName: "",
@@ -26,7 +27,6 @@ class Skill extends React.Component {
       Reviews: []
     },
     found: false,
-    loggedin: false,
     contactText: "",
     showContactModal: false
   };
@@ -35,14 +35,6 @@ class Skill extends React.Component {
     this.mounted = true;
     let data = { id: this.props.match.params.id };
 
-    if (!this.props.userData) {
-      if (this.mounted) {
-        //check user session
-        API.getUserSession().then(res => {
-          this.setState({ loggedin: res.data.loggedin });
-        });
-      }
-    }
     this.getSkillFromDb(data);        
   }
 
@@ -93,19 +85,19 @@ class Skill extends React.Component {
                 exact
                 to={"/profile/"+skill.UserId}
                 activeClassName="active"
-                className="btn btn-primary mr-3"
+                className="btn btn-secondary mr-3"
                 >
                 <i className="far fa-user-circle"></i> View Profile
               </NavLink>
-              {(this.state.loggedin || this.props.userData.loggedin) ?
+              {(this.props.userData.loggedin) ?
                 <Button
-                  className="btn btn-primary"
+                  className="btn btn-secondary"
                   onClick={this.contactHandle}
                 >
                   <i className="far fa-comments"></i> Contact
                 </Button>
               :
-                <Button className="btn-secondary mr-3" onClick={() => this.props.toggleAuthModalShow("signin")}>Sign-In to Contact</Button>
+                <Button className="btn-danger mr-3" onClick={() => this.props.toggleAuthModalShow("signin")}>Sign-In to Contact</Button>
               }
             </Col>
             <Col md="8" className="pt-3">
@@ -123,10 +115,11 @@ class Skill extends React.Component {
           </Row>
           <Row className="border-top mt-4 p-2">
             <Col md="4">
-              {(this.state.loggedin || this.props.userData.loggedin )?
+            {(this.props.userData.loggedin )?
               <ReviewForm skillId={skill.id} getSkillFromDb={this.getSkillFromDb} />
-              : "Sign in to add a review"
-              }
+            :
+              "Sign in to add a review"
+            }
             </Col>            
             <Col md="8">
               <h3>Reviews</h3>
@@ -143,6 +136,7 @@ class Skill extends React.Component {
         handleCloseModal={this.closeContactModal}
         show={this.state.showContactModal}
         skillId={skill.id}
+        skillUserId={skill.UserId}
         {...this.props}
       />
     </>

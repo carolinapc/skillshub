@@ -30,8 +30,8 @@ const SkillForm = props => {
       </Form.Group>
 
       <Form.Group controlId="formBasicZipCode">
-        <Form.Label>Zip Code</Form.Label>
-        <Form.Control type="text" name="zipCode" value={props.skill.zipCode} placeholder="Zip Code" onChange={props.handleInputChange} />
+        <Form.Label>Postal Code</Form.Label>
+        <Form.Control type="text" name="zipCode" value={props.skill.zipCode} placeholder="Postal Code" onChange={props.handleInputChange} />
       </Form.Group>
 
       <Form.Group controlId="formBasicPrice">
@@ -65,7 +65,7 @@ const SkillForm = props => {
       
       <ButtonToolbar>
         <Button
-          variant="primary"
+          variant="secondary"
           disabled={props.controllers.isLoading}
           onClick={!props.controllers.isLoading ? props.saveSkill : null}
           className="mt-3 mr-2"

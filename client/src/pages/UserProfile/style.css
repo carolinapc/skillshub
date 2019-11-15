@@ -1,0 +1,14 @@
+.wrap-skills{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.wrap-skills .card{
+    width: 250px;
+}
+
+.wrap-skills .btn-link{
+    color: blue !important;
+    padding:0;
+}

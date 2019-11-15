@@ -4,7 +4,7 @@
   justify-content: center;
 }
 
-.btn-secondary{
+.btn-danger{
   background-color: #FF593E;
   border-color: aliceblue;
 }
@@ -20,4 +20,19 @@
   background:  rgb(38, 35, 50);
   color: aliceblue;
   font-family: 'Londrina Solid', cursive;
+}
+
+.modal-header .close span{
+  visibility: hidden;
+  color: aliceblue;
+}
+.modal-header .close span::after{
+  color: aliceblue;
+  text-shadow: none;
+  content: "x";
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  visibility: visible;
+}
+.modal-header .close span:hover{
+  color: white;
 }

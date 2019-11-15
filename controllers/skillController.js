@@ -1,12 +1,22 @@
 const db = require("../models");
+const geo = require("../utils/geo");
+
+//filter results from findAll method by distance
+const filterSkillsByDistance = (results, distance, latitude, longitude) => {
+  let data = results.filter(item => { return (true||false) });
+  return data;
+};
 
 // Defining methods for the booksController
 module.exports = {
+  /*
+  Gets all skills filtering by category, search text, id, zipCode and distance range
+  */
   findAll: function (req, res) {
-    const { search, categoryId, id } = req.query;
+    let { search, categoryId, id, zipCode, distanceRange, latitude, longitude } = req.query;
     let where = {active: true};
     let include = [{ all: true }];
-
+    
     if (id) {
       where.id = id;
       include = [{ all: true, nested: true }];
@@ -26,7 +36,33 @@ module.exports = {
         where: where,
         order:[['createdAt', 'DESC'],[db.Review,'createdAt','DESC']]
       })
-      .then(dbModel => res.json(dbModel))
+      .then(data => {
+
+        //if zipCode was passed
+        if (zipCode) {
+          distanceRange = distanceRange || "5"; //default 5km - if the distance ranges wasn't passed
+          
+          //if geo locattion was passed
+          if (latitude && longitude) {
+            //filter the results by distance
+            res.json(filterSkillsByDistance(data, distanceRange, latitude, longitude));
+          }
+          else {
+            //get lat/lng from zip code
+            geo.zipToGeo(zipCode).then(resp => {
+              //filter the results by distance
+              res.json(filterSkillsByDistance(data, distanceRange, latitude, longitude));
+
+            }).catch(err => {
+              console.log("Error at skillController->findAll->zipToGeo:", err);
+              res.json(data);
+            });
+          }          
+        }
+        else {
+          res.json(data);
+        }
+      })
       .catch(err => res.status(422).json(err));
   },
 

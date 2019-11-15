@@ -1,3 +1,5 @@
+const Geo = require("../utils/geo");
+
 module.exports = function (sequelize, DataTypes) {
     let Skill = sequelize.define("Skill", {
       name: {
@@ -57,6 +59,14 @@ module.exports = function (sequelize, DataTypes) {
           }
         }
       },
+      latitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: true
+      },
+      longitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: true
+      },
       active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
@@ -68,7 +78,15 @@ module.exports = function (sequelize, DataTypes) {
       }
     },
     {
-      freezeTableName: true
+      freezeTableName: true, //tratar o retorno do axios
+      hooks: {
+        afterValidate: function (skill) {
+          return Geo.zipToGeo(skill.zipCode).then(res => {
+            skill.latitude = res.data.results[0].geometry.location.lat;
+            skill.longitude = res.data.results[0].geometry.location.lng;
+          }).catch(err => console.log("Error", err));
+        }
+      }
     });
   
     Skill.associate = function (models) {
