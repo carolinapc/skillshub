@@ -41,6 +41,21 @@ export default {
     }
   },
 
+  getDealStatusName: type => {
+    switch (type.toUpperCase()) {
+      case "O":
+        return "Opened";
+      case "D":
+        return "Denied";
+      case "P":
+        return "Pending Confirmation";
+      case "C":
+        return "Closed";
+      default:
+        return "undefined";
+    }
+  },
+
   replaceNewLines: text => {
     return text.split("\n").map((item, key) => <React.Fragment key={key}>{item}<br /></React.Fragment>);
   }
