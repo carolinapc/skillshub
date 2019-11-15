@@ -35,9 +35,7 @@ class Contact extends React.Component {
     this.socket.on("new_contact_notification", msg => {
       //check if the user from the skill contacted is the same of the user loggedin
       if (msg.destinyUserId === this.props.userData.UserId) {
-        if (this.state.currentContact.id) {
-          this.getAllContacts(this.state.currentContact.id);  
-        }
+        this.getAllContacts(this.state.currentContact.id);  
       }
     });
 
@@ -47,9 +45,7 @@ class Contact extends React.Component {
       
       //check if the user that updated the contact is not the the user loggedin and it is client or provider
       if (msg.originUserId !== UserId && (msg.providerId === UserId || msg.clientId === UserId)) {
-        if (this.state.currentContact.id) {
-          this.getAllContacts(this.state.currentContact.id);  
-        }
+        this.getAllContacts(this.state.currentContact.id);  
       }
     });
 
@@ -60,7 +56,12 @@ class Contact extends React.Component {
       //check if the user that removed the contact is not the the user loggedin and it is client or provider
       if (msg.originUserId !== UserId && (msg.providerId === UserId || msg.clientId === UserId)) {
         if (this.state.currentContact.id) {
+
           this.getAllContacts(this.state.currentContact.id);  
+
+          if (this.state.currentContact.id === msg.contact.id) {
+            this.setState({currentContact: {}})
+          }
         }
       }
     });
@@ -107,41 +108,44 @@ class Contact extends React.Component {
   }
 
   setCurrentContact = data => {
-    
-    let currentContact = {
-      id: data.id,
-      SkillId: data.SkillId,
-      skillName: data.Skill.name,
-      price: `${data.price} per ${Utils.getPriceTypeName(data.priceType)}`,
-      dealClosed: data.dealClosed,
-      dealStatus: data.dealStatus,
-      dealDate: data.dealDate,
-      note: data.note,
-      active: data.active,
-      createdAt: data.createdAt,
-      chat: data.chat,
-      agreedDate: data.agreedDate,
-      providerId: data.Skill.UserId,
-      clientId: data.UserId
-    };
+    let currentContact = {};
 
-    if (this.props.match.params.pagetype === "client") {
-      currentContact.userOriginId = data.Skill.UserId;
-      currentContact.userDestinyId = data.UserId;
-      currentContact.userName = `${data.Skill.User.firstName} ${data.Skill.User.lastName}`;
-      currentContact.contactName = `${data.User.firstName} ${data.User.lastName}`;
-    }
-    else {
-      currentContact.userOriginId = data.UserId;
-      currentContact.userDestinyId = data.Skill.UserId;
-      currentContact.userName = `${data.User.firstName} ${data.User.lastName}`;
-      currentContact.contactName = `${data.Skill.User.firstName} ${data.Skill.User.lastName}`;
+    if (data) {
+      currentContact = {
+        id: data.id,
+        SkillId: data.SkillId,
+        skillName: data.Skill.name,
+        price: `${data.price} per ${Utils.getPriceTypeName(data.priceType)}`,
+        dealClosed: data.dealClosed,
+        dealStatus: data.dealStatus,
+        dealDate: data.dealDate,
+        note: data.note,
+        active: data.active,
+        createdAt: data.createdAt,
+        chat: data.chat,
+        agreedDate: data.agreedDate,
+        providerId: data.Skill.UserId,
+        clientId: data.UserId
+      };
+
+      if (this.props.match.params.pagetype === "client") {
+        currentContact.userOriginId = data.Skill.UserId;
+        currentContact.userDestinyId = data.UserId;
+        currentContact.userName = `${data.Skill.User.firstName} ${data.Skill.User.lastName}`;
+        currentContact.contactName = `${data.User.firstName} ${data.User.lastName}`;
+      }
+      else {
+        currentContact.userOriginId = data.UserId;
+        currentContact.userDestinyId = data.Skill.UserId;
+        currentContact.userName = `${data.User.firstName} ${data.User.lastName}`;
+        currentContact.contactName = `${data.Skill.User.firstName} ${data.Skill.User.lastName}`;
+      }
     }
 
     if (this.mounted) {
       this.setState({ currentContact });
     }
-    
+
   }
 
   getAllContacts = contactId => {
@@ -303,11 +307,9 @@ class Contact extends React.Component {
 
     API.updateContact(data).then(() => {
       let contacts = [...this.state.contacts];
+      let currentContact = this.state.currentContact;
       
-      contacts.filter(contact => contact.id !== id);
-
-      //update state contact info
-      this.setState({ contacts });
+      contacts = contacts.filter(contact => contact.id.toString() !== id.toString());
       
       //send info to client
       const socket = io();
@@ -317,7 +319,16 @@ class Contact extends React.Component {
         providerId: this.state.currentContact.providerId,
         clientId: this.state.currentContact.clientId
       });
-      
+
+      //update current contact and contacts
+      if (currentContact.id) {
+        if (id.toString() === this.state.currentContact.id.toString()) {
+          currentContact = {};
+        }  
+      }
+
+      //update state contact info
+      this.setState({ contacts, currentContact });
       
     })
     .catch(err => console.log("removing contact error", err.response));

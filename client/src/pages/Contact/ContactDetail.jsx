@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, Card } from 'react-bootstrap';
 import Utils from '../../utils';
+import Moment from 'react-moment';
 
 const ContactDetail = props => {
 
@@ -38,47 +39,46 @@ const ContactDetail = props => {
           Contact Details
         </Card.Header>
         <Card.Body>
-          <p>Contact started at: {createdAt}</p>
-          <p>Price: $ {price}</p>
-          <p>Deal Status: {Utils.getDealStatusName(dealStatus)}</p>
+          <p><b>Contact started at:</b> <Moment format="MMM Qo YYYY, h:mma">{createdAt}</Moment></p>
+          <p><b>Price:</b> $ {price}</p>
+          <p><b>Deal Status:</b> {Utils.getDealStatusName(dealStatus)}</p>
 
           {/* if deal is opened or denied and user is the provider */}
           {((dealStatus === "O" || dealStatus === "D") && providerId === props.userData.UserId) ?
             <>
               <Form.Group controlId="formBasicDescription">
-                <Form.Label>Note</Form.Label>
+                <Form.Label><b>Note</b></Form.Label>
                 <Form.Control as="textarea" rows="5" name="note" value={props.note} placeholder="Enter notes to close the deal" onChange={props.handleInputChange} />
               </Form.Group>
 
-              <Button variant="primary" className="mr-3" onClick={()=>props.makeDeal(id)}>Make a Deal</Button>
+              <Button variant="primary" className="mr-3" onClick={()=>props.makeDeal(id)}><i className="far fa-handshake text-white"></i> Make a Deal</Button>
             </>
           : null} 
 
-          {/* if deal is opened */}
-          {dealStatus === "O" ? <Button variant="danger" onClick={()=>props.removeContact(id)}>Remove Contact</Button> : null} 
-          
           {/* if deal is not opened and not denied */}
           {(dealStatus !== "O" && dealStatus !== "D") ?
             <>
-              <p>Deal Date: {dealDate}</p>
-              <p>Deal Note: {note}</p>
+              <p><b>Deal Date:</b> <Moment format="MMM Qo YYYY, h:mma">{dealDate}</Moment></p>
+              <p><b>Deal Note:</b> {note}</p>
             </>
           :null}
 
           {/* if deal is pending confirmation and user is the client*/}
           {dealStatus === "P" && clientId === props.userData.UserId ?
             <>
-              <p>Do you agree with the deal?</p>
-              <Button variant="primary" className="mr-3" onClick={()=>props.answerDeal(true,id)}>Yes</Button>
-              <Button variant="danger" onClick={()=>props.answerDeal(false,id)}>No</Button>
+              <p><b>Do you agree with the deal?</b></p>
+              <Button variant="primary" className="mr-3" onClick={()=>props.answerDeal(true,id)}><i className="far fa-thumbs-up text-white"></i> Yes</Button>
+              <Button variant="danger" onClick={()=>props.answerDeal(false,id)}><i className="far fa-thumbs-down text-white"></i> No</Button>
             </>
           : null}
           
           {/* if deal is closed */}
           {dealStatus === "C" ?
-            <p>Agreed Date: {agreedDate}</p>
+            <p><b>Agreed Date:</b> <Moment format="MMM Qo YYYY, h:mma">{agreedDate}</Moment></p>
           : null}
           
+          {/* if deal is opened or closed*/}
+          {dealStatus === "O" || dealStatus === "C" ? <Button variant="danger" onClick={()=>props.removeContact(id)}><i className="fas fa-archive text-white"></i> Archive Contact</Button> : null} 
 
         </Card.Body>
       </Card>
