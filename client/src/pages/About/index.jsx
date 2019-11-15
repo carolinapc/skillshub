@@ -2,12 +2,9 @@ import React from 'react';
 import Jumbotron from "../../components/Jumbotron";
 import PageContainer from '../../components/PageContainer';
 
+const About = () => {
 
-
-class About extends React.Component {
-
-  render() { 
-    return (
+  return (
     <>
       <Jumbotron />
       <PageContainer title="About Us">
@@ -18,13 +15,11 @@ class About extends React.Component {
         <br></br>
         Create an account and post your skills or to chat with the other Professionals in your area!
       </p>
-
       </span>
        
       </PageContainer>
     </>
-    );
-  }
+  );
 }
  
 export default About;

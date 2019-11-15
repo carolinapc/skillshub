@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Averia+Sans+Libre&display=swap');
 
+*{
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 h1, h3, h4, h5 {
   font-family: 'Averia Sans Libre', cursive;
 }
