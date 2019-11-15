@@ -20,11 +20,24 @@ const Chat = props => {
   } catch{
     contact.chat = [];
   }
+
+  let bgTitleColor = "";
+  switch (contact.dealStatus) {
+    case "C":
+      bgTitleColor = "bg-success";
+      break;
+    case "P":
+      bgTitleColor = "bg-warning";
+      break;
+    case "D":
+      bgTitleColor = "bg-danger";
+      break;
+  }
   
   return (
     <>
       <Card>
-        <Card.Header>
+        <Card.Header className={bgTitleColor}>
           {`${contact.contactName} - ${contact.skillName}`}
         </Card.Header>
         <Card.Body>
