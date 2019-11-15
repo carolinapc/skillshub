@@ -22,6 +22,7 @@ import Profile from "./pages/Profile";
 import UserProfile from "./pages/UserProfile";
 import Skill from "./pages/Skill";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
 
 class App extends Component {
   mounted = false;
@@ -104,6 +105,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/about" component={About} />
           <Route exact path="/skill/:id" render={props => <Skill userData={this.state.userData} toggleAuthModalShow={this.toggleAuthModalShow} {...props} />} />
           <Route exact path="/profile" component={WithAuth(Profile)} />
           <Route exact path="/profile/:id" component={UserProfile} />
