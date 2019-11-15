@@ -20,6 +20,9 @@ export default {
   resetPassword: function (data) {
     return axios.post("/api/user/resetpwd", data);
   },
+  changePassword: function (data) {
+    return axios.post("/api/user/changepwd", data);
+  },
   updateUser: function (data) {
     return axios.put("/api/user", data);
   },

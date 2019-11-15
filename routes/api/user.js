@@ -22,8 +22,10 @@ router.route("/skills")
   .put(userController.updateUserSkill);
 
 // Matches with "/api/user/resetpwd"
-router.route("/resetpwd")
-  .post(userController.resetPassword);
+router.route("/resetpwd").post(userController.resetPassword);
+
+// Matches with "/api/user/changepwd"
+router.route("/changepwd").post(userController.changePassword);
 
 // Matches with "/api/user/auth"
 router.route("/auth").get(userController.getUserSession);
