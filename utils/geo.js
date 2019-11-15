@@ -26,12 +26,12 @@ function degToRadians(degree) {
 function getStraightDistance(posOrigin, posDestination) {
     const radius = 6371;
 
-    var dLat = degToRadians(posDestination.lat - posOrigin.lat);
-    var dLng = degToRadians(posDestination.lng - posOrigin.lng);
+    var dLat = degToRadians(posDestination.latitude - posOrigin.latitude);
+    var dLng = degToRadians(posDestination.longitude - posOrigin.longitude);
 
     a = Math.pow(Math.sin(dLat / 2), 2) +
-        Math.cos(degToRadians(posOrigin.lat)) *
-        Math.cos(degToRadians(posDestination.lat)) *
+        Math.cos(degToRadians(posOrigin.latitude)) *
+        Math.cos(degToRadians(posDestination.latitude)) *
         Math.pow(Math.sin(dLng / 2), 2);
 
     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
@@ -43,7 +43,8 @@ function getStraightDistance(posOrigin, posDestination) {
 
 module.exports = {
     zipToGeo: zipToGeo,
-    getPostalCode: getPostalCode
+    getPostalCode: getPostalCode,
+    getStraightDistance: getStraightDistance
 };
 
 // MAP FEATURE (TBD)
