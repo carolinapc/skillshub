@@ -17,7 +17,7 @@ const SkillsSearchList = props => {
                 <h4>{Utils.getStars(skill.score)}</h4>  
               </div>              
               <div className="card-text">
-                <img src={skill.User.image?`/${skill.User.image}` :"/profile.jpg"} alt="Profile" className="shadow-lg" />
+                <img src={skill.User.image?`/${skill.User.image}` :"/profile.jpg"} alt="Profile" className="shadow-lg" onError={()=>props.handleSkillImgError(skill.id)} />
                 <h3 className="card-subtitle mb-2 text-muted">{skill.name}</h3>
                 <h5 className="card-subtitle mb-2 text-muted">{skill.Category.name}</h5>
                 <p>{Utils.replaceNewLines(skill.description)}</p>

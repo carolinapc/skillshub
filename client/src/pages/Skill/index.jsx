@@ -69,6 +69,23 @@ class Skill extends React.Component {
   }
 
   closeContactModal = () => this.setState({ showContactModal: false });
+  
+  handleImgError = () => {
+    let skill = this.state.skill;
+    skill.User.image = "profile.jpg";
+    this.setState({ skill });
+  }
+
+  handleReviewsImgError = reviewId => {
+    let skill = this.state.skill;
+    skill.Reviews.map(review => {
+      if (review.id === reviewId) {
+        review.User.image = "profile.jpg";
+      }
+      return review;
+    });
+    this.setState({ skill });
+  }
 
   render() { 
     const { skill, found } = this.state;
@@ -79,7 +96,7 @@ class Skill extends React.Component {
         <PageContainer title="">
           <Row className="mt-5">
             <Col md="4">
-              <img src={skill.User.image? `/${skill.User.image}` : "/profile.jpg"} alt="Profile" className="profile-img shadow-lg mb-4" />
+              <img src={skill.User.image? `/${skill.User.image}` : "/profile.jpg"} alt="Profile" className="profile-img shadow-lg mb-4" onError={this.handleImgError} />
               <h3 className="card-subtitle mb-2 text-muted">{skill.User.firstName + " " + skill.User.lastName}</h3>
               <NavLink
                 exact
@@ -124,7 +141,7 @@ class Skill extends React.Component {
             <Col md="8">
               <h3>Reviews</h3>
               
-              <Reviews reviews={skill.Reviews}/>
+              <Reviews reviews={skill.Reviews} handleReviewsImgError={this.handleReviewsImgError}/>
             </Col>
           </Row>  
         </PageContainer>

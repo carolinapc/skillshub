@@ -93,6 +93,17 @@ class Search extends React.Component {
     
   }
 
+  handleSkillImgError = skillId => {
+    let skills = this.state.skills;
+    skills.map(skill => {
+      if (skill.id === skillId) {
+        skill.User.image = "profile.jpg";
+      }
+      return skill;
+    });
+    this.setState({ skills });
+  }
+
   render() { 
     return (
       <PageContainer title="Search Skills">
@@ -137,7 +148,7 @@ class Search extends React.Component {
         <Row>
           <Col md="12">
             {this.state.skills.length > 0 ? 
-              <SkillsSearchList skills={this.state.skills} />
+              <SkillsSearchList skills={this.state.skills} handleSkillImgError={this.handleSkillImgError} />
               : <div className="message">{this.state.notFoundMsg}</div>
             }
           </Col>
