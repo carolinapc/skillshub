@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(fileUpload({
   limits: { fileSize: 50 * 1024 * 1024 },
   useTempFiles : true,
-  tempFileDir : `${uploadFolder}/tmp/`
+  tempFileDir : `${__dirname}/public/images/uploads/tmp/`
 }));
 
 app.use(session({
