@@ -1,5 +1,5 @@
 const db = require("../models");
-const uploadFolder = `${__dirname}/public/images/uploads`;//require("../config/config").uploadFolder;
+const uploadFolder = require("../config/config").uploadFolder;
 const bcrypt = require("bcrypt");
 let fs = require("fs");
 let lib = require("../utils/functions");
@@ -125,13 +125,14 @@ module.exports = {
         let fileName = `profile_${req.session.UserId}.${fileExt}`.toLowerCase();
         req.body.image = fileName;
         req.session.UserImage = fileName;
-
+        
         //upload the file to tmp folder
-        req.files.file.mv(req.files.file.tempFilePath, function(err) {
+        req.files.file.mv(req.files.file.tempFilePath, function (err) {
+          console.log("upload file to:",`${ uploadFolder } / ${ fileName }`);
           if (!err) {
             //move the file from the tmp folder to the final folder
             fs.renameSync(req.files.file.tempFilePath, `${uploadFolder}/${fileName}`);
-            console.log("upload file to:",`${ uploadFolder } / ${ fileName }`);
+
             const fullFileName = (`${uploadFolder}/${fileName}`).replace("client/public/", "");
             data = {
               fileName: fileName,
