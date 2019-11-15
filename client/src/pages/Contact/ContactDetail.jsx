@@ -16,10 +16,25 @@ const ContactDetail = props => {
     agreedDate
   } = props.contact;
 
+  let bgTitleColor = "";
+  switch (dealStatus) {
+    case "C":
+      bgTitleColor = "bg-success";
+      break;
+    case "P":
+      bgTitleColor = "bg-warning";
+      break;
+    case "D":
+      bgTitleColor = "bg-danger";
+      break;
+    default:
+      break;
+  }
+
   return (
     <>
       <Card className="mt-3">
-        <Card.Header>
+        <Card.Header className={bgTitleColor}>
           Contact Details
         </Card.Header>
         <Card.Body>
