@@ -38,10 +38,11 @@ class UserProfile extends React.Component {
         <PageContainer title="Profile">
             <Row>
                 <Col xs="6" md="3">
-                    <Image src={image?`/images/uploads/${image}`:"profile.jpg"} thumbnail /> 
+                    <Image src={image ? `/images/uploads/${image}` : "/profile.jpg"} thumbnail className="mb-3" /> 
+                    <h4>{firstName + " " + lastName}</h4>
                 </Col>
                 <Col xs="6" md="9">
-                    <h3>{firstName + " " + lastName}</h3>
+                    <h4>Skills</h4>
                     <div className="wrap-skills">
                     {Skills.length > 0 ?
                         Skills.map(skill => {
@@ -50,7 +51,7 @@ class UserProfile extends React.Component {
                                 <Card.Header>{skill.name}</Card.Header>
                                 <Card.Body>
                                     <Card.Title>{Utils.getStars(skill.score)}</Card.Title>
-                                    <Card.Text>{skill.description}</Card.Text>
+                                    <Card.Text>{Utils.replaceNewLines(skill.description)}</Card.Text>
                                 </Card.Body>
                                 <Card.Footer>
                                     <Button variant="link" href={`/skill/${skill.id}`}>view more</Button>
