@@ -1,22 +1,5 @@
-.card-custom {
+p{
+  font-size-adjust: inherit;
   margin: 20px;
-  cursor: pointer;
-}
-.card-custom:hover{
-  background-color: #ccc;
-}
-.card-custom img{
-  width: 100% !important;
-  height: 180px;
-}
+  text-align: center;
 
-/*overriding bootstrap card class*/
-.btn-link{
-  text-decoration: none;
-  color: inherit;
-}
-/*overriding bootstrap card class*/
-.btn-link:hover{
-  text-decoration: none;
-  color: inherit;
-}

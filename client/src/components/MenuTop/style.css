@@ -21,7 +21,7 @@ nav.navbar.navbar-default {
 
 
 nav.navbar{
-  background: rgb(38, 35, 50);
+  background: rgb(38, 35, 50) !important;
   color: aliceblue;
 }
 

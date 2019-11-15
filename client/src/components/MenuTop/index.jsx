@@ -23,19 +23,19 @@ function MenuTop(props) {
       <Nav className="mr-auto">
         <NavLink
           exact
+          to="/about"
+          activeClassName="active"
+          className="nav-link"
+          >
+          About
+        </NavLink>
+        <NavLink
+          exact
           to="/search"
           activeClassName="active"
           className="nav-link"
           >
           Search
-        </NavLink>
-        <NavLink
-          exact
-          to="/"
-          activeClassName="active"
-          className="nav-link"
-          >
-          About
         </NavLink>
       </Nav>
       <Nav>
