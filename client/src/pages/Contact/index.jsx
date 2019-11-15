@@ -44,7 +44,7 @@ class Contact extends React.Component {
     //update the contacts updated
     this.socket.on("contact_updated", msg => {
       const { UserId } = this.props.userData;
-
+      
       //check if the user that updated the contact is not the the user loggedin and it is client or provider
       if (msg.originUserId !== UserId && (msg.providerId === UserId || msg.clientId === UserId)) {
         if (this.state.currentContact.id) {
@@ -234,12 +234,25 @@ class Contact extends React.Component {
       dealStatus: "P",
       note: this.state.note,
       dealDate: Moment().format('YYYY-MM-DD'),
-      dateClosed : this.state.currentContact.dateClosed
+      agreedDate : this.state.currentContact.agreedDate
     };
 
     this.updateContactDetails(data);
 
   }
+
+  answerDeal = (answer,id) => {
+    let data = {
+      id: id,
+      dealStatus: answer ? "C" : "D",
+      note: this.state.currentContact.note,
+      agreedDate: answer ? Moment().format('YYYY-MM-DD') : null,
+      dealDate: this.state.currentContact.dealDate
+    };
+
+    this.updateContactDetails(data);
+  }
+
 
   updateContactDetails = data => {
 
@@ -252,8 +265,7 @@ class Contact extends React.Component {
           contact.dealStatus = data.dealStatus;
           contact.note = data.note;
           contact.dealDate = data.dealDate;
-          contact.dateClosed = data.dateClosed;
-
+          contact.agreedDate = data.agreedDate;
         }
         return contact;
       });
@@ -262,6 +274,7 @@ class Contact extends React.Component {
       currentContact.note = data.note;
       currentContact.dealDate = data.dealDate;
       currentContact.dateClosed = data.dateClosed;
+      currentContact.agreedDate = data.agreedDate;
 
       //update state contact info
       if (this.mounted) {
@@ -276,8 +289,6 @@ class Contact extends React.Component {
         providerId: currentContact.providerId,
         clientId: currentContact.clientId
       });
-
-
     })
     .catch(err => console.log("making a deal error", err.response));
   
@@ -312,17 +323,6 @@ class Contact extends React.Component {
     .catch(err => console.log("removing contact error", err.response));
   }
 
-  answerDeal = (answer,id) => {
-    let data = {
-      id: id,
-      dealStatus: answer ? "C" : "D",
-      note: this.state.currentContact.note,
-      dateClosed: answer ? Moment().format('YYYY-MM-DD') : null,
-      dealDate: this.state.currentContact.dealDate
-    };
-
-    this.updateContactDetails(data);
-  }
 
   render() { 
     return (

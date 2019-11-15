@@ -42,8 +42,8 @@ const ContactDetail = props => {
           {/* if deal is opened */}
           {dealStatus === "O" ? <Button variant="danger" onClick={()=>props.removeContact(id)}>Remove Contact</Button> : null} 
           
-          {/* if deal is not opened */}
-          {dealStatus !== "O" ?
+          {/* if deal is not opened and not denied */}
+          {(dealStatus !== "O" && dealStatus !== "D") ?
             <>
               <p>Deal Date: {dealDate}</p>
               <p>Deal Note: {note}</p>
@@ -54,7 +54,7 @@ const ContactDetail = props => {
           {dealStatus === "P" && clientId === props.userData.UserId ?
             <>
               <p>Do you agree with the deal?</p>
-              <Button variant="primary" onClick={()=>props.answerDeal(true,id)}>Yes</Button>
+              <Button variant="primary" className="mr-3" onClick={()=>props.answerDeal(true,id)}>Yes</Button>
               <Button variant="danger" onClick={()=>props.answerDeal(false,id)}>No</Button>
             </>
           : null}
@@ -63,6 +63,7 @@ const ContactDetail = props => {
           {dealStatus === "C" ?
             <p>Agreed Date: {agreedDate}</p>
           : null}
+          
 
         </Card.Body>
       </Card>
