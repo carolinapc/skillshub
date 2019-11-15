@@ -9,3 +9,7 @@ body{
 h3{
      font-family: 'Roboto', sans-serif;
 }
+
+.container{
+    margin-bottom: 40px;
+}

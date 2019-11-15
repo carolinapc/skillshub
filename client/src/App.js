@@ -14,6 +14,7 @@ import "./App.css";
 import MenuTop from "./components/MenuTop";
 import AuthModal from "./components/AuthModal";
 import WithAuth from './components/WithAuth';
+import Footer from './components/Footer';
 
 //Pages
 import Home from "./pages/Home";
@@ -121,6 +122,7 @@ class App extends Component {
           viewType={this.state.viewType}
           handleAuthentication={this.handleAuthentication}
         />
+        <Footer />
       </Router>
     );
   }
