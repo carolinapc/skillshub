@@ -327,11 +327,16 @@ class Contact extends React.Component {
         clientId: this.state.currentContact.clientId
       });
 
-      //update current contact and contacts
-      if (currentContact.id) {
-        if (id.toString() === this.state.currentContact.id.toString()) {
-          currentContact = {};
-        }  
+      if (contacts.length === 0) {
+        currentContact = {};
+      }
+      else {
+        //update current contact and contacts
+        if (currentContact.id) {
+          if (id.toString() === this.state.currentContact.id.toString()) {
+            currentContact = {};
+          }  
+        }
       }
 
       //update state contact info
