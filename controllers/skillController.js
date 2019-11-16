@@ -3,10 +3,13 @@ const geo = require("../utils/geo");
 
 //filter results from findAll method by distance
 const filterSkillsByDistance = (results, distance, latitude, longitude) => {
+  distance = parseInt(distance);
   let data = results.map(item => {
-    item.dataValues.distance = Math.round(geo.getStraightDistance(item.dataValues, { latitude, longitude }),2);
+    item.dataValues.distance = geo.getStraightDistance(item.dataValues, { latitude, longitude }).toFixed(2);
     return item;
-  }).filter(item => item.dataValues.distance <= distance);
+  }).filter(item => {
+    return item.dataValues.distance <= distance;
+  });
   
   return data;
 };
@@ -44,7 +47,7 @@ module.exports = {
         
         //if zipCode was passed
         if (zipCode) {
-          distanceRange = distanceRange || "5"; //default 5km - if the distance ranges wasn't passed
+          distanceRange = distanceRange || 5; //default 5km - if the distance ranges wasn't passed
           
           //if geo locattion was passed
           if (latitude && longitude) {
@@ -52,6 +55,7 @@ module.exports = {
             res.json(filterSkillsByDistance(data, distanceRange, latitude, longitude));
           }
           else {
+            
             //get lat/lng from zip code
             geo.zipToGeo(zipCode).then(resp => {
               const { lat, lng } = resp.data.results[0].geometry.location;
