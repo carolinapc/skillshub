@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Card } from 'react-bootstrap';
+import { Button, Form, Card, Spinner } from 'react-bootstrap';
 import Utils from '../../utils';
 import Moment from 'react-moment';
 
@@ -51,7 +51,9 @@ const ContactDetail = props => {
                 <Form.Control as="textarea" rows="5" name="note" value={props.note} placeholder="Enter notes to close the deal" onChange={props.handleInputChange} />
               </Form.Group>
 
-              <Button variant="primary" className="mr-3" onClick={()=>props.makeDeal(id)}><i className="far fa-handshake text-white"></i> Make a Deal</Button>
+              <Button variant="primary" className="mr-3" onClick={props.loading ? null : () => props.makeDeal(id)} disabled={props.loading}>
+                <i className="far fa-handshake text-white"></i> Make a Deal
+              </Button>
             </>
           : null} 
 
@@ -67,8 +69,12 @@ const ContactDetail = props => {
           {dealStatus === "P" && clientId === props.userData.UserId ?
             <>
               <p><b>Do you agree with the deal?</b></p>
-              <Button variant="primary" className="mr-3" onClick={()=>props.answerDeal(true,id)}><i className="far fa-thumbs-up text-white"></i> Yes</Button>
-              <Button variant="danger" onClick={()=>props.answerDeal(false,id)}><i className="far fa-thumbs-down text-white"></i> No</Button>
+              <Button variant="primary" className="mr-3" disabled={props.loading} onClick={props.loading ? null : () => props.answerDeal(true, id)}>
+                <i className="far fa-thumbs-up text-white"></i> Yes
+              </Button>
+              <Button variant="danger" onClick={props.loading ? null : () => props.answerDeal(false, id)} disabled={props.loading}>
+                <i className="far fa-thumbs-down text-white"></i> No
+              </Button>
             </>
           : null}
           
@@ -78,8 +84,17 @@ const ContactDetail = props => {
           : null}
           
           {/* if deal is opened or closed*/}
-          {dealStatus === "O" || dealStatus === "C" ? <Button variant="danger" onClick={()=>props.removeContact(id)}><i className="fas fa-archive text-white"></i> Archive Contact</Button> : null} 
+          {dealStatus === "O" || dealStatus === "C" ?
+            <Button variant="danger" disabled={props.loading} onClick={props.loading ? null : () => props.removeContact(id)}>
+              <i className="fas fa-archive text-white"></i> Archive Contact
+            </Button>
+          : null} 
 
+          {props.loading ?
+            <Spinner animation="grow" variant="success" role="status" className="ml-3">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+          :null}
         </Card.Body>
       </Card>
     </>
