@@ -15,7 +15,7 @@ const SkillsSearchList = props => {
               <div className="wrap-price">
                 <h4>{Utils.getStars(skill.score)}</h4>  
                 <h4>${skill.price + " per " + Utils.getPriceTypeName(skill.priceType)}</h4>
-                {skill.distance?<h5>Distance: {skill.distance} km</h5>:null}
+                {skill.distance?<h5>{skill.distance} km</h5>:null}
               </div>              
               <div className="card-text description">
                 <img src={skill.User.image ? `/${skill.User.image}` : "/profile.jpg"} alt="Profile" className="shadow-lg" onError={() => props.handleSkillImgError(skill.id)} />
