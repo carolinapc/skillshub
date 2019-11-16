@@ -84,7 +84,7 @@ class Search extends React.Component {
     const { name, value } = event.target;
 
     //if a new postal code is informed then it cleans the geo location
-    if (name === "postalCode") {
+    if (name === "zipCode") {
       this.setState({ [name]: value, latitude: "", longitude: "" });  
     }
     else {

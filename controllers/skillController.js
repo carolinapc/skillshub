@@ -3,7 +3,11 @@ const geo = require("../utils/geo");
 
 //filter results from findAll method by distance
 const filterSkillsByDistance = (results, distance, latitude, longitude) => {
-  let data = results.filter(item => geo.getStraightDistance(item,{latitude,longitude})<=distance );
+  let data = results.map(item => {
+    item.dataValues.distance = Math.round(geo.getStraightDistance(item.dataValues, { latitude, longitude }),2);
+    return item;
+  }).filter(item => item.dataValues.distance <= distance);
+  
   return data;
 };
 
@@ -37,7 +41,7 @@ module.exports = {
         order:[['createdAt', 'DESC'],[db.Review,'createdAt','DESC']]
       })
       .then(data => {
-
+        
         //if zipCode was passed
         if (zipCode) {
           distanceRange = distanceRange || "5"; //default 5km - if the distance ranges wasn't passed
@@ -50,9 +54,9 @@ module.exports = {
           else {
             //get lat/lng from zip code
             geo.zipToGeo(zipCode).then(resp => {
+              const { lat, lng } = resp.data.results[0].geometry.location;
               //filter the results by distance
-              res.json(filterSkillsByDistance(data, distanceRange, latitude, longitude));
-
+              res.json(filterSkillsByDistance(data, distanceRange, lat, lng));
             }).catch(err => {
               console.log("Error at skillController->findAll->zipToGeo:", err);
               res.json(data);
