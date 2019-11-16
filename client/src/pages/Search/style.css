@@ -24,6 +24,9 @@
 .wrap-price h4{
   text-align: end;
 }
+.wrap-price h5{
+  text-align: end;
+}
 
 .message{
   margin: 20px auto;
