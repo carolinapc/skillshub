@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button, Card, Spinner } from 'react-bootstrap';
 import './style.css';
 import Moment from 'moment';
  
@@ -58,7 +58,12 @@ const Chat = props => {
           </div>
           <Form>
             <Form.Control ref={props.refChatText} autoComplete="off" type="text" disabled={props.loading} name="text" value={text||""} placeholder="Type a message..." onChange={props.handleInputChange} />
-            <Button type="submit" disabled={props.loading||props.text.trim()===""} className="mt-2 inline" onClick={props.loading||props.text.trim()===""?null:props.submitMessage}>{props.loading?"sending...":"send"}</Button>
+            <Button type="submit" disabled={props.loading || props.text.trim() === ""} className="mt-2 inline" onClick={props.loading || props.text.trim() === "" ? null : props.submitMessage}>{props.loading ? "sending..." : "send"}</Button>
+            {props.loading ?
+              <Spinner animation="grow" variant="success" role="status" className="ml-3">
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            :null}
           </Form>
         </Card.Body>
       </Card>

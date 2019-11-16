@@ -26,7 +26,8 @@ class Contact extends React.Component {
       contacts: [],
       text: "",
       note: "",
-      loading: false
+      loading: false,
+      loadingDetails: false
     };
 
     this.socket = io();
@@ -233,19 +234,21 @@ class Contact extends React.Component {
   }
 
   makeDeal = id => {
+    this.setState({ loadingDetails: true });
     let data = {
       id: id,
       dealStatus: "P",
       note: this.state.note,
       dealDate: Moment().format('YYYY-MM-DD'),
-      agreedDate : this.state.currentContact.agreedDate
+      agreedDate: this.state.currentContact.agreedDate
     };
 
     this.updateContactDetails(data);
-
   }
 
-  answerDeal = (answer,id) => {
+  answerDeal = (answer, id) => {
+    this.setState({ loadingDetails: true });
+
     let data = {
       id: id,
       dealStatus: answer ? "C" : "D",
@@ -280,11 +283,6 @@ class Contact extends React.Component {
       currentContact.dateClosed = data.dateClosed;
       currentContact.agreedDate = data.agreedDate;
 
-      //update state contact info
-      if (this.mounted) {
-        this.setState({ currentContact, contacts });
-      }
-      
       //send info to other user
       const socket = io();
       socket.emit("update_contact", {
@@ -293,12 +291,21 @@ class Contact extends React.Component {
         providerId: currentContact.providerId,
         clientId: currentContact.clientId
       });
+
+      //update state contact info
+      if (this.mounted) {
+        this.setState({ currentContact, contacts, loadingDetails: false });
+      }
     })
-    .catch(err => console.log("making a deal error", err.response));
+    .catch(err => {
+      console.log("making a deal error", err.response);
+      this.setState({ loadingDetails: false });
+    });
   
   } 
   
   removeContact = id => {
+    this.setState({ loadingDetails: true });
 
     let data = {
       id: id,
@@ -328,10 +335,13 @@ class Contact extends React.Component {
       }
 
       //update state contact info
-      this.setState({ contacts, currentContact });
+      this.setState({ contacts, currentContact, loadingDetails:false });
       
     })
-    .catch(err => console.log("removing contact error", err.response));
+    .catch(err => {
+      console.log("removing contact error", err.response);
+      this.setState({ loadingDetails: false });
+    });
   }
 
 
@@ -381,6 +391,7 @@ class Contact extends React.Component {
                   makeDeal={this.makeDeal}
                   removeContact={this.removeContact}
                   answerDeal={this.answerDeal}
+                  loading={this.state.loadingDetails}
                 />
               </>
             :null}
