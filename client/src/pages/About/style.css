@@ -1,5 +1,8 @@
-p{
-  font-size-adjust: inherit;
-  margin: 20px;
-  text-align: center;
+.about p {
+  margin-top: 20px;
+  text-align: justify;
+}
 
+.about p:first-child{
+  margin-top: 40px;
+}

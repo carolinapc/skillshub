@@ -16,22 +16,22 @@ const SkillsSearchList = props => {
                 <h4>{Utils.getStars(skill.score)}</h4>  
                 <h4>${skill.price + " per " + Utils.getPriceTypeName(skill.priceType)}</h4>
                 {skill.distance?<h5>Distance: {skill.distance} km</h5>:null}
-                
               </div>              
-              <div className="card-text">
-                <img src={skill.User.image?`/${skill.User.image}` :"/profile.jpg"} alt="Profile" className="shadow-lg" onError={()=>props.handleSkillImgError(skill.id)} />
-                <h3 className="card-subtitle mb-2 text-muted">{skill.name}</h3>
-                <h5 className="card-subtitle mb-2 text-muted">{skill.Category.name}</h5>
-                <p>{Utils.replaceNewLines(skill.description)}</p>
-                <NavLink
-                  exact
-                  to={"/skill/"+skill.id}
-                  activeClassName="active"
-                  className="btn btn-secondary"
-                  >
-                  View
-                </NavLink>
-
+              <div className="card-text description">
+                <img src={skill.User.image ? `/${skill.User.image}` : "/profile.jpg"} alt="Profile" className="shadow-lg" onError={() => props.handleSkillImgError(skill.id)} />
+                <div>
+                  <h3 className="card-subtitle mb-2 text-muted">{skill.name}</h3>
+                  <h5 className="card-subtitle mb-2 text-muted">{skill.Category.name}</h5>
+                  <p>{Utils.replaceNewLines(skill.description)}</p>
+                  <NavLink
+                    exact
+                    to={"/skill/"+skill.id}
+                    activeClassName="active"
+                    className="btn btn-secondary"
+                    >
+                    View
+                  </NavLink>
+                </div>
               </div>
             </div>
           </div>
