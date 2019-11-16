@@ -28,6 +28,14 @@
   text-align: end;
 }
 
+.description{
+  display: grid;
+  grid-template-columns: 180px 1fr;
+}
+.description p{
+  margin-top: 20px;
+}
+
 .message{
   margin: 20px auto;
 }
