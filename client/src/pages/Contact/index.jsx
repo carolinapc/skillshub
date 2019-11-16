@@ -166,6 +166,9 @@ class Contact extends React.Component {
           //set the default opened chat 
           this.selectContact(contactId);  
         }
+        else {
+          this.setState({ currentContact: {} });
+        }
       }
     }
     

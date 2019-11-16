@@ -84,7 +84,7 @@ const ContactDetail = props => {
           : null}
           
           {/* if deal is opened or closed*/}
-          {dealStatus === "O" || dealStatus === "C" ?
+          {dealStatus !== "P" ?
             <Button variant="danger" disabled={props.loading} onClick={props.loading ? null : () => props.removeContact(id)}>
               <i className="fas fa-archive text-white"></i> Archive Contact
             </Button>
