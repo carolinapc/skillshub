@@ -8,12 +8,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.skill-header div{
+.skill-header div:last-child{
   text-align: right;
 }
-.skill-header h5{
-  color: #9e9e15;
-}
+
 .skill-description{
   margin: 30px 0;
   font-size: 20px;
@@ -37,8 +35,4 @@
 
 .star{
   cursor: pointer;
-}
-
-h5 i{
-  color: #9d9e15;
 }

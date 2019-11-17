@@ -10,6 +10,8 @@ import ContactModal from './ContactModal';
 
 class Skill extends React.Component {
   mounted = false;
+  distance = "";
+  zipCode = "";
 
   state = {
     skill: {
@@ -34,6 +36,9 @@ class Skill extends React.Component {
   componentDidMount = () => {
     this.mounted = true;
     let data = { id: this.props.match.params.id };
+    let params = new URLSearchParams(this.props.location.search);
+    this.distance = params.get("dist");
+    this.zipCode = params.get("zip");
 
     this.getSkillFromDb(data);        
   }
@@ -46,7 +51,6 @@ class Skill extends React.Component {
     //get skill from database
     API.getSkills(data).then(res => {
       if (res.data.length > 0) {
-        //console.log(res.data[0]);
         this.setState({ skill: res.data[0], found: true });
       }
     }).catch(err => console.log(err.response));
@@ -87,6 +91,15 @@ class Skill extends React.Component {
     this.setState({ skill });
   }
 
+  getMapLink = () => {
+    if (this.zipCode) {
+      return `https://www.google.com.br/maps/dir/${this.zipCode}/${this.state.skill.latitude},${this.state.skill.longitude}`;
+    }
+    else {
+      return `http://www.google.com.br/maps/place/${this.state.skill.latitude},${this.state.skill.longitude}`;
+    }
+  }
+
   render() { 
     const { skill, found } = this.state;
     
@@ -119,10 +132,18 @@ class Skill extends React.Component {
             </Col>
             <Col md="8" className="pt-3">
               <div className="skill-header">
-                <h4>{skill.name}</h4>
+                <div>
+                    <h4>{skill.name}</h4>
+                    <h6>
+                      {this.distance ? `${this.distance} km` : null}
+                      <Button variant="outline-secondary" className="ml-3 btn-sm" href={this.getMapLink()} target="_blank">
+                        <i className="far fa-map"></i> View Map
+                      </Button>
+                    </h6>
+                </div>
                 <div>
                   <h4>Price: ${skill.price + " per " + Utils.getPriceTypeName(skill.priceType)}</h4>
-                  <h5>{skill.score}.0 {Utils.getStars(skill.score)} ({skill.Reviews.length})</h5>  
+                  <h5 className="stars">{skill.score}.0 {Utils.getStars(skill.score)} ({skill.Reviews.length})</h5>  
                 </div>
               </div>    
 

@@ -5,7 +5,7 @@ export default {
   getStars: score => {
     let stars = [];
     for (let i = 1; i <= score; i++){
-      stars.push(<i key={i} className="fas fa-star"></i>);  
+      stars.push(<i key={i} className="fas fa-star stars"></i>);  
     }
     return stars;
   },
