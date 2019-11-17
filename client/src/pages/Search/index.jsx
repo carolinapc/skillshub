@@ -148,7 +148,7 @@ class Search extends React.Component {
         <Row>
           <Col md="12">
             {this.state.skills.length > 0 ? 
-              <SkillsSearchList skills={this.state.skills} handleSkillImgError={this.handleSkillImgError} />
+              <SkillsSearchList skills={this.state.skills} handleSkillImgError={this.handleSkillImgError} zipCode={this.state.zipCode} />
               : <div className="message">{this.state.notFoundMsg}</div>
             }
           </Col>
