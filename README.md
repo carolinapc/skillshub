@@ -4,6 +4,8 @@ Skills Hub is a virtual skill sharing platform. Users who want to share their ta
 
 [View Website](https://skillshub.herokuapp.com/)
 
+![preview](https://carolinapc.github.io/assets/images/skillshub.png)
+
 #### Users
 
 Skills Hub is for skilled people who are looking to provide their services for money. The application provides a platform that connects people with others who are skilled and offering corresponding needs to their own. 
@@ -30,7 +32,7 @@ Skills Hub differentiates itself by eliminating the sale of things (as you might
 
 - Node.js
 - Express
-- Java Script
+- Javascript
 - MySQL
 - Sequelize
 - Socket.io
@@ -38,7 +40,7 @@ Skills Hub differentiates itself by eliminating the sale of things (as you might
 
 #### Front-end
 
-- React
+- React.js
 - Bootstrap
 
 #### API's
