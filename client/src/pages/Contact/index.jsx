@@ -183,7 +183,7 @@ class Contact extends React.Component {
   }
 
   selectContact = id => {
-    let currentContact = this.state.contacts.filter(contact => contact.id.toString() === id.toString())[0]; //the condition must use "==" and not "===" because the value could be number or string
+    let currentContact = this.state.contacts.find(contact => contact.id.toString() === id.toString());
     this.setCurrentContact(currentContact);
   }
 
